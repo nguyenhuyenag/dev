@@ -1,0 +1,392 @@
+
+	https://www.mysqltutorial.org/mysql-signal-resignal/
+
+	https://www.mysqltutorial.org/mysql-error-handling-in-stored-procedures/
+
+
+- Dấu phân cách mặc định là `;`
+
+- Tạo và gọi procedure
+
+		DELIMITER $$
+			CREATE PROCEDURE procedure_name(argument_list)
+			BEGIN
+				<câu lệnh sql>;
+			END $$
+		DELIMITER ;
+
+		- Đổi dấu phân cách mặc định thành $$ (có thể dùng `//`)
+
+		- Sử dụng `;` trong phần thân
+		
+		- Đổi dấu phân cách trở lại thành `;`
+	
+	- Gọi procedure
+	
+		CALL procedure_name();
+	
+	- Ví dụ
+
+		DELIMITER $$
+			CREATE PROCEDURE GetAllProducts(quantity SMALLINT)
+			BEGIN
+				select * from products where quantityInStock <= quantity;
+			END $$
+		DELIMITER ;
+		
+		=> call GetAllProducts(500);
+	
+- Biến trong procedure
+
+	- Khai báo
+
+		DECLARE variable_name datatype(size) [DEFAULT default_value];
+	
+		DECLARE title VARCHAR(255) DEFAULT 'No Name';
+	
+	- Gán giá trị cho biến
+	
+		SET variable_name = 'value';
+		
+	- Biến phải đặt trong phần thân của procedure (begin-end)
+	
+- Tham số
+
+		[IN | OUT | INOUT] parameter_name datatype;
+		
+	- IN (mặc định): Giá trị không bị thay đổi
+	
+		DELIMITER //
+		CREATE PROCEDURE GetOfficeByCountry(
+			IN countryName VARCHAR(255) -- hoặc countryName VARCHAR(255)
+		)
+		BEGIN
+			SELECT * FROM offices WHERE country = countryName;
+		END //
+		DELIMITER ;
+		
+		=>	CALL GetOfficeByCountry('USA');
+
+	- OUT: Giá trị có thể bị thay đổi trong quá trình chạy
+	
+		- Mặc định procedure sẽ nhận giá trị truyền vào là NULL cho dù có gán giá trị trước đó.
+		
+		- Biến truyền vào phải có chữ `@` ở phái trước.
+		
+		DELIMITER $$
+			CREATE PROCEDURE GetSumAmountByCustomerNumber (
+				customerNumber int,
+				OUT total DECIMAL(10,2)
+			)
+			BEGIN
+				SELECT sum(p.amount) into total FROM payments p where p.customerNumber = customerNumber;
+			END $$
+		DELIMITER ;
+
+		=> CALL GetSumAmountByCustomerNumber(103, @total);
+
+		=> select @total;
+		
+	- INOUT: Kết hợp giữa IN và OUT
+	
+		DELIMITER $$
+		CREATE PROCEDURE SetCounter(
+			INOUT counter INT,
+			IN inc INT
+		)
+		BEGIN
+			SET counter = counter + inc;
+		END$$
+		DELIMITER ;
+		
+		SET @counter = 1;
+		CALL SetCounter(@counter, 1); -- 2
+		CALL SetCounter(@counter, 1); -- 3
+		CALL SetCounter(@counter, 5); -- 8
+		SELECT @counter; -- 8
+		
+- Câu lệnh điều kiện
+	
+- Câu lệnh IF: Có 3 loại
+
+	- IF-THEN
+
+		IF `condition` THEN
+		   `statements`;
+		END IF;
+		
+	- IF-THEN-ELSE
+	
+		IF condition THEN
+		   statements;
+		ELSE
+		   else-statements;
+		END IF;
+	
+	- IF-THEN-ELSEIF-ELSE
+	
+		IF condition THEN
+		   statements;
+		ELSEIF elseif-condition THEN
+		   elseif-statements;
+		...
+		ELSE
+		   else-statements;
+		END IF;
+
+- CASE: Có 2 loại
+
+	- Đơn giản
+	
+		CASE case_value
+			WHEN when_value1 THEN statements
+			WHEN when_value2 THEN statements
+			...
+			[ELSE else-statements]
+		END CASE;
+		
+	- Case not found for CASE statement
+
+	- CASE tìm kiếm
+		
+		CASE
+			WHEN search_condition1 THEN statements
+			WHEN search_condition1 THEN statements
+			...
+			[ELSE else-statements] // default
+		END CASE;
+		
+		- MySQL không cho phép có khoảng trống trong mệnh đề THEN hoặc ELSE.
+		
+		  Nếu bạn có thể sử dụng một BEGIN-END trống trong mệnh đề ELSE.
+	
+- Vòng lặp
+
+
+- LOOP
+
+		[begin_label:] LOOP
+			statement_list
+		END LOOP [end_label]
+		
+		[label]: LOOP
+			...
+			-- terminate the loop
+			IF condition THEN
+				LEAVE [label]; // LEAVE = break, ITERATE = continue
+			END IF;
+			...
+		END LOOP;
+	
+	- Ví dụ
+			
+			loop_label: loop
+				if i > 10 then
+					leave looop_label;
+				end if;
+				if not(i mod 2) then
+					set s = concat(s, i, ",");
+				end if;
+				set i = i + 1;
+			end loop;
+
+- WHILE
+
+		[begin_label:] WHILE condition DO
+			statement_list
+		END WHILE [end_label]
+	
+	- Ví dụ
+			
+			while i < 10 do
+				set s = concat(s, i, ", ");
+				set i = i + 1;
+			end while;
+	
+- REPEAT
+
+		[begin_label:] REPEAT
+			statement
+		UNTIL search_condition
+		END REPEAT [end_label]
+	
+	- statement sẽ chạy cho đến khi search_condition trả về true;
+	
+	- Ví dụ
+	
+		repeat
+			set s = concat_ws(",", s, i);
+			set i = i + 1;
+		until i >= 10
+		end repeat;
+
+- LEAVE
+
+	- Đặt label trước `BEGIN` để dừng `procedure`.
+	
+	- Tương tự cho LOOP, REPEAT, WHILE
+	
+- Con trỏ
+
+- Cho phép lặp lại một tập hợp các hàng được trả về bởi một truy vấn và xử lý từng hàng riêng lẻ
+
+	- Read-only
+	
+	- Non-scrollable: Không thể bỏ qua hoặc nhảy đến 1 hàng cụ thể.
+	
+	- Có 2 loại con trỏ:
+	
+		- Asensitive cursor: Trỏ vào dữ liệu thực (nhanh hơn).
+		
+		- Insensitive cursor: Sử dụng bảng sao tạm thời của dữ liệu.
+
+	- Khai báo
+		
+		DECLARE cursor_name CURSOR FOR SELECT_statement; Khai báo sau khai báo biến và phải có liên kết với select
+		
+		OPEN cursor_name;	- Mở con trỏ
+		
+		FETCH cursor_name INTO variables list; - Truy xuất hàng tiếp theo
+			
+		CLOSE cursor_name; - Hủy con trỏ
+		
+	- FETCH sẽ cố đọc hàng tiếp theo trong tập kết quả khi con trỏ đến cuối cùng, nó sẽ không thể lấy dữ liệu. Dùng NOT FOUND
+	
+		DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
+	
+	
+	- Ví dụ
+	
+		Drop procedure if exists getEmailList;
+		DELIMITER $$
+			CREATE PROCEDURE getEmailList(INOUT emailList varchar(4000))
+			BEGIN
+				DECLARE finished int DEFAULT 0;
+				DECLARE emailAddress varchar(100) DEFAULT "";
+			 
+				-- khai báo con trỏ
+				DEClARE curEmail CURSOR FOR SELECT email FROM employees;
+			 
+				-- xử lý lỗi NOT FOUND
+				DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
+			 
+				OPEN curEmail; -- mở con trỏ
+			 
+				getEmail: LOOP
+					FETCH curEmail INTO emailAddress;
+					IF finished = 1 THEN 
+						LEAVE getEmail;
+					END IF;
+					-- build email list
+					SET emailList = CONCAT(emailAddress, "; ", emailList);
+				END LOOP getEmail;
+				CLOSE curEmail; -- đóng con trỏ
+			END$$
+		DELIMITER ;
+
+		SET @emailList = ""; 
+		CALL getEmailList(@emailList); 
+		SELECT @emailList;
+		
+- Hiển thị danh sách procedure
+
+	SHOW PROCEDURE STATUS WHERE db = `database_name`;
+		
+	SHOW PROCEDURE STATUS LIKE '%pattern%';
+	
+- Xóa procedure
+
+	DROP PROCEDURE [IF EXISTS] procedure_name;
+		
+- Sửa procedure
+
+	- MySQL không có lệnh sửa procedure
+	
+- Function
+
+	DELIMITER $$
+	CREATE FUNCTION function_name(
+		param1,
+		param2,...
+	)
+	RETURNS datatype
+	[NOT] DETERMINISTIC -- mặc định là NOT DETERMINISTIC 
+	BEGIN
+	 -- statements		-- cần ít nhất 1 RETURN
+	END $$
+	DELIMITER ;
+
+- Function được sử dụng ở nhiều nơi hơn sao với procedure.
+	
+	- Ví dụ
+	
+		DELIMITER $$
+		CREATE FUNCTION CustomerLevel(
+			credit DECIMAL(10,2)
+		) 
+		RETURNS VARCHAR(20)
+		DETERMINISTIC
+		BEGIN
+			DECLARE customerLevel VARCHAR(20);
+		 
+			IF credit > 50000 THEN
+				SET customerLevel = 'PLATINUM';
+			ELSEIF (credit >= 50000 AND 
+					credit <= 10000) THEN
+				SET customerLevel = 'GOLD';
+			ELSEIF credit < 10000 THEN
+				SET customerLevel = 'SILVER';
+			END IF;
+			-- return the customer level
+			RETURN (customerLevel);
+		END$$
+		DELIMITER ;
+		
+	- Gọi function trong select
+	
+		SELECT 
+			customerName, 
+			CustomerLevel(creditLimit)            				-- here --
+		FROM
+			customers
+		ORDER BY 
+			customerName;
+			
+	- Gọi trong procedure
+	
+		DELIMITER $$
+		CREATE PROCEDURE GetCustomerLevel(
+			IN  customerNo INT,  
+			OUT customerLevel VARCHAR(20)
+		)
+		BEGIN
+			DECLARE credit DEC(10,2) DEFAULT 0;
+			-- get credit limit of a customer
+			SELECT 
+				creditLimit 
+			INTO credit
+			FROM customers
+			WHERE 
+				customerNumber = customerNo;
+			-- call the function 
+			SET customerLevel = CustomerLevel(credit);	-- here --
+		END$$
+		DELIMITER ;
+	
+- Xóa function
+
+	DROP FUNCTION [IF EXISTS] function_name;
+	
+- Hiển thị tất cả các function
+
+		SHOW FUNCTION STATUS WHERE db = `database_name`;	
+	
+	- Tương tự như procedure
+	
+- Phân quyền cho procedure và function
+
+	- Dùng DEFINER và SQL SECURITY
+
+	
+	
+	

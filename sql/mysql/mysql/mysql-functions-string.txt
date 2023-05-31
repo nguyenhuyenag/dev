@@ -1,0 +1,89 @@
+﻿
+- MySQL không phân biệt chữ hoa-thường, trừ khi so sánh nhị phân
+
+	- SELECT binary 'a' = 'A' as compare;
+
+- UPPER() & UCASE(): Viết hoa chuỗi
+
+- LOWER() & LCASE(): 
+	
+- TRIM(), LTRIM(), RTRIM(): Loại bỏ khoảng trắng 2 đầu, bên trái hoặc bên phải
+
+- SUBSTRING_INDEX(string, delimiter, number): Trích xuất một chuỗi con từ một chuỗi
+
+	- delimiter: Dấu phân cách để tìm kiếm trong chuỗi.
+	
+	- number: Số lần tìm kiếm dấu phân cách.
+
+		- Nếu number là giá trị âm, mọi thứ từ bên trái của dấu phân cách sẽ được trả về
+		- Nếu number là một giá trị dương, mọi thứ từ bên phải của dấu phân cách sẽ được trả về
+		
+- SUBSTRING(string, start, [length]): Trích xuất một chuỗi con từ một chuỗi
+
+	- start: Vị trí bắt đầu trích xuất. Vị trí đầu tiên trong chuỗi luôn là 1.
+	
+		- Nếu start là một số dương, thì hàm SUBSTRING bắt đầu từ đầu chuỗi.
+		- Nếu start là một số âm, thì hàm SUBSTRING bắt đầu từ cuối chuỗi và đếm ngược
+
+	- length: Đây là số lượng ký tự để trích xuất, nếu không có hàm sẽ trả về toàn bộ chuỗi.
+
+- STRCMP(string1, string2): So sánh 2 chuỗi
+
+	- string1 = string2, returns  0
+	- string1 < string2, returns -1
+	- string1 > string2, returns  1
+	
+- SPACE(n): Trả về n khoảng trắng
+
+- LPAD(string, n, pad_string) & RPAD(): Trả về 1 chuỗi có độ dài = n, nếu thiếu sẽ cộng thêm pad_string vào bên trái hoặc phải.
+
+- LEFT(string, n) & RIGHT(): Trả về chuỗi con có độ dài n, tính từ ngoài cùng bên trái hoặc phải.
+
+- LOCATE(substring, string, [start]): Trả về vị trí xuất hiện đầu tiên của chuỗi con trong chuỗi, nếu không có trả về 0.
+
+	- start: Vị trị bắt đầu tìm kiếm, mặc định là 1
+	
+- POSITION(substring IN string): Tương tự LOCATE()
+
+- INSTR(string, substring): Trả về vị trí của chuỗi con trong chuỗi.
+
+- REVERSE(): Đảo chuỗi
+
+- REPLACE(string, from, to): Thay thế tất cả các lần xuất hiện của một chuỗi được chỉ định.
+
+- REPEAT(string, n): Lặp lại 1 chuỗi n lần.
+
+- LENGTH() & CHAR_LENGTH() & CHARACTER_LENGTH(): Độ dài chuỗi
+
+- INSERT(string, position, number, substring)
+
+	- position: Vị trí chèn, nếu position nằm ngoài độ dài của string hàm sẽ trả về string.
+	- number: Số lượng ký tự để thay thế trong chuỗi. Nếu number nằm ngoài độ dài của phần còn lại của chuỗi, hàm INSERT sẽ thay thế string bắt đầu từ postion cho đến hết string.
+	
+- FORMAT(number, decimal_places): Định dạng số dưới dạng '#,###.##', làm tròn nó đến một số vị trí thập phân nhất định.
+
+- FIND_IN_SET(string, string_list): Trả về vị trí của chuỗi trong danh sách chuỗi được phân tách bằng dấu phẩy.
+
+	- If string is not found in string_list, this function returns 0
+	- If string_list is an empty string (""), this function returns 0
+	- If string or string_list is NULL, this function returns NULL
+
+	- SELECT FIND_IN_SET('c', 'a,b,c,d'); -- 3
+	
+- FIELD(value, val1, val2, val3, ...)
+
+	- value: Giá trị cần tìm trong danh sách
+	- val1, val2, val3, ... là danh sách các giá trị sẽ được tìm kiếm.
+	
+	- SELECT FIELD('c', 'a', 'b', 'c', 'd'); -- 3
+
+- CONCAT(str1, str2, str3,...): Nối chuỗi
+
+- CONCAT_WS(separator, str1, str2, str3,...): Nối chuỗi bằng dấu phân cách
+
+	
+	- SELECT concat_ws("_", "a", "b", "c", "d");  =>	a_b_c_d
+	
+	- SELECT CONCAT_WS(NULL, 'a', 'b', 'c');	  => 	NULL
+	
+- ASCII(character): Trả về mã ASCII, nếu chuỗi có nhiều ký tự thì chọn giá trị đầu tiên.

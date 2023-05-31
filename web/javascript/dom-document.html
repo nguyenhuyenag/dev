@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DOM Document</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        h3 {
+            color: rgb(204, 5, 5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mb-4">
+        <h3>1) activeElement</h3>
+        <p>Get the currently focused element in the document</p>
+        <p>Click vào input hoặc button bên dưới</p>
+        <div onclick="call_activeElement()">
+            <input type="text" value="An input field">
+            <button>A Button</button>
+        </div>
+        <p id="activeElement" class="text-danger"></p>
+        <script>
+            function call_activeElement() {
+                var x = document.activeElement.tagName;
+                document.getElementById("activeElement").innerHTML = x;
+            }
+        </script>
+
+        <hr>
+        <h3>2) addEventListener</h3>
+        <p>Click chuột vào nơi bất kỳ</p>
+        addEventListener: <span id="addEventListener" class="text-danger"></span>
+        <script>
+            document.addEventListener("click", function () {
+                document.getElementById("addEventListener").innerHTML = "Hello World!";
+            });
+        </script>
+
+        <hr>
+        <h3>3) domain, baseURI, URL </h3>
+        <p>Returns the base URI of the HTML document.</p>
+        <p>domain: <code id="domain"></code></p>
+        <p>baseURI: <code id="baseURI"></code></p>
+        <p>URL: <code id="_URL"></code></p>
+        <p><b>Note:</b> This <b>URL</b> property is similar to the <code>location.href</code> property.</p>
+        <script>
+            function call_baseURI() {
+                $('#domain').text(document.domain);
+                $('#baseURI').text(document.baseURI);
+                $('#_URL').text(document.URL);
+            }
+            call_baseURI();
+        </script>
+
+        <hr>
+        <h3>4) cookie</h3>
+        <code>document.cookie</code>: Get cookie
+        <p>Xem thêm: <code>https://www.w3schools.com/js/js_cookies.asp</code></p>
+
+        <hr>
+        <h3>5) form</h3>
+        <h4>5.1) reset form</h4>
+        <p><code>document.forms['myForm'].reset();</code></p>
+        <p><code>document.getElementById("myForm").reset()</code></p>
+
+        <hr>
+        <h3>6) images</h3>
+        <p>Lấy tất cả các thẻ img: <code>var x = document.images</code></p>
+        <p>Get SRC: <code>x[i].src</code></p>
+
+        <hr>
+        <h3>7) readyState</h3>
+        <p>Display the loading status of the current document</p>
+        A String, representing the status of the current document.
+        <ul>
+            <li>uninitialized - Has not started loading yet</li>
+            <li>loading - Is loading</li>
+            <li>loaded - Has been loaded</li>
+            <li>interactive - Has loaded enough and the user can interact with it</li>
+            <li>complete - Fully loaded</li>
+        </ul>
+    </div>
+</body>
+
+</html>

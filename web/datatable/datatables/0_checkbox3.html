@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Datatables</title>
+    <link rel="shortcut icon" href="#">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+    <style>
+        table tbody tr {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(function () {
+            let table = $('#example').DataTable({
+                ajax: '../ajax/data/objects_salary.txt',
+                columns: [
+                    {
+                        "render": function (data, type, row, meta) {
+                            return '<input type="checkbox" id="chbox' + (meta.row + 1)  + '" value="" />';
+                        }
+                    },
+                    { data: 'name' },
+                    { data: 'position' },
+                    { data: 'office' },
+                    { data: 'extn' },
+                    { data: "start_date" },
+                    { data: "salary" }
+                ],
+                columnDefs: [
+                    { "className": "dt-center", "targets": 0 } // "targets": "_all"
+                ],
+                "ordering": false,
+            });
+            // $('#example tbody').on('click', 'tr', function () {
+            //     const data = table.row(this).data();
+			// 	const index = table.row(this).index() + 1;
+			// 	const rowData = {...data, index};
+			// 	console.log(rowData);
+            // });
+            $("#flowcheckall").click(function () {
+                $('#example tbody input[type="checkbox"]').prop('checked', this.checked);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container mt-4 bt-4">
+        <h3 class="text-center"><a href="http://127.0.0.1:5500/">Home</a></h3>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="flowcheckall" value="" /></th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Progress</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+
+</html>

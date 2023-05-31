@@ -1,0 +1,222 @@
+
+
+- Khi kết nối vào một Database hoặc Collection mongodb sẽ tự động tạo database hoặc collection đó khi thao tác nào đó.
+
+- Tốn bộ nhớ do dữ liệu lưu dưới dạng key-value.
+
+- Khi insert/update/remove bản ghi, MongoDB không cập nhật ngay xuống ổ cứng, mà sau 60 giây MongoDB mới thực hiện ghi toàn bộ dữ liệu thay đổi từ RAM xuống ổ cứng vì sẽ có nguy cơ bị mất dữ liệu khi xảy ra các tình huống như mất điện.
+
+- Document có cấu trúc dữ liệu kiểu JSON, là một tập hợp các cặp key - value. Các Document không cần thiết phải có cùng một tập hợp các trường hoặc cấu trúc giống nhau.
+
+		RDBMS				MongoDB
+		
+		Database			Database
+		
+		Table				Collection
+		
+		Row					Document
+		
+		Column				Field
+		
+		Table Join			Embedded Documents
+		
+		Primary Key			Primary Key (Giá trị mặc định là _id được cung cấp bởi chính MongoDB)
+
+- cmd 
+
+	- mongo: Kết nối với mongo
+	
+	- db.help(): Danh sách các lệnh
+
+- Tạo database
+
+	- use DATABASE_NAME
+
+- Xóa database
+
+	- db.dropDatabase()
+
+- Hiển thị database đang được chọn
+
+	- db
+	
+- Hiển thị danh sách database
+
+	- show dbs
+	
+	- database không có dữ liệu sẽ không hiển thị
+
+- Tạo Collection
+
+	- db.createCollection(name, [options])
+	
+	- Một số thông số của options
+	
+		- capped (boolean): Kích hoạt một Capped Collection có kích cỡ cố định, nó tự động ghi đè các entry cũ nhất khi tiếp cận kích cỡ tối đa. Nếu xác định là true, thì bạn cũng cần xác định tham số size.
+
+		- autoIndexID (boolean): Tự động tạo chỉ mục trên các trường _id,  giá trị mặc định là false.
+
+		- size (số): Xác định kích cỡ tối đa (giá trị byte) cho một Capped Collection.
+
+		- max (số): Xác định số Document tối đa trong một Capped Colleciton
+		
+	- Ví dụ
+	
+		- db.createCollection("mycol", {capped : true, autoIndexID : true, size : 6142800, max : 10000 })
+		
+	- Mongodb sẽ tự động tạo collection (nếu chưa tồn tại) khi insert dữ .
+	
+	- Hiển thị danh sách collections
+	
+		- show collections
+
+- Xóa Colleciton
+
+	- db.Colleciton_Name.drop()
+	
+	- Phương thức này sẽ trả về true nếu xóa thành công, ngược lại là false.
+
+- Kiểu dữ liệu
+
+	String: Chuỗi trong MongoDB phải là UTF-8.
+
+	Integer: Kiểu số nguyên 32 bit hoặc 64 bit.
+
+	Boolean: true hoặc false.
+
+	Double: 
+
+	Min/ Max keys: Kiểu dữ liệu này được sử dụng để so sánh một giá trị với các phần tử BSON thấp nhất và cao nhất.
+
+	Arrays: Lưu trữ mảng, danh sách hoặc nhiều giá trị vào trong một key.
+
+	Timestamp (ctimestamp): Giúp thuận tiện cho việc ghi chép hoặc đánh dấu thời điểm một Document được sửa đổi hoặc được thêm vào.
+
+	Object: Kiểu dữ liệu này được sử dụng cho các Document được nhúng vào.
+
+	Null: Kiểu dữ liệu này được sử dụng để lưu một giá trị Null.
+
+	Symbol: Kiểu dữ liệu này được sử dụng giống như một chuỗi, tuy nhiên, nói chung nó được dành riêng cho các ngôn ngữ mà sử dụng kiểu symbol cụ thể.
+
+	Date : Kiểu dữ liệu này được sử dụng để lưu giữ date và time hiện tại trong định dạng UNIX time. Bạn có thể xác định date time riêng cho bạn bằng việc tạo đối tượng Date và truyền ngày, tháng, năm vào trong đó.
+
+	Object ID: Kiểu dữ liệu này được sử dụng để lưu giữ ID của Document.
+
+	Binary data: Kiểu dữ liệu này được sử dụng để lưu giữ dữ liệu nhị phân.
+
+	Code: Kiểu dữ liệu này được sử dụng để lưu giữ JavaScrip code vào trong Document.
+
+	Regular expression: Kiểu dữ liệu này được sử dụng để lưu giữ Regular Expresion.
+
+- Insert document
+
+	- db.COLLECTION_NAME.insert(document)
+	
+	- db.COLLECTION_NAME.insert([doc1, doc2, ...]) Nếu muốn insert nhiều document
+	
+	- Ví dụ
+	
+		db.mycol.insert({
+		   title: 'MongoDB Overview',
+		   tags: ['mongodb', 'database', 'NoSQL'],
+		   description: 'MongoDB is no sql database',
+		   likes: 100
+		});
+
+	- _id là một số thập lục phân 12 byte để đảm bảo tính duy nhất của mỗi Document. Bạn có thể cung cấp _id trong khi chèn vào Document. Nếu không MongoDB sẽ cung cấp một id duy nhất cho mỗi Document. Trong 12 byte này, 4 byte đầu là cho Timestamp hiện tại, 3 byte tiếp theo cho ID của thiết bị, 2 byte tiếp là process id của MongoDB Server và 3 byte còn lại là giá trị có thể tăng (xem org.bson.types.ObjectId).
+
+		_id: ObjectId(4 bytes timestamp, 3 bytes machine id, 2 bytes process id, 3 bytes incrementer)
+
+	- db.post.save(document): Nếu không xác định `_id` trong Document, thì phương thức save() sẽ làm việc như phương thức insert(). Nếu xác định `_id` thì nó sẽ thay thế toàn bộ dữ liệu của Document chứa `_id` khi được xác định trong phương thức save().
+
+- Truy vấn
+
+	- db.COLLECTION_NAME.find() hoặc db.COLLECTION_NAME.find().pretty()
+	
+		Phép toán		Cú pháp					Ví dụ							Mệnh đề WHERE tương đương
+
+		=				{key: value}			.find({"by": "Java"})			where by = 'Java'
+
+		<				{key: {$lt: value}}		.find({"likes": {$lt: 50}})		where likes < 50
+
+		<=				{key: {$lte: value}}	.find({"likes": {$lte: 50}})	where likes <= 50
+
+		>				{key: {$gt: value}}		.find({"likes": {$gt: 50}})		where likes > 50
+
+		>=				{key: {$gte: value}}	.find({"likes": {$gte: 50}})	where likes >= 50
+
+		!=				{key: {$ne: value}}		.find({"likes": {$ne: 50}})		where likes != 50
+
+	- Toán tử AND
+	
+		- db.mycol.find({key1:value1, key2:value2})
+
+	- Toán tử OR
+	
+		db.mycol.find({
+			$or: [
+				{key1: value1}, {key2: value2}
+			]
+		});
+
+- Cập nhật document
+
+	- update(): Cập nhật các giá trị trong Document đang tồn tại
+	
+		db.COLLECTION_NAME.update(SELECTIOIN_CRITERIA, UPDATED_DATA)
+
+	- Ví dụ
+	
+			db.mycol.update({'title': 'Java'}, {$set:{'description': 'Java 8'}})
+
+		- Mặc định MongoDB sẽ chỉ cập nhật một Document đơn, để cập nhật nhiều Document, bạn thiết lập tham số 'multi' thành true.
+		
+			db.mycol.update({'title': 'Java'}, {$set:{'description': 'Java 8'}}, {multi: true})
+
+	- save(): Thay thế Document đang tồn tại bằng Document mới
+
+		db.COLLECTION_NAME.save({_id:ObjectId(),NEW_DATA})
+
+	- Ví dụ
+	
+		db.mycol.save(
+			{ "_id" : ObjectId("5feada58214d20c7e13557db"), "title" : "C++ 11", "tags" : [ "C++" ], "description" : "C++ GNU", "likes" : 250 }
+		);
+	
+- Xóa document
+
+	- Xóa 1 document: db.COLLECTION_NAME.remove(DELETION_CRITERIA, 1)
+
+	- Xóa tất cả: db.mycol.remove()
+
+- Projection: Ẩn/hiển thị trường. Giá trị 1 là hiển thị, 0 là ẩn trường.
+
+	- db.COLLECTION_NAME.find({}, {key:0}) hoặc db.COLLECTION_NAME.find({}, {key:1})
+
+	- Ví dụ
+	
+		- db.restaurant.find({}, {"_id":0})
+
+- limit(): Giới hạn bảng ghi
+
+	- db.restaurant.find().limit(n)
+
+	- Nếu không có có tham số thì hàm sẽ hiển thị tất cả kết quả.
+	
+- skip(): Bỏ qua n kết quả
+
+	- db.restaurant.find().skip(n)
+
+	- Giá trị mặc định của `n` là `0`
+
+- Sắp xếp
+
+	- db.COLLECTION_NAME.find().sort({key: 1})
+	
+- Index
+
+	- db.COLLECTION_NAME.ensureIndex({key1: 1, key2: 1, ...})
+	
+	- Lưu ý `1` là tăng dần, `-1` là giảm dần
+	
+	

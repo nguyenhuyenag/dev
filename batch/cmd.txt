@@ -1,0 +1,32 @@
+
+- Tìm kiếm trên CMD
+
+	> your_command | findstr "keyword"
+
+		
+		pip list | findstr "mysql"
+	
+
+- Find the process ID (PID) for the port 
+
+	netstat -ao | find "8080"
+	
+	netstat -ano | findstr :8080
+		
+		Proto  Local Address          Foreign Address        State           PID
+		---------------------------------------------------------------------------
+		TCP    0.0.0.0:8080           ts24-nvhuyen:0         LISTENING       10192
+		TCP    [::]:8080              ts24-nvhuyen:0         LISTENING       10192
+	
+	Kill process
+		
+		taskkill /PID 10192 /F			<- Không phân biệt hoa, thường
+		
+	Requirements: npm@5.2.0^ version
+
+		npx kill-port 8080
+	
+- Xóa file (trong cả thư mục con)
+
+	> del /S *.class
+

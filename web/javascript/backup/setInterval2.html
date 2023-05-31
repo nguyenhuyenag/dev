@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function startTime() {
+            var arr = ['Hello', 'voz', 'forums'];
+            setTimeout(function loop() {
+                document.getElementById("txt").innerHTML += arr.shift() + " ";
+                //console.log(ary.shift());
+                if (arr.length) {
+                    setTimeout(loop, 1000);
+                }
+            }, 1000);
+        }
+    </script>
+</head>
+<body onload="startTime()">
+    <div id="txt"></div>
+</body>
+
+</html>

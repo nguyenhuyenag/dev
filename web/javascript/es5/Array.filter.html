@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>JavaScript Array.filter()</h1>
+    <p id="result"></p>
+    <script>
+        var txt = "";
+        var arr = [45, 4, 9, 16, 25, 0, 19, 22, 1, 3, 8];
+        filter = arr.filter(function (element, index, array) {
+            // console.log(index);
+            // console.log(index);
+            return element > 10;
+        });
+        filterLambda = arr.filter(t => t > 10);
+        document.getElementById("result").innerHTML = filter;
+    </script>
+</body>
+
+</html>

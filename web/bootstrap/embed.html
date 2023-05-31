@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <title>Embed</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/script/jquery.min.js" ></script>
+    <script src="assets/script/popper.min.js" ></script>
+    <script src="assets/script/bootstrap.min.js" ></script>
+    <style>
+        h4,
+        h5 {
+            color: rgb(207, 8, 8);
+            font-weight: bold;
+        }
+
+        .embed-responsive {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Embed</h1>
+        <h4>1) Embed</h4>
+        <h5 class="mb-3">1.1) Object</h5>
+        <!-- object/ PDF ... -->
+        <div class="embed-responsive embed-responsive-16by9">
+            <object class="embed-responsive-item"
+                data="https://docs.spring.io/spring-boot/docs/current/reference/pdf/spring-boot-reference.pdf"
+                type="application/pdf" internalinstanceid="9" title="">
+                <p>
+                    Your browser isn't supporting embedded pdf files. You can download the file
+                    <a
+                        href="https://docs.spring.io/spring-boot/docs/current/reference/pdf/spring-boot-reference.pdf">here</a>
+                </p>
+            </object>
+        </div>
+
+        <br />
+        <h5 class="mb-3">1.2) Iframe</h5>
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/3AtDnEC4zak?rel=0" allowfullscreen>
+            </iframe>
+        </div>
+
+        <br />
+        <h4>2) Tùy biến .embed-responsive-*by*</h4>
+        <p>Công thức tổng quát là:</p>
+        <img src="assets/images/embed.png">
+        <ul>
+            <li><strong>embed-responsive-21by9</strong></li>
+            <li><strong>embed-responsive-16by9</strong></li>
+            <li><strong>embed-responsive-4by3</strong></li>
+            <li><strong>embed-responsive-1by1</strong></li>
+        </ul>
+    </div>
+</body>
+
+</html>

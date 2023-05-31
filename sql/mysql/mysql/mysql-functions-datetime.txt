@@ -1,0 +1,224 @@
+﻿
+- DATE_ADD(date, INTERVAL value unit): Thêm bớt thời gian
+
+	- value: Là số nguyên
+	- unit: Thuộc các giá trị bên dưới
+	
+		MICROSECOND
+		SECOND
+		MINUTE
+		HOUR
+		DAY
+		WEEK
+		MONTH
+		YEAR
+		QUARTER
+		SECOND_MICROSECOND
+		MINUTE_MICROSECOND
+		MINUTE_SECOND
+		HOUR_MICROSECOND
+		HOUR_SECOND
+		HOUR_MINUTE
+		DAY_MICROSECOND
+		DAY_SECOND
+		DAY_MINUTE
+		DAY_HOUR
+		YEAR_MONTH
+		
+	=> SELECT DATE_ADD('2020-12-12', interval 5 day) day;
+
+- ADDTIME(datetime, addtime): Thêm bớt thời gian
+
+	=> SELECT ADDTIME('2020-12-12 09:45:20', '01:01:01') time;
+	
+- SUBDATE(date, days) hoặc SUBDATE(date, INTERVAL value unit): Trừ ngày
+
+- SUBTIME(datetime, time): Hàm giảm thời gian của time/datetime
+
+- YEARWEEK(date, firstdayofweek): Hàm trả về năm_tuần
+
+	firstdayofweek
+
+		0 - First day of week is Sunday
+		1 - First day of week is Monday and the first week has more than 3 days
+		2 - First day of week is Sunday
+		3 - First day of week is Monday and the first week has more than 3 days
+		4 - First day of week is Sunday and the first week has more than 3 days
+		5 - First day of week is Monday
+		6 - First day of week is Sunday and the first week has more than 3 days
+		7 - First day of week is Monday
+		
+- YEAR(date_value): Trích xuất năm (1000 - 9999)
+
+- WEEKOFYEAR(date_value): Trả về giá trị tuần trong năm của `date_value` (1 - 53)
+
+- WEEKDAY(date): Trả về chỉ mục ngày trong tuần
+
+	- 0 = Monday, 1 = Tuesday, 2 = Wednesday, 3 = Thursday, 4 = Friday, 5 = Saturday, 6 = Sunday
+
+- WEEK(date, firstdayofweek): Trả về phần tuần của giá trị ngày
+
+- TO_DAYS(date): Chuyển đổi ngày thành các ngày số.
+
+	=> SELECT TO_DAYS('0000-00-00') = NULL
+	
+	=> SELECT TO_DAYS('0000-01-01') = 1
+
+- FROM_DAYS(number): Hàm ngược lại của TO_DAYS()
+
+- TIMESTAMP(expression, [interval]): Chuyển đổi một biểu thức thành datetime
+
+	- interval: Thời gian để thêm vào (nếu có)
+	
+	=> SELECT timestamp('2012-12-12') 				= 2012-12-12 00:00:00
+	
+	=> SELECT timestamp('2012-12-12', '12:12:12') 	= 2012-12-12 12:12:12
+	
+- TIMEDIFF(time1, time2): Chênh lệnh thời gian của time1 & time2 (time/datetime)
+
+	- time1 & time2 cần có cùng định dạng kết quả của hàm là time1 - time2
+
+- TIME_TO_SEC(time): Chuyển đổi thời gian thành số giây
+
+- TIME_FORMAT(time, format): Định dạng thời gian
+
+	%f	Microseconds (000000 to 999999)
+	%H	Hour (00 to 23)
+	%h	Hour (00 to 12)
+	%I	Hour (00 to 12)
+	%i	Minutes (00 to 59)
+	%p	AM or PM
+	%r	Time in 12 hour AM or PM format (hh:mm:ss AM/PM)
+	%S	Seconds (00 to 59)
+	%s	Seconds (00 to 59)
+	%T	Time in 24 hour format (hh:mm:ss)
+	
+	=> SELECT TIME_FORMAT('19:30:10', '%r') = 07:30:10 PM
+
+- TIME(expression): Trích xuất giờ từ biểu thức kiểu time/datetime
+
+- SYSDATE(): Trả về ngày giờ hiện tại 'YYYY-MM-DD hh:mm:ss' or `YYYYMMDDhhmmss`
+
+- NOW(): Trả về ngày giờ hiện tại dạng 'YYYY-MM-DD hh:mm:ss' hoặc `YYYYMMDDhhmmss` (< MySQL 4.1.13) hoặc `YYYYMMDDHHMMSS.uuuuuu` (>= MySQL 4.1.13)
+
+- LOCALTIME(): Giống hàm NOW()
+		 
+- LOCALTIMESTAMP(): Giống hàm NOW()
+
+- CURRENT_TIMESTAMP(): Giống hàm NOW()
+
+- STR_TO_DATE(string, format): String to date https://www.w3schools.com/sql/func_mysql_str_to_date.asp
+
+- SECOND(datetime): Trích xuất giây (0 - 59)
+
+- SEC_TO_TIME(seconds): Chuyển đổi số giây thành thời gian định dạng 'HH:MM:SS'
+
+- QUARTER(date): Quý
+
+	- January - March returns 1
+	- April - June returns 2
+	- July - Sep returns 3
+	- Oct - Dec returns 4
+
+- PERIOD_DIFF(period1, period2): Chênh lệch tháng của 2 period định dạng YYMM hoặc YYYYMM
+
+- PERIOD_ADD(period, number): Thêm tháng và trả về kết quả dạng YYYYMM
+
+- MONTHNAME(date): Tên đầy đủ của tháng.
+
+- MONTH(date_value): Trả về tháng
+
+- MINUTE(date_value): Trả về phút
+
+- MICROSECOND(date_value): Trả về Microsecond
+
+- MAKETIME(hour, minute, second): Ghép giờ, phút, giây
+
+- MAKEDATE(year, day_of_year): Tạo date từ năm và số ngày
+
+	=> SELECT MAKEDATE(2017, 365) = '2017-12-31'
+	
+	=> SELECT MAKEDATE(2017, 366) = '2018-01-01'
+	
+- LAST_DAY(date): Trả về ngày cuối cùng của tháng
+
+- HOUR(datetime): Trích xuất giờ
+
+- EXTRACT(unit FROM date): Trích xuất các phần từ một ngày.
+
+	unit = MICROSECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR, ...
+
+	=> SELECT EXTRACT(MONTH FROM '2020-06-15 10:10:10') = 6
+
+- DAYOFYEAR(date): Trả về ngày trong năm của date (1 - 366)
+
+	=> SELECT DAYOFYEAR('2019-01-20') = 20
+
+- DAYOFWEEK(date): Returns the weekday index for a given date (1 - 7)
+
+	1 = Sunday, 2 = Monday, 3 = Tuesday, 4 = Wednesday, 5 = Thursday, 6 = Friday, 7 = Saturday
+	
+- DAYNAME(date): Trả về tên ngày
+
+	=> SELECT DAYNAME(2020-12-21) = Monday
+
+- DAYOFMONTH(date): Trả về ngày trong tháng (1 - 31)
+
+- DAY(date): Trích xuất ngày, giống với DAYOFMONTH()
+
+- DATEDIFF(date1, date2): Chênh lệch ngày giữa date1 & date2
+
+- DATE_SUB(date, INTERVAL value unit): Hàm trừ ngày
+
+	=> SELECT DATE_SUB('2017-06-15', INTERVAL -2 MONTH) = 2017-08-15
+
+- DATE_FORMAT(date, format): Định dạng ngày
+	
+	%a			Viết tắt ngày trong tuần (Sun - Sat)
+	%b			Viết tắt tên tháng (Jan - Dec)
+	%c			Tháng dưới dạng giá trị số (0 - 12)
+	%D			Ngày trong tháng dưới dạng giá trị số, theo sau là hậu tố (1st, 2nd, 3rd, ...)
+	%d			Ngày trong tháng dưới dạng giá trị số (01 - 31)
+	%e			Ngày trong tháng dưới dạng giá trị số (1 - 31)
+	%f			Giây (000000 - 999999)
+	%H			Hour (00 - 23)
+	%h, %l		Giờ (00 - 12)
+	%i			Phút (00 - 59)
+	%j			Ngày trong năm (001 - 366)
+	%k			Giờ (00 - 23)
+	%l			Giờ (1 - 12)
+	%M			Tên tháng đầy đủ (January - December)
+	%m			Tên tháng dưới dạng giá trị số (00 - 12)
+	%p			AM hoặc PM
+	%r			Thời gian ở định dạng 12 giờ AM hoặc PM (hh: mm: ss AM / PM)
+	%S			Giây (00 - 59)
+	%s			Giây (00 - 59)
+	%T			Thời gian ở định dạng 24 giờ (hh: mm: ss)
+	%U			Tuần mà Chủ nhật là ngày đầu tuần (00 - 53)
+	%u			Tuần mà thứ Hai là ngày đầu tuần (00 - 53)
+	%V			Tuần mà Chủ nhật là ngày đầu tuần (01 - 53)
+	%v			Tuần mà thứ Hai là ngày đầu tuần (01 - 53)
+	%W			Tên ngày trong tuần đầy đủ (Sunday - Saturday)
+	%w			Ngày trong tuần trong đó Chủ nhật = 0 và Thứ bảy = 6
+	%X			Năm trong tuần (chủ nhật là đầu tuần)
+	%x			Năm trong tuần (thứ Hai là đầu tuần)
+	%Y			Năm 4 chữ số
+	%y			Năm 2 chữ số
+
+	=> SELECT DATE_FORMAT(curdate(), '%d/%m/%Y') = 21/12/2020
+	
+- DATE(expression): Trích xuất ngày (date) từ date/datetime
+
+	=> SELECT DATE('2019-03-28 07:20:01')	=	2019-03-28
+
+- CURTIME() & CURRENT_TIME(): Thời gian hiện tại dưới dạng 'HH-MM-SS' (string) hoặc HHMMSS.uuuuuu (numeric)
+
+- CURDATE() & CURRENT_DATE(): Trả về ngày hiện tại dạng 'YYYY-MM-DD' hoặc `YYYYMMDD`
+
+- ADDDATE(date, INTERVAL value unit) hoặc ADDDATE(date, days): Thêm ngày
+
+	=> SELECT adddate(curdate(), 1)					=	'2019-03-28 22:59:21'
+
+	=> SELECT adddate(curdate(), interval 1 day) 	= 	'2019-03-28 22:59:21'
+
+

@@ -1,0 +1,36 @@
+	
+	@Getter/@Setter
+
+	Mặc định lombok sẽ generate các field có phạm vi truy cập là public. Bạn có thể thay đổi phạm vi truy cập này bằng cách xác định AccessLevel. Ví dụ xác định setter của field name là protected
+	
+		@Setter(AccessLevel.PROTECTED)
+		private String name;
+	
+	Đôi khi bạn muốn generate getter/setter tất cả các field của một class, nhưng loại từ một số field nhất định bằng cách xác định AccessLevel là NONE.
+	
+	
+	@ToString: sẽ generate phương thức toString().
+
+	@EqualsAndHashCode: sẽ generate phương thức hashCode() và equals().
+
+	@NoArgsConstructor: sẽ generate một hàm construct không có đối số.
+
+	@AllArgsConstructor: sẽ generate một hàm construct có đối số của tất cả field có trong class.
+
+	@Data = @Getter + @Setter + @ToString + @EqualsAndHashCode + @NoArgsConstructor
+
+	@Builder: sẽ generate các phương thức để có thể khởi tạo một object theo Builder Pattern.
+
+	@Log: sẽ generate một log field thuộc lớp Logger.
+
+		@Log: sẽ sử dụng logger của lớp java.util.logging.Logger.
+		@Log4j: sẽ sử dụng logger của lớp org.apache.log4j.Logger.
+		@Slf4j: sẽ sử dụng logger của lớp org.slf4j.Logger.
+	
+	@ToString(exclude="address")
+	@EqualsAndHashCode(exclude="address")
+	public class Person {
+	  @Getter @Setter private String name;
+	  @Getter @Setter private String address;
+	}
+

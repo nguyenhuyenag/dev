@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            counter-reset: section;
+        }
+
+        h4::before {
+            color: brown;
+            counter-increment: section;
+            content: counter(section) ") ";
+        }
+    </style>
+    <script>
+        $(function () {
+            let s = "";
+            $(".btn1").click(function () {
+                $("li").each(function (i, e) {
+                    s += $(this).text() + " ";
+                    console.log(i, $(e).text());
+                });
+                $('.out').text(s);
+            });
+            let arr = [
+                { "TEST1": 45, "TEST2": 23, "TEST3": "DATA1" },
+                { "TEST1": 46, "TEST2": 24, "TEST3": "DATA2" },
+                { "TEST1": 47, "TEST2": 25, "TEST3": "DATA3" }
+            ];
+            $(".btn2").click(function () {
+                jQuery.each(arr, function (i, e) {
+                    console.log(i, e);
+                    s += JSON.stringify(e);
+                    $.each(this, function (ii, ee) {
+                        console.log(ee);
+                    });
+                });
+                $('.out').text(s);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <pre>
+            $.each(data, function(index, element));
+            $(selector).each(function(index, element));
+        </pre>
+        <h4>List each</h4>
+        <button class="btn1">Each list item</button>
+        <ul>
+            <li>Coffee</li>
+            <li>Milk</li>
+            <li>Soda</li>
+        </ul>
+        <h4>JSON each</h4>
+        <pre>
+            arr = [
+            { "TEST1": 45, "TEST2": 23, "TEST3": "DATA1" },
+            { "TEST1": 46, "TEST2": 24, "TEST3": "DATA2" },
+            { "TEST1": 47, "TEST2": 25, "TEST3": "DATA3" }
+            ];
+        </pre>
+        <button class="btn2">Each JSON</button>
+        <div class="out"></div>
+    </div>
+</body>
+
+</html>

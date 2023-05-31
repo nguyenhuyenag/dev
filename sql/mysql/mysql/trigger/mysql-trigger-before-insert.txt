@@ -1,0 +1,42 @@
+
+	DROP TABLE IF EXISTS WorkCenters;
+	CREATE TABLE WorkCenters (
+		id INT AUTO_INCREMENT PRIMARY KEY,
+		name VARCHAR(100) NOT NULL,
+		capacity INT NOT NULL
+	);
+
+	DROP TABLE IF EXISTS WorkCenterStats;
+	CREATE TABLE WorkCenterStats(
+		totalCapacity INT NOT NULL
+	);
+
+- Khi thêm mới dữ liệu vào WorkCenterStats thì trigger sẽ cập nhật tổng công suất làm việc (totalCapacity)
+
+	DELIMITER $$
+		CREATE TRIGGER before_workcenters_insert
+		BEFORE INSERT
+		ON WorkCenters FOR EACH ROW
+		BEGIN
+			DECLARE rowcount INT;
+			SELECT COUNT(*) 
+			INTO rowcount
+			FROM WorkCenterStats;
+			
+			IF rowcount > 0 THEN -- Nếu đã có thì cộng dồn, chưa có thì INSERT
+				UPDATE WorkCenterStats
+				SET totalCapacity = totalCapacity + new.capacity;
+			ELSE
+				INSERT INTO WorkCenterStats(totalCapacity)
+				VALUES(new.capacity);
+			END IF; 
+		END $$
+	DELIMITER ;
+
+	=> INSERT INTO WorkCenters(name, capacity) VALUES('Mold Machine', 100);
+
+	=> SELECT * FROM WorkCenterStats;
+
+	=> INSERT INTO WorkCenters(name, capacity) VALUES('Packing', 200);
+
+	=> SELECT * FROM WorkCenterStats;

@@ -1,0 +1,35 @@
+
+- HTTP methods
+
+	GET 			Được sử dụng để lấy thông tin từ sever theo URI đã cung cấp.
+	HEAD 			Giống với GET nhưng response trả về không có body, chỉ có header
+	POST 			Gửi thông tin tới sever thông qua các biểu mẫu http( đăng kí chả hạn..)
+	PUT 			Ghi đè tất cả thông tin của đối tượng với những gì được gửi lên
+	PATCH 			Ghi đè các thông tin được thay đổi của đối tượng.
+	DELETE 			Xóa tài nguyên trên server.
+	CONNECT 		Thiết lập một kết nối tới server theo URI.
+	OPTIONS			Mô tả các tùy chọn giao tiếp cho resource.
+	TRACE 			Thực hiện một bài test loop - back theo đường dẫn đến resource
+
+- Một số điểm khác biệt của POST/PUT/PATCH
+	
+	+ Ta sẽ nhận được thông báo lỗi khi gửi 2 POST request có cùng nội dung nhưng PUT thì không, nó luôn trả về kết quả như nhau.
+
+		POST		Tạo mới
+		PUT			Ghi đè (toàn bộ) hoặc tạo mới 1 resource
+		PATCH 		Cập một 1 phần của resource
+
+- Safe method là method không làm thay đổi trạng thái của server. Tức, chỉ đọc mà không làm thay đổi gì.
+		
+		Safe		GET, HEAD, OPTIONS
+		Unsafe		PUT, DELETE, POST, PATCH
+
+- Idempotent
+
+	- Một method được coi là idempotent khi nó chỉ trả về 1 kết quả dù thực hiên n + 1 lần.
+	
+- Một số lưu ý khác
+
+	- Header dài tối đa 8kb và cũng phụ thuộc cả vào trình duyệt
+	- Body thì limit của nó tùy trình duyệt.
+	- Url không dài quá 2 nghìn kí tự (ror)

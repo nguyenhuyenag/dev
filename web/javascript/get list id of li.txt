@@ -1,0 +1,9 @@
+<ul id="my-ul" class="navbar-nav mr-auto">
+  <li id="invoice" class="nav-item"><a class="nav-link" href="./invoice">Tìm kiếm Hóa Đơn</a></li>
+  <li id="count-unread-message" class="nav-item"><a class="nav-link" href="./count-unread-message">Đếm Hóa Đơn</a></li>
+</ul>
+
+$('ul.navbar-nav li').each((index, element) => {
+	let liId = $(element).attr('id');
+	console.log(liId);
+});

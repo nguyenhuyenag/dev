@@ -1,0 +1,26 @@
+function passwordReset() {
+	var msg = "";
+	var form = document.forms["resetPasswordForm"];
+	var password = form.password.value;
+	msg = passwordValidation(password);
+	if (password !== form.confirm_password.value) {
+		msg = "Xác nhận mật khẩu không khớp";
+	}
+	if (msg.length > 0) {
+		if (msg.indexOf("%s") >= 0) {
+			msg = msg.replace("%s", "Mật khẩu");
+		}
+		$(".error").addClass("alert alert-danger");
+		$(".error").text(msg);
+		return false;
+	} else {
+		showLoader();
+		let objUrlParams = new URLSearchParams(window.location.search);
+		let frame = objUrlParams.getAll('frame');
+		let url = '${CONTEXT_PATH}/reset-pass-ts24pro.html?email=' + '<%=request.getParameter("email")%>';
+		if(frame != 'undefined' && frame == 'ts24pro')
+		url += '&frame=' + frame;
+		form.action = url;
+		form.submit();
+	}
+}

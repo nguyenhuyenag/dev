@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Form</title>
+	<link rel="shortcut icon" href="#">
+	<!-- <meta content="text/html; charset=UTF-8" /> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container" style="width: 40%;">
+		<h2>Vertical (basic) form</h2>
+		<form id="formName" action="#">
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" id="email" name="email" value="abc@abc.com">
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" id="remember" name="remember">Remember me</label>
+			</div>
+		</form>
+		<button type="button" class="btn btn-success" onclick="submit()">Success</button>
+		<br />
+		<div id="feedback"></div>
+	</div>
+	<br />
+	<script type="text/javascript">
+		$(document).ready(function () {
+			// hello();
+		});
+		function submit() {
+			// cach 1
+			var elements = document.getElementById("formName").elements;
+			var obj = {};
+			for (var i = 0; i < elements.length; i++) {
+				var item = elements.item(i);
+				obj[item.name] = item.value;
+			}
+			// console.log(JSON.stringify(obj));
+
+			// cach 2
+			var formData = new FormData($('#formName')[0]);
+			const formObject = Object.fromEntries(formData);
+			// console.log(formObject);
+
+			// cach 3
+			const form = new FormData($('#formName')[0]);
+			const v = form.get("remember");
+			console.log(v);
+
+			// cach 4
+			//console.log($('#addForm').serialize());
+
+			var json = "<h4>Ajax Response</h4><pre>" + JSON.stringify(obj, null, 4) + "</pre>";
+			$('#feedback').html(json);
+		}
+	</script>
+</body>
+
+</html>

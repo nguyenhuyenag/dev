@@ -1,0 +1,507 @@
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R
+ /A:D  Folder         /A:-D  NOT Folder
+   /A:R  Read-only      /A:-R  NOT Read-only 
+   /A:H  Hidden         /A:-H  NOT Hidden
+   /A:A  Archive        /A:-A  NOT Archive
+   /A:S  System file    /A:-S  NOT System file
+   /A:I  Not content indexed Files  /A:-I  NOT content indexed
+   /A:L  Reparse Point  /A:-L  NOT Reparse Point (symbolic link)
+
+   /A:X  No scrub file  /A:-X  Scrub file    (Windows 8+)
+   /A:V  Integrity      /A:-V  NOT Integrity (Windows 8+)
+
+   /A    Show all files
+   Several attributes can be combined e.g. /A:HD-R

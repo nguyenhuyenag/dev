@@ -1,0 +1,64 @@
+
+- Ưu điểm
+	
+	- Giống như 1 table ảo và có đầy đủ các tính chất của một Table.
+
+	- Khi ta tạo một View từ 1 table thì nếu table đó đổi dữ liệu thì mặc nhiên View cũng sẽ thay đổi theo.
+	
+	- View chi đọc mà không ghi được
+	
+	- View cho phép tăng/giảm các Fields vì nó được tạo từ một câu truy vấn SELECT nên có thể JOIN nhiều Table lại với nhau và lưu vào View
+	
+- Nhược điểm
+
+	- Truy vấn trong View có thể sẽ chậm hơn trong table.
+	
+	- Bị phụ thuộc vào Table gốc, nếu Table gốc thay đổi cấu trúc thì đòi hỏi View cũng phải thiết kế lại cho phù hợp.
+	
+- Tạo view
+
+	CREATE [OR REPLACE] VIEW [db_name.]view_name [(column_list)]
+		AS
+		câu_lệnh_select;
+		
+	
+	- `Or Replace` sẽ thay thế View có tên là view_name bằng nội dung SQL mới, nếu chưa tồn tại thì nó sẽ tạo view mới.
+
+	- column_list là danh sách các cột sẽ được đặt tên lại, nếu không có sẽ lấy tên cột mặc định của các table.
+		
+	CREATE VIEW daysofweek (day) AS
+		SELECT 'Mon'
+		UNION
+		SELECT 'Tue'
+		UNION
+		SELECT 'Web'
+		UNION
+		SELECT 'Thu'
+		UNION
+		SELECT 'Fri'
+		UNION
+		SELECT 'Sat'
+		UNION
+		SELECT 'Sun';
+		
+- Kiểm tra view
+
+	- SHOW TABLES;
+
+	- SHOW FULL TABLES;
+	
+- Drop View
+
+	DROP VIEW [IF EXISTS] view_name;
+	
+- Đổi tên View
+
+	RENAME TABLE tên_view_hiện_tại
+	TO tên_view_mới;
+
+
+
+
+
+
+

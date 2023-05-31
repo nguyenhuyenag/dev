@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <title>Position</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <style>
+        h4, h5 {
+            color: rgb(207, 8, 8);
+            font-weight: bold;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h4>position-absolute</h4>
+        <p>Phần tử được áp dụng lớp .position-absolute (vị trí tuyệt đối) sẽ tìm kiếm phần tử cha gần nó nhất mà phần tử
+            này có {position: relative}. Sau khi tìm thấy nó sẽ thiết lập vị trí tương đối so với
+            phần tử này. Nếu không tìm thấy nó sẽ thiết lập vị trí tương đối so với khung nhìn (Viewport) của trình
+            duyệt.
+        </p>
+        <img src="../assets/images/position-absolute-2.gif">
+        <br>
+        <img src="../assets/images/position-absolute.png">
+        <br>
+        <br />
+        <div class="position-relative border border-danger" style="height:200px;">
+            .position-relative
+            <div class="position-absolute border bg-info" style="bottom:10px; right:15px;">
+                .position-absolute (bottom:10px; right:15px;)
+            </div>
+        </div>
+        <br />
+        <div class="position-relative border border-danger" style="height:250px;">
+            .position-relative
+            <div class="position-absolute border bg-info" style="bottom:40px;right:35px;top: 100px;left:150px;">
+                .position-absolute (bottom:40px;right:35px;top: 100px;left:150px;)
+            </div>
+        </div>
+        <br />
+    </div>
+</body>
+
+</html>

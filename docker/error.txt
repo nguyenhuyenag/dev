@@ -1,0 +1,10 @@
+
+- Docker says: No connection could be made because the target machine actively refused it
+
+	Environment Variables
+	Add new Variable: DOCKER_HOST
+	Value: tcp://127.0.0.1:2375
+	Run Docker Desktop
+	bottom-right, right-click on Docker-Desktop
+	Settings
+	Enable the following option: "Expose daemon on tcp://localhost:2375 without TLS"

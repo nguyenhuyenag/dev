@@ -1,0 +1,68 @@
+﻿
+- TÙY CHỈNH
+
+	- Phím tắt
+
+		- Sửa tên nhiều biến		- Alt + Shift + R
+		
+									- Hoặc từ biến cần sửa -> right click -> Refactor -> Rename...
+		
+		- Create a Javadoc			- Từ dòng trên tên hàm gõ `/**` + Enter
+		
+									  Hoặc `Shift-Alt-J`
+		
+		- Word Wrap					- Window -> Editor -> Toggle word wrap
+		
+									  Hoặc `Alt + Shift + Y`
+									  
+		- Expand/Collapse package	- Right Arrow	--> Expand
+		
+									- Left Arrow 	--> Collapse
+		
+		- new String(); 			<- "Ctrl + 1" hoặc "Ctrl + 2, L" hoặc "Ctrl + 2, F"
+
+	- Uninstall plugin
+
+		- Help > Eclipse Marketplace > Installed > Chọn plugsin cần gỡ bỏ
+
+	- Show line numbers
+
+		- Window > Preferences > General > Editors > Text Editors > Show line numbers
+
+	- Show memers
+		
+		- Window > Preferences > Java > Appearance > Show members in Package Explorer
+		
+	- Change theme
+
+		- Window > Preferences > Appearance > Theme
+		
+	- Hiển thị dung lượng bộ nhớ
+
+		- Window -> Preferences -> General -> "Show heap status"
+		
+	- Copy method
+	
+		- Press alt + shift + up
+	
+- ERRORS
+
+	- Could not find tools.jar in the active jre
+
+		- Copy file tools.jar từ		"..\jdk1.8\lib\"		=>		"..\jre1.8\lib\"
+	
+	- You need to run build with JDK or have tools.jar on the classpath
+	
+		- Dùng cách copy tools.jar như trên
+		
+	- Failed to load javahl library
+		
+			1. Select Window > Preferences
+			
+			2. Expand Team > SVN
+			
+			3. SVN interface > Client > SVNKit (Pure Java) SVNKit ...
+	
+	- An internal error occurred during: "Repository registry initialization". java.lang.ArrayIndexOutOfBoundsException
+	
+		Remove `\.metadata\.plugins\org.eclipse.m2e.core\nexus`

@@ -1,0 +1,26 @@
+
+- Ưu điểm của JWT so với Basic authen hay Bearer ?
+
+	Phần signature được tính thế này:
+
+		signature = HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret)
+	
+	Với HMACSHA256 là giải thuật hash, không phải là encode do đó không dò được secret từ kết quả của hàm băm, trừ khi dùng brute-force.
+
+	Khi server nhận được request, bao gồm header, payload và signature, tất cả những gì server cần làm là tính lại signature từ header, payload và secret (tất nhiên server cũng biết secret). Nếu signature được tái tạo lại giống với signature từ request => xác thực được client.
+
+	Vậy nó bảo mật hơn Basic authen hay Bearer như thế nào?
+	
+	Có 2 vấn đề:
+
+	- Dùng JWT không phải truyền secret đi muôn nơi trong network nên không bị đối mặt với việc secret bị compromise, so với việc dùng Basic, hay Bearer (an toàn hơn Basic chút).
+	
+	- Vấn đề là với Basic và Bearer, ta hoàn toàn có thể bị tấn công bởi replay attack - ai đó ở giữa biết được request và gọi y hệt như thế. JWT có thể chống cách tấn công này tương đối đơn giản: Trong payload có cả thời gian gửi. Khi đó, 2 request yêu cầu cùng 1 tài nguyên, ở 2 thời điểm khác nhau sẽ có payload và signature hoàn toàn khác nhau. Trên server chỉ cần kiểm tra thời điểm gọi, nếu nó quá lâu so với thời điểm hiện tại, thì reject.
+	
+	Vấn đề là làm thế nào lại để lộ token?
+
+		- Để ai đó tấn công Man-in-the-middle (MITM). Ví dụ bị cài script nào đó lên máy tính cá nhân, hoặc sử dụng 1 proxy độc hại nào đó, hoặc ai đó may mắn bắt được gói tin gửi khi ngồi trong cafe-internet, truy cập 1 website không sử dụng HTTPS.
+	
+		- Chủ động share token đó cho ai đó, và người ta dùng sai mục đích.
+
+	Thực ra, JWT không được design để chống MITM. Nhưng nếu cậu dùng JWT + HTTPS,thì hoàn toàn có thể yên tâm chống MITM.

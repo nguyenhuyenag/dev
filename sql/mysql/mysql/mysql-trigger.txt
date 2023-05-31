@@ -1,0 +1,61 @@
+
+- Cú pháp
+
+		CREATE TRIGGER `trigger_name`
+		{BEFORE | AFTER} {INSERT | UPDATE| DELETE}
+		ON `table_name` FOR EACH ROW
+		`trigger_body`;
+
+	- Trigger_body là nội dung xử lý khi xảy ra sự kiện. Ta sẽ dựa vào hai biến tạm là `OLD.ten_field` và `NEW.ten_field` 
+	   để biết đâu là dữ liệu cũ và mới.
+	
+	- Nếu có nhiều lệnh thì đặt chúng trong `BEGIN ... END`
+
+		Trigger-Event	OLD		NEW
+		INSERT			No		Yes
+		UPDATE			Yes		Yes
+		DELETE			Yes		No
+		
+- Hiển thị danh sách trigger
+
+	SHOW TRIGGERS;
+	
+- Xóa trigger
+
+	DROP TRIGGER [IF EXISTS] trigger_name;
+	
+- Before Insert
+
+	- Trigger sẽ được gọi trước khi insert dữ liệu vào table.
+
+	- Không có OLD, có NEW
+	
+- After Insert
+
+	- Trigger được gọi sau khi dữ liệu được insert vào table.
+	
+	- Không có OLD, có NEW thay đổi được chúng bởi bản chất nó đã insert xong.
+	
+- Before Update
+
+	- Trigger sẽ được gọi trước khi update một row nào đó trong database.
+	
+	- Không thể thay đổi dữ liệu của OLD nhưng có thể thay đổi dữ liệu cho NEW
+
+- After Update
+
+	- Trigger được gọi sau khi lệnh update hoàn thành
+	
+	- Có thể truy cập OLD và NEW nhưng không thay đổi được giá trị của chúng.
+
+- Before Delete
+
+	- Trigger sẽ được gọi trước khi hệ thống xóa dữ liệu.
+	
+	- Có thể truy cập OLD nhưng không thể thay đổi, NEW không có bởi vì đã bị xóa
+
+- After Delete
+
+	- Trigger sẽ được gọi sau khi hệ thống xóa dữ liệu.
+	
+	- Có thể truy xuất đến giá trị của OLD nhưng không thể thay đổi, không có NEW.

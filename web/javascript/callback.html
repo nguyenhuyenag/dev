@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DOM Location</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        
+    </script>
+</head>
+
+<body>
+    <div class="container mt-2 mb-4">
+        <h3>Callback là gì?</h3>
+        <p>Callback là một hàm sẽ được thực hiện sau khi một hàm khác đã thực hiện xong - vì thế nó có tên là callback.
+        </p>
+        <h3>Ví dụ 1</h3>
+        <pre>
+            function first(){
+                console.log("Một");
+            }
+            function second(){
+                console.log("Hai");
+            }
+            first();
+            second();
+        </pre>
+        Kết quả sẽ là
+        <pre>
+            // Một
+            // Hai
+        </pre>
+        <h3>Ví dụ 2</h3>
+        <pre>
+            function first() {
+                setTimeout(function() {
+                    console.log("Một");
+                }, 1000);
+            }
+            function second() {
+                console.log("Hai");
+            }
+        </pre>
+        Kết quả sẽ là
+        <pre>
+            // Hai
+            // Một
+        </pre>
+        <p>=> <strong>Callback</strong> là một cách để đảm bảo code nhất định không thực thi cho đến khi code khác thực
+            hiện xong.</p>
+        <h3>Callback 1</h3>
+        <pre>
+            function doHomework(subject, callback) {
+                console.log(`Bắt đầu làm bài tập ${subject}.`);
+                callback();
+            }
+            doHomework('TOÁN', function() {
+                console.log('Làm bài tập xong!');
+            });
+        </pre>
+        <h3>Callback 2</h3>
+        <pre>
+            function doHomework(subject, callback) {
+                setTimeout(function() {
+                    console.log(`Bắt đầu làm bài tập ${subject}.`);
+                    callback();
+                }, 1000);
+            }
+            function alertFinished() {
+                console.log('Làm bài tập xong!');
+            }
+            doHomework('TOÁN', alertFinished);
+        </pre>
+    </div>
+</body>
+
+</html>

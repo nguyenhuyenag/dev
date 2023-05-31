@@ -1,0 +1,4 @@
+
+- Hide file or folder in Visual Studio Code
+	
+- File > References > Settings => search: files:Exclude

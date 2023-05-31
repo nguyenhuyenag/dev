@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+   <meta charset="utf-8">
+   <title>Bootstrap</title>
+   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/script/jquery.min.js" ></script>
+    <script src="assets/script/popper.min.js" ></script>
+    <script src="assets/script/bootstrap.min.js" ></script>
+   <style>
+      h6 {
+         color: rgb(207, 8, 8);
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="container">
+      <h4>Nav</h4>
+
+      <!-- introduction -->
+      <h6>1) Lớp .nav được sử dụng cùng với các lớp .nav-item, .nav-link để tạo ra một Menu nằm ngang đơn giản</h6>
+      <ul class="nav">
+         <li class="nav-item">
+            <a class="nav-link" href="#">Javascript</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Css</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Bootstrap</a>
+         </li>
+      </ul>
+
+      <!-- Alignment -->
+      <h6>2) Căn lề (Alignment)</h6>
+      <pre>.justify-content-start, .justify-content-center, .justify-content-end</pre>
+      <ul class="nav justify-content-center">
+         <li class="nav-item">
+            <a class="nav-link" href="#">Javascript</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Css</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Bootstrap</a>
+         </li>
+      </ul>
+
+      <!-- Vertical -->
+      <h6>3) Vertical Nav (.flex-column)</h6>
+      .nav là một Menu nằm ngang nhưng ta có thể làm cho nó hiển thị thẳng đứng bằng cách sử dụng .flex-column
+      <ul class="nav flex-column">
+         <li class="nav-item">
+            <a class="nav-link" href="#">Javascript</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Css</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Bootstrap</a>
+         </li>
+      </ul>
+      <!-- Responsive -->
+      <h6>3.1) Responsive Nav</h6>
+      Nếu ta muốn có một Menu nằm ngang và chuyển sang thẳng đứng khi chiều rộng màn hình nhỏ hơn, bạn có thể kết hợp
+      lớp .flex-column với một trong các lớp sau:
+      <pre>.flex-sm-row, .flex-md-row, .flex-lg-row, .flex-xl-row</pre>
+      <ul class="nav flex-column flex-sm-row">
+         <li class="nav-item">
+            <a class="nav-link" href="#">Javascript</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Css</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Bootstrap</a>
+         </li>
+      </ul>
+
+      <!-- .active & .disable  -->
+      <h6>4) .active & .disable</h6>
+      <ul class="nav">
+         <li class="nav-item">
+            <a class="nav-link" href="#">Javascript</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="#">Bootstrap (Reading)</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link disabled" href="#">AngularJS (Comming Soon)</a>
+         </li>
+      </ul>
+
+      <!-- Nav (Tab)  -->
+      <h6>5- Nav (Tab)</h6>
+      Hiển thị .nav như một TAB
+      <ul class="nav nav-tabs">
+         <li class="nav-item">
+            <a class="nav-link" href="#">Javascript</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="#">Bootstrap (Reading)</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link disabled" href="#">AngularJS (Comming Soon)</a>
+         </li>
+      </ul>
+      Sử dụng lớp .nav-tabs và .nav-fill để được một Nav(Tab) mà các Nav-Item có chiều rộng lấp đầy khoảng trống còn lại
+      theo phương nằm ngang.
+      <ul class="nav nav-tabs nav-fill">
+         <li class="nav-item">
+            <a class="nav-link" href="#">Javascript</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">CSS</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="#">Bootstrap</a>
+         </li>
+      </ul>
+      <br>
+
+      <!-- Nav (Tab) Data-Toggle  -->
+      <h6>6- Nav (Tab) Data-Toggle </h6>
+      Hiển thị nội dung tương ứng với Nav-Item mà mà không nhẩy sang môt trang khác.
+      <ul class="nav nav-tabs" id="myTab">
+         <li class="nav-item">
+            <a class="nav-link" id="tab-javascript" data-toggle="tab" href="#content-javascript">
+               Javascript
+            </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" id="tab-css" data-toggle="tab" href="#content-css">
+               CSS
+            </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" id="tab-bootstrap" data-toggle="tab" href="#content-bootstrap">
+               Bootstrap
+            </a>
+         </li>
+      </ul>
+
+      <div class="tab-content" id="myTabContent">
+         <div class="tab-pane fade" id="content-javascript">
+            JavaScript is a cross-platform, object-oriented scripting language ...
+         </div>
+         <div class="tab-pane fade" id="content-css">
+            CSS stands for Cascading Style Sheets. ...
+         </div>
+         <div class="tab-pane fade show active" id="content-bootstrap">
+            Bootstrap is a free front-end framework for faster and easier web development...
+         </div>
+      </div>
+
+      <!-- Nav (Pill)  -->
+      <h6>7- Nav (Pill) </h6>
+      .nav-item của Nav (Pill) ở trạng thái active trông giống như một button
+      <ul class="nav nav-pills">
+         <li class="nav-item">
+            <a class="nav-link active" href="#">Javascript</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Bootstrap</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link disabled" href="#">AngularJS (Comming Soon)</a>
+         </li>
+      </ul>
+
+      Kết hợp Pill (.nav-pills + .nav-fill)
+      <ul class="nav nav-pills nav-fill">
+         <li class="nav-item">
+            <a class="nav-link" href="#">Javascript</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">CSS</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" href="#">Bootstrap</a>
+         </li>
+      </ul>
+
+      <!-- Nav (Pill) Data-Toggle  -->
+      <h6>8- Nav (Pill) Data-Toggle </h6>
+      <ul class="nav nav-pills" id="myPill" role="tablist">
+         <li class="nav-item">
+            <a class="nav-link" id="tab-javascript" data-toggle="tab" href="#content-javascript">
+               Javascript
+            </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" id="tab-css" data-toggle="tab" href="#content-css">
+               CSS
+            </a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link active" id="tab-bootstrap" data-toggle="tab" href="#content-bootstrap">
+               Bootstrap
+            </a>
+         </li>
+      </ul>
+
+      <div class="tab-content" id="myPillContent">
+         <div class="tab-pane fade" id="content-javascript">
+            JavaScript is a cross-platform, object-oriented scripting language ...
+         </div>
+         <div class="tab-pane fade" id="content-css">
+            CSS stands for Cascading Style Sheets. ...
+         </div>
+         <div class="tab-pane fade show active" id="content-bootstrap">
+            Bootstrap is a free front-end framework for faster and easier web development...
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p id="result1"></p>
+    <p id="result2"></p>
+
+    <script>
+        
+        var i;
+
+        var str = "nguyen van huyen";
+        var arr = str.split(" ");
+        var result1 = "";
+        for (i = 0; i < arr.length; i++) {
+            result1 += arr[i] + "<br>"
+        }
+        document.getElementById("result1").innerHTML = result1;
+
+        var str2 = "huyen";
+        var arr2 = str2.split("");
+        var result2 = "";
+        for (i = 0; i < arr2.length; i++) {
+            result2 += arr2[i] + "<br>"
+        }
+        document.getElementById("result2").innerHTML = result2;
+        
+    </script>
+
+</body>
+
+</html>

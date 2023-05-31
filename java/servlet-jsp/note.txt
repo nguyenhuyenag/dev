@@ -1,0 +1,6 @@
+
+- Hiển thị giá trị trên JSP
+
+	+ ${name} nếu giá trị từ Model
+	
+	+ <c:out value="${name}" /> nếu giá trị được tạo từ thẻ <c:set>

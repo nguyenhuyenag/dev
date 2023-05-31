@@ -1,0 +1,216 @@
+- Basic command 
+
+	lsb_release -a			Check Ubuntu version
+	~						Home directory
+	pwd						Print woring directory
+
+- VIM: How to Exit Vim
+	
+	Press ESC once (sometimes twice)
+	
+	The next step depends on the current status and your expectations:
+	
+		:q		If you didn't make any changes
+		:q!		If you made some changes and would rather discard them
+		:wq 	If you made some changes and would like to keep them
+		u 		Undo
+		yy		Copy the current line
+		dd		Delete the current line
+	
+- String
+
+	echo $HOME				/home/huyennv
+	echo "$HOME"			/home/huyennv
+	echo '$HOME'			$HOME
+	echo \'$HOME\'			'/home/huyennv'
+
+- Operator
+
+	command_1 ; command_2		luôn luôn chạy cả 2
+	command_1 && command_2		command_1 (trước &&) có nghĩa thì command_2 (sau &&) mới chạy
+	
+	abc ; ifconfig
+	abc && ifconfig
+
+- File
+
+	cat file.txt					Hiển thị nội dung file
+	echo "content" > file.txt		Tạo file và ghi đè nội dụng
+	echo "content" >> file.txt		Chèn nội dụng vào file
+	
+- Packages manager
+
+	- List all installed packages
+
+		sudo apt install aptitude
+		aptitude search '~i!~M'
+	
+	- Search
+		
+		apt-cache search gcloud
+		
+		apt-cache search openjdk | grep 'openjdk-8'
+	
+- Grep
+
+	<your_command> | grep 'keyword'
+	
+	grep -E --color 'pattern|$' file.txt
+	
+- Grants write access for all users
+
+	Trong đó:
+
+		- Chữ số thứ nhất được dùng để phân quyền cho owner
+		- Chữ số thứ 2 sẽ phân quyền cho group
+		- Chữ số thứ 3 được dùng để phân quyền cho những người khác
+		
+	Với
+	
+		0 	- 		Không quyền nào được cấp
+		1 	-x 		Thực thi
+		2 	-w- 	Viết
+		3 	-wx		Viết và thực thi
+		4 	r- 		Đọc
+		5 	r-x 	Đọc và thực thi
+		6 	rw- 	Đọc và viết
+		7	rwx		Đọc, viết và thực thi
+
+	chmod 777 <NAME_OF_FOLDER>
+	chmod -R 777 /opt/
+	chmod -R 777 ./					->	the current directory
+
+- WINSCP & SSH
+
+	sudo service ssh start
+	service ssh status
+	sudo service ssh restart
+	
+	systemctl restart sshd
+
+	sudo apt remove openssh-server
+	sudo apt install openssh-server
+	sudo vi /etc/ssh/sshd_config
+	
+	Chỉnh 2 thuộc tính
+	
+		PermitRootLogin yes
+		PasswordAuthentication yes
+	
+	sudo apt install net-tools
+	ifconfig
+	
+	Connect with:	SFTP	127.0.0.1:22
+		
+	- Tham khảo
+		
+		https://www.youtube.com/watch?v=Y0q_16MDN-c
+
+- JAVA
+
+	- ps ux
+	
+	- kill -9 PIDnumber
+
+	- Set JAVA_HOME
+
+		https://stackoverflow.com/a/54690640/12189418
+	
+		sudo apt-get update
+		sudo apt install openjdk-8-jdk -y
+		
+		whereis java
+		# ls -l /usr/bin/java
+		# ls -l /etc/alternatives/java
+		ls -l /usr/lib/jvm
+		
+		sudo vi ~/.bashrc
+		# sudo vi /etc/environment
+		
+			# export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
+			# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+			
+			JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+			export JAVA_HOME
+
+		sudo update-java-alternatives --list
+
+- Tomcat
+
+	Find tomcat version
+	
+		cd /opt/tomcat8/lib
+		java -cp catalina.jar org.apache.catalina.util.ServerInfo
+
+	sudo vi /etc/systemd/system/tomcat.service
+	
+		[Unit]
+		Description=Apache Tomcat Web Application Container
+		After=syslog.target network.target
+
+		[Service]
+		Type=forking
+		
+		User=tomcat
+		Group=tomcat
+		
+		# WorkingDirectory=/opt/tomcat/%i
+
+		Environment="JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64"
+		Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true"
+		Environment="CATALINA_BASE=/opt/tomcat8"
+		Environment="CATALINA_HOME=/opt/tomcat8"
+		Environment="CATALINA_PID=/opt/tomcat8/temp/tomcat.pid"
+		Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+
+		ExecStart=/opt/tomcat8/bin/startup.sh
+		ExecStop=/opt/tomcat8/bin/shutdown.sh
+
+		[Install]
+		WantedBy=multi-user.target
+	
+	Manager page 403
+	
+		/opt/tomcat8/conf/tomcat-users.xml
+	
+			<role rolename="admin-gui"/>
+			<role rolename="manager-gui"/>
+			<user username="huyennv" password="root" roles="admin-gui,manager-gui"/>
+	
+		/opt/tomcat8/webapps/manager/META-INF/context.xml
+	
+			<Context antiResourceLocking="false" privileged="true" >
+				<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="^.*$" />
+			</Context>
+		
+	- Start/Stop
+		
+		sudo vi ~/.bashrc
+
+			# Tomcat 8
+			tomcat8=/opt/tomcat8
+			tomcat8_start=$tomcat8/bin/startup.sh
+			tomcat8_stop=$tomcat8/bin/shutdown.sh
+			tomcat8_logs="tail -f $tomcat8/logs/catalina.out"
+		
+		sudo systemctl daemon-reload
+	
+	Xem log: tail -f /opt/tomcat8/logs/catalina.out
+	
+- MYSQL
+
+	mysql --version
+	mysql -u root -p
+	
+	Import by file
+	
+		mysql> source /tmp/test.sql;
+	
+	ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+
+	sudo service mysql start
+	sudo systemctl restart mysql
+	sudo service mysql status
+	
+	sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+	

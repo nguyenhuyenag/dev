@@ -1,0 +1,135 @@
+
+- Định nghĩa một phần tử đơn (Defining a Simple Element)
+
+	<xsd:element name="x" type="y"/>
+	
+	+ Với x là tên phần tử, y là kiểu dữ liệu.
+	
+		Kiểu dữ liệu		Miêu tả
+		xsd:string			Ký tự
+		xsd:decimal			Số thực
+		xsd:integer			Số nguyên
+		xsd:boolean			Luận lý (true hoặc false)
+		xsd:date			Ngày
+		xsd:time			Thời gian
+		
+	+ Ví dụ các phần tử trong tài liệu XML như sau
+
+		<lastname>Refsnes</lastname>
+		<age>36</age>
+		<dateborn>1970-03-27</dateborn>
+	
+	thì định nghĩa các phân tử trong XSD
+
+		<xsd:element name="lastname" type="xsd:string"/>
+		<xsd:element name="age" type="xsd:integer"/>
+		<xsd:element name="dateborn" type="xsd:date"/>
+		
+- Giá trị mặc định và giá trị cố định
+
+	+ Mặc định
+
+		<xsd:element name="color" type="xsd:string" default="red"/>
+
+	+ Cố định
+
+		<xsd:element name="color" type="xsd:string" fixed="red"/>
+		
+- Định nghĩa thuộc tính cho một phần tử
+
+		<xsd:attribute name="xxx" type="yyy"/>
+	
+	+ Ví dụ
+
+		<lastname lang="EN">Smith</lastname>
+
+	thì định nghĩa thuộc tính như sau
+
+		<xsd:attribute name="lang" type="xsd:string"/>
+		
+	+ Thiết lập bắt buộc phải nhập giá trị cho thuộc tính lang
+
+		<xsd:attribute name="lang" type="xsd:string" use="required"/>
+
+– Ràng buộc giá trị
+
+	+ Tuổi lớn hơn 0 và nhỏ hơn 120
+
+	<xsd:element name="age">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:integer">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="120"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+
+	+ Ràng buộc với một tập các giá trị
+	
+		* Cách 1:
+		
+			<xsd:element name="car">
+				<xsd:simpleType>
+				 <xsd:restriction base="xsd:string">
+				   <xsd:enumeration value="Audi"/>
+				   <xsd:enumeration value="Golf"/>
+				   <xsd:enumeration value="BMW"/>
+				 </xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+		* Cách 2: Tạo ra một kiểu dữ liệu mới
+		
+			<!--Định nghĩa phần tử "car" với kiểu dữ liệu là "carType"-->
+			<xsd:element name="car" type="carType"/>
+			<!--Định nghĩa kiểu dữ liệu tên "carType"-->
+			<xsd:simpleType name="carType">
+			  <xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Audi"/>  
+				<xsd:enumeration value="Golf"/>  
+				<xsd:enumeration value="BMW"/>
+			  </xsd:restriction>
+			</xsd:simpleType>
+	
+	+ Ràng buộc trên một loạt các giá trị  
+	
+		- Phần tử “letter” chỉ chấp nhận giá trị là một ký tự thường
+	
+			<xsd:element name="letter">
+			   <xsd:simpleType>
+				 <xsd:restriction base="xsd:string">
+				   <xsd:pattern value="[a-z]"/>
+				 </xsd:restriction>
+			   </xsd:simpleType>
+			</xsd:element>
+			
+		- Phần tử "initials" chỉ chấp nhận giá trị là ba ký tự in hoa
+		
+			<xsd:pattern value="[A-Z][A-Z][A-Z]"/>
+
+		- Phần tử “gender” chỉ chấp nhận giá trị là male hoặc female
+		
+			<xsd:pattern value="male|female"/>
+			
+		- Phần tử “password” phải đủ 8 ký tự là chữ thường hoặc chữ in hoa từ a đến z, hoặc chữ số từ 0 đến 9
+		
+			 <xsd:pattern value="[a-zA-Z0-9]{8}"/>
+	+ Ràng buộc phạm vi về số ký tự của chuỗi
+
+		<xsd:minLength value="5"/>
+		<xsd:maxLength value="8"/>
+
+
+
+
+
+
+
+	
+		
+		
+		
+		
+		
+		
+		

@@ -1,0 +1,116 @@
+Các thẻ JSTL cơ bản (JSTL Core Tags)
+
+<c:out>			Để viết một cái gì đó trong trang JSP, bạn có thể sử dụng EL cũng có thẻ này
+<c:import>		Giống với <jsp:include> hoặc chỉ thị include (include directive)
+<c:redirect>	Chuyển hướng (redirect) yêu cầu tới một nguồn dữ liệu khác.
+<c:set>			Sét đặt giá trị biến cho bởi phạm vi.
+<c:remove>		Loại bỏ biến ra khỏi phạm vi đã cho.
+<c:catch>		Bắt ngoại lệ và gói vào một đối tượng.
+<c:if>			Điều kiện logic đơn giản, sử dụng với EL và bạn có thể sử dụng nó để xử lý các trường hợp ngoại lệ từ <c:catch>
+<c:choose>		Tag có điều kiện đơn giản mà thiết lập một bối cảnh cho các trường hợp loại trừ lẫn nhau có điều kiện, đánh dấu bằng <c:when> và <c:otherwise>
+<c:when>		Thẻ con của <c:choose>, khi một điều kiện tại when là đúng.
+<c:otherwise>	Thẻ con của <c:choose>, khi tất cả các điều kiện <c:when> là sai.
+<c:forEach>		Dùng để lặp trên một tập hợp.
+<c:forTokens>	dùng để lặp trên chuỗi (tokens) được phân cách bởi một dấu phân cách.
+<c:param>		Được sử dụng với <c:import> để truyền các tham số.
+<c:url>			Để tạo một URL với các tham số tùy chọn (optional query string parameters).
+
+- Cú pháp: <c:forEach>
+
+	<c:forEach
+		items     = "<iterate object>"	// option
+		begin 	  = "<int>"				// option
+		end       = "<int>"				// option
+		step  	  = "<int>"				// option
+		var   	  = "<string>"			// option
+		varStatus = "<string>">			// option
+		// todo
+	</c:forEach>
+
+- Cú pháp: <c:if>
+
+	<c:if
+		test  = "<boolean>" // required
+		var   = "<string>" 	// option
+		scope = "<string>">	// option
+		// todo
+	</c:if>
+
+	- var: Biến sẽ nhận giá trị của biểu thức trong `test`
+
+- Cú pháp: Choose - When - Otherwise
+
+	<c:choose>
+		<c:when test="${điều kiện 1}">	// in c:when test is required
+			// todo
+		</c:when>
+		<c:when test="${điều kiện 2}">
+			// todo
+		</c:when>
+		<c:otherwise>
+			// else
+		</c:otherwise>
+	</c:choose>
+
+- Cú pháp: <c:out>
+
+	<c:out
+		value	  = "<string>"		// required
+		default   = "<string>"		// option
+		escapeXml = "<boolean>"/>	// option
+	
+	- default: Nếu biểu thức NULL, thẻ sẽ hiển thị giá trị này.
+	
+	- Thẻ này có thể tự động `escape` nội dung XML.
+	
+	- escape có ý nghĩa là nếu có các ký tự đặc biệt `<, >, &` nằm ở trong <c:out> khi in ra nó sẽ được chuyển thành `&lt;`, `&gt;` và `&amp;`
+
+- Cú pháp: <c:set>
+
+	<c:set
+		var		 = "<string>"	// required
+		value	 = "<string>"	// option
+		target	 = "<string>"	// option
+		property = "<string>"	// option
+		scope	 = "<string>"/>	// option (request, session, page, application), default is `page` scope
+
+- Cú pháp: <c:remove>
+
+	<c:remove
+		var	  = "<string>"		// required
+		scope = "<string>"/>	// option
+		
+	- If no `scope` is provided, the variable will be removed from all the scopes.
+
+- Cú pháp: <c:catch>
+
+	<c:catch var="<string>">	// option
+	
+	</c:catch>
+
+- Cú pháp: <c:forTokens>
+
+	<c:forTokens
+		items	  = "<string>"	// required
+		delims	  = "<string>"	// required: Dấu phân tách
+		begin	  = "<int>"		// option
+		end		  = "<int>"		// option
+		step	  = "<int>"		// option
+		var		  = "<string>"	// option
+		varStatus = "<string>">	// option
+	// todo
+	</c:forTokens>
+
+- Cú pháp: <c:url>
+
+	<c:url
+		var		= "<string>"
+		scope	= "<string>"
+		value	= "<string>"
+		context = "<string>"/>
+	
+	
+	
+
+
+

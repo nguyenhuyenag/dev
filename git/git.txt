@@ -1,0 +1,24 @@
+
+- Git push force
+
+	> git push <https://git...> --force (hoặc mở cmd ở thư mục của repository)
+	
+	> git push --force (hoặc mở cmd ở thư mục của repository)
+
+- Show curent URL
+
+		> git config --get remote.origin.url
+		
+- Git ignore not working
+	
+		> git rm -rf --cached .
+		
+		> git add .
+	
+	- LF will be replaced by CRLF in .gitattributes
+		
+		> git config core.autocrlf true
+	
+	- touch .gitignore
+	
+		**/node_modules

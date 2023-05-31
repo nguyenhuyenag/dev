@@ -1,0 +1,207 @@
+
+	> C:\Program Files\MySQL\MySQL Server 8.0\bin
+	
+- USER
+	
+	Show all user: 
+	
+		SELECT host, user FROM mysql.user;
+	
+	mysql -u root -p
+	
+	- Tạo user & cấp quyền
+	
+		CREATE USER 'huyennv'@'localhost' IDENTIFIED BY 'root';
+		GRANT ALL PRIVILEGES ON *.* TO 'huyennv'@'localhost' WITH GRANT OPTION;
+		FLUSH PRIVILEGES;
+	
+	- Thay đổi mật khẩu
+	
+		ALTER USER 'huyennv'@'localhost' IDENTIFIED BY 'new_password';
+		FLUSH PRIVILEGES;
+
+- REMOTE
+
+		- mysql -u USERNAME -p PASSWORD -hHOST -P PORT
+		
+		- mysql -u root -p root -h localhost -P 3306
+	
+- EXPORT DATABASE MYSQL
+
+		- mysqldump -udev1 -p123456 springboot > D:\springboot.sql (localhost)
+
+		- mysqldump -udev1 -p123456 springboot -h192.168.0.98 -P3306 > D:\springboot.sql
+	
+- IMPORT DATABASE MYSQL
+
+		- mysql -udev1 -p123456 test < D:\springboot.sql (localhost)
+		
+		- mysql -udev1 -p123456 test -h192.168.0.98 -P3306 < D:\springboot.sql
+		
+- Reset AUTO_INCREMENT
+
+		- ALTER TABLE clazz AUTO_INCREMENT = 1;
+		
+		- ALTER TABLE `users` MODIFY `id` INTEGER NOT NULL AUTO_INCREMENT;
+	
+- UNIQUE
+
+		- Create
+		
+			CREATE TABLE `clazz` (
+			  `id` int NOT NULL AUTO_INCREMENT,
+			  `name` varchar(45) DEFAULT NULL,
+			  PRIMARY KEY (`id`),
+			  UNIQUE KEY `name_UNIQUE` (`name`)
+			);
+
+		- Add
+
+			ALTER TABLE `clazz`
+			ADD UNIQUE INDEX `name_UNIQUE`(`name` ASC) VISIBLE;
+
+		- Xóa UNIQUE
+			
+			DROP INDEX `name_UNIQUE`;
+
+
+- View Diagram
+	
+		> Cách 1: Ctrl + R => Next .. Next ..
+
+		> Cách 2: Database => Reverse Engineer => Next .. Next ..
+
+- So sánh cấu trúc của 2 bảng
+
+		SELECT IF(COUNT(1) > 0, 'Differences', 'No Differences') Comparison FROM (
+			SELECT
+				column_name, ordinal_position,
+				data_type, column_type, COUNT(1) rowcount
+			FROM information_schema.columns
+			WHERE
+			(
+				(table_schema='bar' AND table_name='bar')
+				OR
+				(table_schema='boot' AND table_name='bar')
+			)
+			AND table_name IN ('bar','bar')
+			GROUP BY
+				column_name, ordinal_position,
+				data_type, column_type
+			HAVING COUNT(1) = 1
+		) A;
+	
+- Get all table name
+
+	SELECT TABLE_NAME 
+	FROM INFORMATION_SCHEMA.TABLES WHERE 
+	TABLE_SCHEMA = SCHEMA();
+
+- Hiển thị tên cột của bảng
+
+	- Sắp xếp theo column_name
+	
+		SELECT t.column_name, t.COLUMN_TYPE
+		FROM INFORMATION_SCHEMA.COLUMNS t
+		WHERE table_schema = '[schemaname]'
+		AND table_name = '[tablename]'		// <- 'table_name' not table_name
+		ORDER BY column_name
+		
+	hoặc
+		
+		use `your_db`;
+		show columns from `table_name`;
+
+- Lấy record thứ n trong MySQL
+
+	SELECT  * FROM `table_name`
+	ORDER BY `column_name` ASC
+	LIMIT n - 1, 1;
+		
+- caching_sha2_password
+
+	- Remote tới mysql bằng cmd và chạy lệnh
+
+	- ALTER USER 'user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+		
+	- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+	
+- You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column
+
+	1. Go to Edit --> Preferences
+	
+	2. Click "SQL Editor" tab and uncheck "Safe Updates" check box
+	
+	3. Query --> Reconnect to Server // logout and then login
+	
+	4. Now execute your SQL query
+	
+	P/s. No need to restart the MySQL daemon!
+
+	
+- You are using safe update mode and you tried to update a table without a WHERE that uses a KEY
+	column. To disable safe mode, toggle the option in Preferences -> SQL Editor and reconnect
+	
+		SET SQL_SAFE_UPDATES = 0;
+
+		update query ...
+
+		SET SQL_SAFE_UPDATES = 1;
+		
+- Illegal mix of collations (utf8mb4_0900_ai_ci, IMPLICIT) and (utf8mb4_unicode_ci,IMPLICIT) for operation 'like'
+
+	LIKE CONCAT('%', pword,'%') COLLATE utf8mb4_unicode_ci;
+	
+- MySQL 8.0 - Client does not support authentication protocol requested by server; consider upgrading MySQL client
+
+	ALTER USER 'your_username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_password';
+	
+	FLUSH PRIVILEGES;
+
+- Numberic
+	
+	- round(value, decimals): Hàm làm tròn, nếu không có decimals thì hàm sẽ trả về phần nguyên
+	
+		select round(1.14159); => 1
+		
+		select round(1.14159, 2); => 1.14
+		
+	- length()
+	
+	- cast()
+
+- Logic
+
+	IF(condition, value_if_true, value_if_false)
+	
+- CREATE TABLE customers_archive LIKE customers;
+	
+	- CURRENT_DATE()
+
+- Cách random giá trị trong mysql
+	
+	- SELECT + ORDER BY RAND() + LIMIT 1
+
+	SELECT 
+		employeeNumber
+	FROM
+		employees
+	WHERE
+		jobtitle = 'Sales Rep'
+	ORDER BY RAND()
+	LIMIT 1;
+
+- Một số hàm mã hóa
+
+	SELECT
+		MD5('w3') md5,
+		SHA('w3') sha,
+		SHA1('w3') sha1,
+        SHA2('w3', 224) sha2; -- SHA2(str, hash_len)
+
+
+- You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column. 
+  To disable safe mode, toggle the option in Preferences
+  
+  - SET SQL_SAFE_UPDATES = 0;
+	

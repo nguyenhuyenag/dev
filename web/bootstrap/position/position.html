@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <title>Position</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <style>
+        h4,
+        h5 {
+            color: rgb(207, 8, 8);
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Position</h1>
+        <h4>1) .position-static</h4>
+        <p>Mặc định các phần tử trong HTML được định vị tĩnh (positioned static), có nghĩa vị trí của nó được xác định
+            theo quy tắc thông thường của trang và không bị ảnh hưởng bởi các Css property:
+            <code>left, right, top, bottom</code> nếu ta cố tình thiết lập cho nó</p>
+        <p>Ví dụ thẻ div dưới đây không bị ảnh hưởng bởi thuộc tính <code>left</code></p>
+
+        <h6>.position-static + style: left:50px</h6>
+        <div class="border bg-info" style="right: 50px; width: 400px;">
+            This div element has position: static;
+        </div>
+        
+        <hr>
+
+        <h4>2) Class .position-relative</h4>
+        <div class="position-relative bg-info border" style="width:450px;">
+            .position-relative (width:450px)
+        </div>
+        
+        <hr>
+        <h4>3) Class .fixed-top, fixed-bottom, .sticky-top</h4>
+        <p><code>.fixed-top</code> cố định phần tử vào phía trên khung nhìn (viewport) của trình duyệt</p>
+        <p><code>.fixed-bottom</code> cố định phần tử vào phía dưới khung nhìn (viewport) của trình duyệt</p>
+    </div>
+</body>
+
+</html>

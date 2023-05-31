@@ -1,0 +1,136 @@
+
+- Print all bean
+
+	@Autowired
+    public ApplicationContext ctx;
+	
+	String[] beanNames = ctx.getBeanDefinitionNames();
+	Arrays.sort(beanNames);
+	for (String beanName : beanNames) {
+		System.out.println(beanName);
+	}
+
+
+- No 'Access-Control-Allow-Origin' header is present on the requested resource
+
+	- WebMvcConfig.java
+
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+			}
+		};
+	}
+
+
+- Pool empty => Điều chỉnh các thông số application.properties
+
+	spring.datasource.tomcat.max-wait=10
+	spring.datasource.tomcat.max-active=5
+	spring.datasource.tomcat.max-idle=3
+	spring.datasource.tomcat.min-idle=1
+
+
+- Unknown column: https://stackoverflow.com/a/38875123/7068014
+
+	spring.jpa.hibernate.naming.implicit-strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+	spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+- Page view spring security (html + css)
+	
+	import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
+
+
+- No identifier specified for entity
+	
+	- Thiếu @Id
+	
+
+- java.sql.SQLException: Unknown initial character set index '255' received from server.
+						 Initial client character set can be forced via the 'characterEncoding' property.
+						  
+	- jdbc:mysql://localhost:3306/world?useUnicode=yes&characterEncoding=UTF-8
+
+
+- @Async trong Spring
+
+	- Phương thức được tag @Async (được gọi là callee), khi được gọi từ 1 process (được gọi là caller) sẽ được thực hiện ở 1 thread mới. Caller sẽ không chờ callee thực thi xong rồi mới thực hiện tiếp (việc chờ rồi mới thực thi tiếp này gọi là đồng bộ - synchronize), mà cứ tiếp tục công việc của caller.
+
+	- Lúc đó, callee được chạy bất đồng bộ.
+
+
+- Phân biệt Authentication & Authorization
+
+	Authentication xác nhận bạn đã được nhận là nhân viên chính thức.
+	
+	Authorization phân biệt bạn là: Dev cùi bắp, Dev bớt cùi hơn, Dev xịn, Manager, ...
+
+
+- Redirect & Forward
+
+	- Redirect (chuyển hướng) cho phép bạn chuyển hướng tới các trang bao gồm cả các trang nằm ngoài website.
+	
+	- Forward (chuyển tiếp) chỉ cho phép chuyển tới các trang nằm trong website, đồng thời có thể chuyển dữ liệu giữa 2 trang thông qua request.setAttribute.
+
+
+- Role và Principal
+
+	- Role (vai trò) là một tập hợp các quyền (permission) đối với một ứng dụng.
+	
+	- Principal (chủ thể): Sau khi đã đăng nhập vào một hệ thống, họ có quyền làm điều gì đó trong hệ thống. Một principal có thể có một hoặc nhiều vai trò. Điều này phụ thuộc vào sự phân quyền của ứng dụng cho mỗi tài khoản người dùng khác nhau.
+
+- So sánh Session và Cookie
+
+	Cookie														Session
+	Lưu trữ trên trình duyệt của người dùng						Session được lưu trữ ở phía server.
+	Dữ liệu cookie dễ dàng sửa đổi hoặc đánh cắp				Dữ liệu session không dễ dàng sửa đổi vì chúng được lưu trữ ở phía máy chủ.
+	Dữ liệu cookie có sẵn trong trình duyệt đến khi expired		Sau khi đóng trình duyệt sẽ hết phiên làm việc (session).
+
+- The superclass "javax.servlet.http.HttpServlet" was not found on the Java Build Path
+
+	- Xem hình (U46s9)
+
+- Show SQL log
+
+		spring.jpa.show-sql=true
+		spring.jpa.properties.hibernate.format_sql=true
+	
+	- Nếu muốn ghi vào log
+	
+		logging.level.org.hibernate.SQL=DEBUG
+		logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+
+	- Log location
+
+		logging.file.name=log-file.log
+		logging.file.name=log/log-file.log
+		logging.file.name=${user.dir}/log/log-file.log
+	
+- Unable to compile class for JSP tomcat
+
+	- Thư viện: `tomcat-embed-jasper` cần phải đặt thuộc tính `<scope>provided</scope>`
+
+- Khi build thành gói war
+
+	<artifactId>spring-boot-starter-tomcat</artifactId>
+	<scope>provided</scope>
+	
+- Spring boot 2: The minimum supported version of Tomcat is 8.5
+
+- Cấu hình MD5 cho PasswordEncoder()
+
+	- https://stackoverflow.com/a/42343324/7068014
+
+- Run spring boot with jar
+
+	> java -jar target/spring-5-0.0.1-SNAPSHOT.jar
+
+- Caused by: org.hibernate.LazyInitializationException: failed to lazily initialize a collection
+
+	https://stackoverflow.com/a/51909714
+	
+	- Your main problem is that you are trying to access an entity reference outside of a transaction

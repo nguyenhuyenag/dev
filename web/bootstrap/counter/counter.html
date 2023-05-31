@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            counter-reset: section;
+        }
+
+        h2::before {
+            counter-increment: section;
+            content: "Section "counter(section) ": ";
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mb-4">
+
+
+        <h1>Using CSS Counters:</h1>
+        <ul>
+            <li><code class="w3-codespan">counter-reset</code> - Creates or resets a counter</li>
+            <li><code class="w3-codespan">counter-increment</code> - Increments a counter value</li>
+            <li><code class="w3-codespan">content</code> - Inserts generated
+                content</li>
+            <li><code class="w3-codespan">counter()</code> or <code class="w3-codespan">counters()</code> function -
+                Adds the
+                value of a counter to an element</li>
+        </ul>
+
+        <h2>HTML Tutorial</h2>
+        <h2>CSS Tutorial</h2>
+        <h2>JavaScript Tutorial</h2>
+    </div>
+</body>
+
+</html>

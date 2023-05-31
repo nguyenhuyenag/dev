@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Datatables</title>
+    <script src="./cdn/script/jquery-3.5.1.js"></script>
+    <script src="./cdn/script/datatables.min.js"></script>
+    <script src="./cdn/script/datatables.select.min.js"></script>
+    <link rel="stylesheet" href="./cdn//css/bootstrap.min.css">
+    <link rel="stylesheet" href="./cdn/css/jquery.datatables.min.css" />
+    <link rel="stylesheet" href="./cdn/css/select.datatables.min.css" />
+    <style>
+        table tbody tr {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(function () {
+            let table = $('#example').DataTable({
+                ajax: '../ajax/data/objects_salary.txt',
+                columns: [
+                    {
+                        className: 'select-checkbox',
+                        "render": function (data, type, full, meta) {
+                            return ''; // '<input type="checkbox"/>';
+                        }
+                    },
+                    { data: 'name' },
+                    { data: 'position' },
+                    { data: "salary" }
+                ],
+                select: {
+                    style: 'multi', // 'single', 'multi', 'os', 'multi+shift'
+                    selector: 'td:first-child',
+                },
+                "info": false,
+                "paging": true,
+                "ordering": false,
+                "searching": false,
+                "bLengthChange": false
+            });
+
+            table.on('select deselect draw', function() {
+                var all = table.rows({ search: 'applied' }).count(); // get total count of rows
+                var selectedRows = table.rows({ selected: true, search: 'applied' }).count(); // get total count of selected rows
+                if (selectedRows < all) {
+                    $('#MyTableCheckAllButton i').attr('class', 'fa fa-square');
+                } else {
+                    $('#MyTableCheckAllButton i').attr('class', 'fa fa-check-square');
+                }
+            });
+
+            $('#MyTableCheckAllButton').click(function () {
+                var all = table.rows({ search: 'applied' }).count(); // get total count of rows
+                var selectedRows = table.rows({ selected: true, search: 'applied' }).count(); // get total count of selected rows
+                if (selectedRows < all) {
+                    // Added search applied in case user wants the search items will be selected
+                    table.rows({ search: 'applied' }).deselect();
+                    table.rows({ search: 'applied' }).select();
+                } else {
+                    table.rows({ search: 'applied' }).deselect();
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h3 class="text-center"><a href="http://127.0.0.1:5500/">Home</a></h3>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+                <tr class="text-center">
+                    <th>
+                        <input type="checkbox" id="MyTableCheckAllButton" class="select-checkbox" />
+                    </th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+
+</html>

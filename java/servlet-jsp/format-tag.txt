@@ -1,0 +1,37 @@
+
+- Cú pháp: <fmt:bundle>
+
+- Cú pháp: <fmt:formatNumber>: Dùng để định dạng số, phần trăm và tiền tệ. 
+
+	<fmt:formatNumber
+		value			  = "<number>"	Số sẽ được định dạng
+		type			  = "<string>"	Số, tiền tệ, phần trăm (number, currency, percel).
+		pattern			  = "<string>"	Định dạng
+		currencyCode	  = "<string>"	Mã tiền tệ được sử dụng nếu các loại thuộc tính là tiền tệ.
+		currencySymbol	  = "<string>"	Các ký hiệu tiền tệ được sử dụng nếu các loại thuộc tính là tiền tệ.
+		groupingUsed	  = "<string>"	Có phân tách nhóm hay không khi định dạng đầu ra.
+		maxIntegerDigits  = "<integer>"	Số lượng tối đa các chữ số trong phần nguyên.
+		minIntegerDigits  = "<integer>"	Số lượng tối thiểu của các chữ số ở phần nguyên
+		maxFractionDigits = "<integer>"	Số lượng tối đa các chữ số trong phần thập phân.
+		minFractionDigits = "<integer>"	Số lượng tối thiểu các chữ số trong phần thập phân.
+		var				  = "<string>"	Tên của biến lưu trữ kết quả đã được định dạng.
+		scope			  = "<string>"	Phạm vi của biến lưu trữ trong var.
+	/>
+
+- Cú pháp: <fmt:parseNumber>
+
+	<fmt:parseNumber
+		value			= "<string>" String được phân tích.
+		type			= "<string>" Number, currency, percentage
+		pattern			= "<string>" Khuôn mẫu của String đã cho trong thuộc tính value được phân tích.
+		parseLocale		= "<string>" Locale để sử dụng khi phân tích các giá trị bằng cách sử dụng khuôn mẫu (pattern) đã cho.
+		integerOnly		= "<string>" Chỉ định có hoặc không, chỉ các phần nguyên của giá trị được phân tích.
+		var				= "<string>" Tên của biến để lưu trữ kết quả phân tích, kết quả trả về là một số (java.lang.Number).
+		scope			= "<string>" Phạm vi của var để lưu trữ.
+	/>
+	
+	- Mặc định, <fmt: formatNumber> gửi đầu ra của nó đến JspWriter hiện tại (để ghi vào trang), nhưng nếu bạn chỉ định thuộc tính var, <fmt: formatNumber> sẽ lưu trữ đầu ra của nó vào một biến có phạm vi (scope) được chỉ định trong thuộc tính var. Giá trị mặc định của thuộc tính scope là 'page', bạn có thể chỉ định giá trị khác cho thuộc tính scope. 
+
+
+
+

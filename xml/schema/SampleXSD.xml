@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<doc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="sampleXSD.xsd">
+	<person>
+		<name>John</name>
+		<initials>z</initials>
+		<prodid>12345</prodid>
+		<password>abc12345</password>
+		<shoesize country="VN">12</shoesize>
+	</person>
+</doc>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../cdn/css/4.3.1/bootstrap.min.css">
+    <style>
+        table {
+            margin: 0 auto
+        }
+    </style>
+    <script>
+        function load() {
+            let arr = [];
+            for (var i = 0; i < 20; i++) {
+                arr.push(i);
+            }
+            arr.forEach((value, i) => {
+                return arr[i] = value * 2;
+            });
+            let test = arr.map(value => {
+                return value * 2;
+            });
+            document.getElementById("demo").innerHTML = JSON.stringify(test);
+        }
+    </script>
+</head>
+
+<body onload="load();">
+    <h1 class="text-center">forEach vs map</h1>
+    <table class="table" style="width: 500px;">
+        <thead>
+            <tr>
+                <th scope="col">forEach()</th>
+                <th scope="col">map()</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Không trả về giá trị nào cả</td>
+                <td>Có trả về giá trị</td>
+            </tr>
+            <tr>
+                <td>Hàm callback có thể thay đổi trực tiếp mảng ban đầu</td>
+                <td>Tạo ra một mảng mới có cùng số phần tử với mảng cũ và trả về mảng mới này</td>
+            </tr>
+        </tbody>
+    </table>
+    <p id="demo"></p>
+</body>
+
+</html>

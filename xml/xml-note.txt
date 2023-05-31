@@ -1,0 +1,124 @@
+
+- XML không cắt ngắn khoảng trắng (HTML cắt ngắn nhiều khoảng trắng thành một khoảng trắng duy nhất).
+
+- Empty XML Elements
+
+		<element></element>
+
+	hoặc
+	
+		<element />
+
+- Special Character
+			
+		Entity References 	Character
+		&apos; 					'
+		&amp; 					&
+		&gt; 					>
+		&lt; 					<
+		&quot; 					"
+
+- CDATA
+
+	<![CDATA[
+		Nội dung
+	]]>
+	
+- DTD (Document Type Definitions)
+
+	+ Định nghĩa phần tử tên <to> chỉ được phép chứa giá trị không chứa được phần tử khác
+
+		<!ELEMENT to (#PCDATA)>
+
+	+ Cú pháp khai báo chỉ chứa một phần tử con
+
+		<!ELEMENT element-name (child1)>
+	
+	+ Cú pháp khai báo chỉ chứa nhiều phần tử con
+
+		<!ELEMENT element-name (child1, child2, ...)>
+
+	+ Chỉ định một phần tử xuất hiện ít nhất một lần
+	
+		<!ELEMENT element-name (child-name+)>
+		
+	+ Chỉ định một phần tử không xuất hiện hoặc xuất hiện nhiều lần
+	
+		<!ELEMENT element-name (child-name*)>
+		
+	+ Chỉ định một phần tử không xuất hiện hoặc xuất hiện một lần
+	
+		<!ELEMENT element-name (child-name?)>
+		
+	+ Chỉ định một trong hai phần tử xuất hiện
+
+		<!ELEMENT note (to, from, header, (message|body))>
+
+	+ Khai báo thuộc tính cho phần tử
+	
+			<!ATTLIST element-name attribute-name attribute-type attribute-value>
+		
+		- Ví dụ khai báo thuộc tính type cho phần tử payment
+
+			<!ATTLIST payment type CDATA "check">
+
+		- Kết quả trong tài liệu xml
+
+			<payment type="check"/>
+		
+		- Trong đó attribute-type có thể là
+		
+			attribute-type		Miêu tả
+			
+			CDATA				Giá trị là các ký tự
+			
+			(en1|en2|..)		Giá trị phải là một từ một danh sách liệt kê
+
+		- Trong đó attribute-value có thể là
+		
+			attribute-value			Giải thích
+			
+			value					Giá trị mặc định của thuộc tính
+			
+			#REQUIRED				Giá trị của thuộc tính là bắt buộc
+			
+			#IMPLIED				Giá trị của thuộc tính không bắt buộc
+			
+			#FIXED value			Giá trị thuộc tính là cố định
+
+		- Ví dụ mẫu
+		
+			<?xml version="1.0" encoding="UTF-8"?>
+			<!DOCTYPE note
+			 [
+				<!ELEMENT note (to,from,heading,body)>
+				<!ELEMENT to (#PCDATA)>
+				<!ELEMENT from (#PCDATA)>
+				<!ELEMENT heading (#PCDATA)>
+				<!ELEMENT body (#PCDATA)>
+			 ]>
+			<note>
+			  <to>Tove</to>
+			  <from>Jani</from>
+			  <heading>Reminder</heading>
+			  <body>Don't forget me this weekend!</body>
+			</note>
+			
+		- Định nghĩa DTD ngoài XML (Sample.dtd)
+		
+				<!ELEMENT note (to,from,heading,body)>
+				<!ELEMENT to (#PCDATA)>
+				<!ELEMENT from (#PCDATA)>
+				<!ELEMENT heading (#PCDATA)>
+				<!ELEMENT body (#PCDATA)>
+		
+			và chèn vào xml
+		
+				<?xml version="1.0"?>
+				<!DOCTYPE note SYSTEM "Sample.dtd">
+				<note>
+					<to>Tove</to>
+					<from>Jani</from>
+					<heading>Reminder</heading>
+					<body>Don't forget me this weekend!</body>
+				</note>

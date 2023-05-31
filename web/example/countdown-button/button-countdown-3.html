@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DOM Location</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            var sec = 10;
+            var timer = setInterval(function () {
+                $("#mdtimer span").text(sec--);
+                if (sec == 0) {
+                    $("#makingdifferenttimer").delay(1000).fadeIn(1000);
+                    $("#mdtimer").hide(1000).fadeOut(fast);
+                }
+            }, 1000);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container mt-2 mb-4">
+        <center>
+            <a class="button" href="#" id="makingdifferenttimer" style="display: none;" target="_blank">Download</a>
+            <div id="mdtimer">
+                <div style="font-size: large;">
+                    <b>Please Wait <span>5</span> seconds</b>
+                </div>
+            </div>
+        </center>
+    </div>
+</body>
+
+</html>

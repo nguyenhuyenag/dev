@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
+    <script>
+
+        function turnOff() {
+            document.getElementById("img").src = "assets/img/pic_bulboff.gif";
+        }
+
+        function turnOn() {
+            document.getElementById("img").src = "assets/img/pic_bulbon.gif";
+        }
+
+        function toggle() {
+            $('p').toggle('hide');
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <p>JavaScript can change HTML attributes.</p>
+
+    <button onclick="turnOn()">Turn on the light</button>
+
+    <img id="img" src="assets/img/pic_bulboff.gif" style="width:100px">
+
+    <button onclick="turnOff()">Turn off the light</button>
+
+    <br> <br>
+
+    <button id="toggle" onclick="toggle()">Toggle</button>
+
+</body>
+
+</html>

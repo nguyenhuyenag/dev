@@ -1,0 +1,38 @@
+
+- Deploy spring_boot 1.5.9 trên Tomcat 7, Java 7
+		
+	-> Xóa các gói JAR `tomcat-xxx-8.x.jar` trong `WEB-INF/lib`
+	
+	-> Hoặc sử dụng
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+- Thay đổi tomcat version trong spring boot
+
+	Mặc định Spring Boot sẽ sử dụng Tomcat 7, nếu bạn muốn sử dụng các phiên bản khác chẳng hạn như Tomcat 8 thì chỉ việc cấu hình trong maven thông qua thuộc tính tomcat.version
+	
+		<properties>
+			<tomcat.version>8.0.3</tomcat.version>
+		</properties>
+		
+- Error
+
+	- Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set.
+	
+		Thêm vào file aplication.properties
+		
+			spring.jpa.database=mysql
+			
+		- https://stackoverflow.com/a/50598093
+		
+	- Unable to process Jar entry [module-info.class] in Tomcat 7 && Java 8
+	
+		- trunk for 9.0.0.M18 onwards
+		- 8.5.x for 8.5.12 onwards 		(8.5.84 OK)
+		- 8.0.x for 8.0.42 onwards
+		- 7.0.x for 7.0.76 onwards
+

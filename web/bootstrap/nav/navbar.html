@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <script src="../assets/script/jquery.min.js" ></script>
+    <script src="../assets/script/popper.min.js" ></script>
+    <script src="../assets/script/bootstrap.min.js" ></script>
+    <style>
+        h5 {
+            color: rgb(207, 8, 8);
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Navbar</h3>
+        <div class="text-center">
+            <img src="../assets/images/navbar.png">
+        </div>
+        <br>
+        <!-- introduction -->
+        <h5>1) .navbar .navbar-expand-sm</h5>
+        Nếu không sử dụng lớp .navbar-expand-xl|lg|md|sm thanh công cụ sẽ luôn luôn thẳng
+        <!-- Vertical with every screen size -->
+        <nav class="navbar bg-dark">
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Javascript</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Css</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bootstrap</a>
+                </li>
+            </ul>
+        </nav>
+        Sử dụng .navbar-expand-xl|lg|md|sm
+        <!-- A horizontal navbar that becomes vertical on small screens -->
+        <nav class="navbar navbar-expand-sm bg-dark">
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Javascript</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Css</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bootstrap</a>
+                </li>
+            </ul>
+        </nav>
+
+        <br>
+        <!-- Colored Navbar -->
+        <h5>2) Colored Navbar</h5>
+        <p>.navbar-dark => màu nền tối, set Nav-item thành màu trắng </p>
+        <p>.navbar-light => màu nền sáng, set Nav-item thành màu đen</p>
+
+        <br />
+        <!-- Brand/ Logo  -->
+        <h5>2- Brand/ Logo </h5>
+        <p>Nơi bạn đặt một Logo hoặc tên liên quan trực tiếp tới website.</p>
+        <p>Sử dụng <code>.navbar-brand</code> để tạo một Brand. Có hai cách để đặt vị trí của Brand, nó có thể là phần
+            tử con trực tiếp của ".navbar" hoặc là phần tử con trực tiếp của ".nav-item"</p>
+        <div class="text-center">
+            <img src="../assets/images/navbar-brand.png">
+        </div>
+        <br />
+        Cách 1
+        <!-- Brand: Direct child of ".navbar" -->
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <a class="navbar-brand" href="#">MY_SITE</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Javascript</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Css</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bootstrap</a>
+                </li>
+            </ul>
+        </nav>
+
+        <br />
+        Cách 2
+        <!-- Brand: Direct Child of ".nav-item" -->
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link navbar-brand" href="#">MY_SITE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Javascript</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Css</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bootstrap</a>
+                </li>
+            </ul>
+        </nav>
+
+        <hr>
+        <!-- Collapsing Navbar  -->
+        <h5>3- Collapsing Navbar </h5>
+        Thu gọn thanh điều hướng (navigation bar) thành một button. Sử dụng kết hợp
+        <code>.collapse + .navbar-collapse + .navbar-toggler</code>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#"></a>
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Javascript</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Css</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bootstrap</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <hr>
+        <!-- Navbar Left & Right  -->
+        <h5>4- Navbar Left & Right </h5>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">SITE</a>
+            <!-- Left -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link">Java</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">C/C++</a>
+                </li>
+            </ul>
+            <!-- Right -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link">Tom</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <hr>
+        <!-- Dropdown Navbar  -->
+        <h5>5- Dropdown Navbar </h5>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">SITE</a>
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Java</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">C/C++</a>
+                </li>
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Front-end
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Javascript</a>
+                        <a class="dropdown-item" href="#">Css</a>
+                        <a class="dropdown-item" href="#">Bootstrap</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <hr>
+        <!-- Navbar & Form  -->
+        <h5>6) Navbar & Form</h5>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary rounded">
+            <a class="navbar-brand" href="#">SITE</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link">Java</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">C/C++</a>
+                </li>
+            </ul>
+            <!-- Navbar-nav with FORM -->
+            <ul class="navbar-nav ml-auto">
+                <form class="form-inline" action="/somepage">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+            </ul>
+        </nav>
+    </div>
+    <br><br> <br> 
+</body>
+
+</html>

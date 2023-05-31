@@ -1,0 +1,1051 @@
+
+- toán tử
+	
+	=				so sánh bằng
+	<> hoặc !=		khác
+	<				less than. you typically use it with numeric and date/time data types.
+	>				greater than
+	<=				less than or equal to
+	>=				greater than or equal to
+	
+- đổi tên bảng
+
+	rename table `old_name` to `new_name`
+
+- sorting data
+
+	- order by (mặc định là asc)
+		
+			select
+			   select_list
+			from 
+			   table_name
+			order by
+			   column1 [asc|desc], -- ưu tiên 1
+			   column2 [asc|desc], -- ưu tiên 2
+			   ...;
+
+	- field(value, val1, val2, val3, ...): trả về vị trí của `value` trong dãy `val1, val2, val3, ...`
+
+		select field("q", "s", "q", "l"); => 2
+	
+	- sắp xếp theo tiêu chí:
+
+		in process
+		on hold
+		canceled
+		resolved
+		disputed
+		shipped
+
+		- select ordernumber, status from orders
+		  order by field(status, 'in process', 'on hold', 'cancelled', 'resolved', 'disputed', 'shipped');
+		
+		- field() => sẽ trả chỉ số của status
+
+- filtering data
+	
+	- where
+	
+		+ and
+		
+		+ or
+		
+		+ between & not between
+		
+			`expression between low and high`
+		
+			- khi sử dụng between để so sánh ngày, nên cast về kiểu date: cast('2003-01-01' as date)
+		
+		+ like
+		
+		+ in
+		
+			`value in (value1, value2,...)`
+		
+		+ is null
+			
+			`value is null`
+	
+	- distinct
+	
+		- nếu cột có nhiều giá trị null, mysql chỉ giữ lại 1 giá trị
+		
+		- distinct là một trường hợp đặc biệt của group by, distinct không sắp xếp kết quả còn group by thì có (từ v8 bị loại bỏ)
+		
+		- distinct & aggregate functions
+		
+			+ count(distinct <column>)
+			
+	- or & and: and có độ ưu tiên cao hơn or
+	
+	- in & not in:
+	
+	- like & not like: 	`%` : đại diện 0 hoặc nhiều ký tự
+						`_` : đại diện 1 ký tự
+			
+		- tìm tên bắt đầu bằng t, kết thúc bằng m và chứa bất kỳ ký tự đơn giữa ví dụ tom, tim, ... như sau:
+		
+			name like 't_m';
+		
+		- nếu mẫu tìm kiếm có chứ ký tự `%` hoặc `_`, ví dụ 10%, _20,... 
+		
+			productcode like '%\_20%';				=> mặc định là dấu `\`
+			
+			hoặc
+			
+			productcode like '%$_20%' escape '$';	=> có thể thay `$` bằng ký tự khác
+			
+	- limit
+		
+			select select_list
+			from table_name
+			order by sort_expression
+			limit n-1, 1;
+		
+		=> mệnh đề `limit n-1, 1` sẽ trả về 1 hàng bắt đầu từ hàng n.
+		
+		=> cách này hoạt động khi không 2 dòng cùng giá trị
+	
+	- is null
+	
+		- nếu cột kiểu dữ liệu là date, datetime `not null` chứa ngày đặc biệt '0000-00-00', thì có thể dùng `is null` toán tử để tìm các hàng đó.
+		
+		- @@sql_auto_is_null mặc định = 0
+		
+		- lệnh explain
+		
+			explain select
+				customernumber
+				salesrepemployeenumber
+			from customers
+			where salesrepemployeenumber is null;
+
+- joining tables
+
+	- inner join
+	
+			select column_list
+			from table_1
+			inner join table_2 on join_condition;
+		
+		hoặc nếu có cột trùng tên
+		
+			select column_list
+			from table_1
+			inner join table_2 using (column_name); <= có dấu ()
+		
+	- left join
+	
+			select column_list 
+			from table_1 
+			left join table_2 on join_condition;
+		
+		hoặc nếu có cột trùng tên
+		
+			select column_list 
+			from table_1 
+			left join table_2 using (column_name);
+		
+		- tìm những hàng chỉ có trong bảng bên trái
+		
+			select  column_list
+			from table_1
+			left join table_2 using(column_name)
+			where column_table_2 is null;
+		
+	- right join
+	
+			select column_list 
+			from table_1
+			right join table_2 on join_condition;
+		
+		hoặc
+		
+			select column_list
+			from table_1 
+			right join table_2 using (column_name);
+		
+		- tìm những hàng chỉ có trong bảng bên phải
+		
+			select column_list 
+			from table_1 
+			right join table_2 using (column_name)
+			where column_table_1 is null;
+		
+	- cross join (tích descartes 2 bảng)
+	
+- grouping data
+
+	- group by
+	
+			select 
+				c1, c2, ..., cn, aggregate_function(ci)
+			from
+				table
+			[where where_conditions]
+			group by c1 , c2,..., cn;
+		
+		- sql chuẩn không cho phép sử dụng bí danh trong mệnh đề group by nhưng mysql thì có.
+		
+		- mysql cho phép sử fụng desc và asc trong mệnhh đề group by.
+		
+		- Ví dụ
+		
+			STT		ten		luong
+			1		Thanh	2
+			2		Minh	3
+			3		Tai		5
+			4		Thanh	9
+			5		Quy		1
+			6		Ngoc	4
+			
+			select
+				ten, sum(luong)
+			from
+				ten
+			group by
+				ten
+		
+		Ta sẽ được kết quả
+		
+			Thanh	11
+			Minh	3
+			Tai		5
+			Quy		1
+			Ngoc	4
+
+	- having
+		
+			select 
+				select_list
+			from 
+				table_name
+			where 
+				search_condition
+			group by 
+				group_by_expression
+			having
+				group_condition;
+			
+		- nếu mệnh đề group by bị bỏ qua thì having hoạt động giống như where.
+		
+		- where áp dụng điều kiện cho từng hàng riêng lẻ còn having áp dụng cho nhóm được tạo bởi group by. Vì vậy mà sau GROUP BY thì sẽ chỉ dùng được HAVING còn WHERE không dùng được sau GROUP BY.
+		
+		- sử dụng nhiều điều kiện trong having bằng and, or
+	
+	- rollup
+	
+			select 
+				select_list
+			from 
+				table_name
+			group by
+				c1, c2, c3 with rollup;
+
+- subqueries
+
+	- subquery
+	
+		- với where
+				
+			value = (select ...); // hoặc <, >, >=,...
+				
+		- với in và not in
+		
+			value not in (...);
+		
+		- với from
+		
+			from
+				(select...) as alias_name;
+		
+		- với exists và not exists
+		
+			select 
+				*
+			from
+				table_name
+			where
+				exists( subquery );
+	
+	- exists
+		
+			select 
+				select_list
+			from
+				a_table
+			where
+				[not] exists(subquery);
+				
+		- nếu subquery trả về ít nhất 1 hàng thì toán tử trả về true, ngược lại false
+		
+		- update table_name 
+			set
+				column = new_value
+			where
+				exists( 
+					select 
+						1
+					from
+						a_table
+					where condition);
+					
+		- insert into customers_archive
+			select *
+			from customers
+			where not exists(
+			   select 1
+			   from
+				   orders
+			   where
+				   orders.customernumber = customers.customernumber
+			);
+			
+		- delete from customers
+			where exists( 
+				select 
+					1
+				from
+					customers_archive a
+				
+				where
+					a.customernumber = customers.customernumber);
+					
+		- exists nhanh hơn in
+
+- set operators
+
+	- union
+	
+			select column_list
+			union [distinct | all]
+			select column_list
+			union [distinct | all]
+			select column_list
+			
+		- quy tắc:
+
+			- số lượng & thứ tự của các cột xuất hiện trong các select phải giống nhau.
+			- thứ hai, các kiểu dữ liệu của cột phải giống nhau hoặc tương thích.
+			- mặc định, union sẽ loại bỏ các hàng trùng lặp ngay cả khi không chỉ định distinc
+			- union all sẽ giữ lại các kết quả trùng lặp
+	
+		- join kết quả kết hợp đặt theo chiều ngang, union nối thêm và đặt theo chiều dọc
+
+			id				id			 id
+			1				2			 1
+			2	  union		3		=> 	 2
+			3				4			 3
+										 4
+										 				 
+			id				id			id		id
+			1				2			 2		2
+			2	  join		3		=> 	 3		3
+			3				4			 
+										 
+		- nếu muốn sắp xếp kết quả thì thêm  order by vào câu select cuối cùng
+
+
+- modifying data in mysql
+
+	- insert
+
+			insert into table(c1,c2,...)
+				values (v1,v2,...);
+	
+		- show variables like 'max_allowed_packet'; số lượng tối đa khi chèn
+
+		- insert into select (thường dùng đẻ clone bảng)
+		
+			insert into table_name(column_list)
+			select 
+			   select_list 
+			from 
+			   another_table
+			where
+			   condition;
+			   
+		- insert ignore
+
+				insert ignore into table(column_list)
+				values (value_list),
+					   (value_list)
+		
+			- khi insert nếu xảy ra lỗi mysql sẽ chấm dứt câu lệnh và trả về lỗi => không có hàng nào được chèn.
+
+			- với insert ignore các gây ra lỗi sẽ bị bỏ qua và các hàng có dữ liệu hợp lệ được chèn vào bảng.
+			
+			- ngoài ra, nó sẽ cố gắng điều chỉnh các giá trị để làm cho chúng hợp lệ trước khi thêm giá trị vào bảng,
+			  ví dụ nếu chuỗi quá dài nó sẽ cắt chuỗi để chèn
+				  
+			- dùng `show warnings;` để xem lỗi
+	
+	- update (cập nhật giá trị của cột): khi update phải lưu ý điều kiện where (very important!)
+
+			update [ignore] table_name 
+			set
+				column_name1 = expr1,
+				column_name2 = expr2,
+				...
+			[where condition];
+			
+		- ignore tương tự của insert
+	
+	- delete
+
+			delete from table_name
+			where condition;
+		
+		- ngoài việc xóa dữ liệu khỏi một bảng, delete còn trả về số lượng hàng đã xóa.
+		
+		- on delete cascade
+		
+			- đặt phía sau foreign key
+			
+				foreign key (building_no)
+					references buildings (building_no)
+					on delete cascade
+			
+			- tự động xóa dữ liệu khỏi các bảng con khi xóa dữ liệu khỏi bảng cha
+			
+			- tìm các bảng bị ảnh hưởng bởi on delete cascade
+			
+				use information_schema;
+ 
+				select 
+					table_name
+				from
+					referential_constraints
+				where
+					constraint_schema = 'database_name'
+						and referenced_table_name = 'parent_table'
+						and delete_rule = 'cascade'
+	
+	- prepared statement
+	
+		- prepare stmt1 from 
+			'select
+				   productcode,
+					productname
+			from products
+				where productcode = ?';
+				
+		- set @pc = 's10_1678'; 
+		
+		- execute stmt1 using @pc;
+		
+		- deallocate prepare stmt1;
+
+- transaction
+
+	- transaction
+	
+		-- start a new transaction
+		start transaction;
+		 
+		-- commit changes    
+		commit;
+		
+		-- rollback;
+		
+	- lock & unlock bảng
+	
+			- lock tables table_name1 [read | write], 
+					  table_name2 [read | write],
+					  ...
+		
+			- `unlock tables;`
+		
+		- read
+		
+			- chỉ đọc, không thể ghi (kể cả ở connection khác). thao tác ghi sẽ được đưa vào trạng thái chờ cho đến khi khóa read được giải phóng.
+		
+		- write
+
+			- connection hiện tại giữ khóa của bảng có thể đọc và ghi.
+		
+			- connection khác không thể đọc ghi cho đến khi khóa write được giải phóng.
+		
+		- `select connection_id()`: trả về id của kết nối hiện tại
+		
+		- `show processlist`: hiển thị các luồng đang chạy
+
+
+- managing mysql databases and tables
+
+		- create database [if not exists] database_name;
+		
+		- show databases;
+		
+		- use database_name;
+		
+		- drop database if exists temp_database;
+	
+		- cmd:	mysql -uroot -proot		=> connection
+		
+				mysql -u root -d classicmodels -p
+			
+				mysql> select database();	=> tên db đang sử dụng
+			
+	- tạo bảng
+	
+			create table [if not exists] table_name(
+			   column_1_definition,
+			   column_2_definition,
+			   ...,
+			   table_constraints
+			) engine=storage_engine;
+		
+		- innodb trở thành công cụ lưu trữ mặc định kể từ phiên bản mysql 5.5
+		
+		- cú pháp cho định nghĩa của một cột
+
+			column_name data_type(length) [not null] [default value] [auto_increment] column_constraint;
+			
+		- xem cấu trúc của bảng
+		
+			describe table_name;
+			
+		- ví dụ
+		
+			create table if not exists tasks(
+				task_id int auto_increment primary key,
+				title varchar(255) not null,
+				start_date date,
+				status tinyint not null,
+				description text,
+				created_at timestamp default current_timestamp
+			) engine=innodb;
+		
+			create table if not exists checklists(
+				todo_id int auto_increment,
+				task_id int,
+				is_completed boolean not null default false,
+				primary key (todo_id , task_id),
+				foreign key (task_id)
+					references tasks (task_id)
+					on update restrict
+					on delete cascade
+			);
+
+	- auto_increment (sequence)
+
+		- mỗi bảng chỉ có 1 cột kiểu auto_increment, thường là số nguyên bắt đầu từ 1 và tăng lên 1 khi chèn null hoặc bỏ qua
+		
+		- cột auto_increment phải được lập chỉ mục, có nghĩa là nó có thể là một trong hai `primary key` hoặc `unique`
+		
+		- khi đặt cột là auto_increment thì mysql sẽ tự động thêm ràng buộc not null vào cột.
+		
+		- select last_insert_id(): trả về thứ tự được tạo cuối cùng.
+		
+		- từ phiên bảng mysql 5.1 auto_increment chỉ chấp nhận giá trị dương
+
+	- alter table
+	
+		- thêm cột
+		
+			alter table `table_name`
+				add [column] `new_column_name` `column_definition` [first | after existing_column],
+				add [column] `new_column_name` `column_definition` [first | after existing_column];
+
+		- kiểm tra 1 cột có tồn tại trong bảng?
+		
+			select 
+				if(count(*) = 1, 'exist', 'not exist') as result
+			from
+				information_schema.columns
+			where
+				table_schema = 'database_name'
+				and table_name = 'table_name'
+				and column_name = 'column_name';
+		
+		- xóa cột
+				
+			alter table `table_name`
+				drop [column] `column_name1`,
+				drop [column] `column_name2`;
+					
+		- sửa cột
+		
+			alter table table_name
+				modify `column_name` `column_definition` [ first | after existing_column],
+				modify `column_name` `column_definition` [ first | after existing_column];
+		
+		- đổi tên cột
+		
+			alter table `table_name`
+				change column `current_name` `new_name column_definition` [first | after existing_column];
+		
+		- đổi tên bảng
+		
+			alter table `table_name`
+				rename to `new_table_name;`
+	
+	- xóa bảng
+	
+			drop [temporary] table [if exists] table_name [, table_name] ...
+				 [restrict | cascade]
+			 
+		- lệnh chỉ xóa bảng, nó không xóa quyền người dùng với bảng. do đó, nếu tạo 1 bảng có cùng tên với bảng đã xóa,
+		  mysql sẽ áp dụng các quyền hiện có cho bảng mới, điều này có thể gây rủi ro bảo mật.
+	
+	- temporary table
+	
+			`create temporary table`
+			
+			`drop temporary table table_name;`
+		
+		- dùng drop table để xóa bảng tạm hoặc mysql sẽ tự động xóa bảng tạm khi kết thúc phiên làm việc
+		
+		- bảng tạm chỉ tồn tại tại phiên làm việc tạo ra nó. các phiên khác nhau có thể tạo các bảng cùng.
+		  tuy nhiên, trong cùng một phiên không thể có 2 bảng tạm cùng tên.
+		  
+		- bảng tạm và bản chính có thể cùng tên, tuy nhiên lúc này mọi truy cập đều sẽ trỏ đến bảng tạm.
+		
+		- tạo bảng tạm giống với bảng chính (không thể dùng like)
+		
+			create temporary table `temp_table_name`
+			select * from `original_table`
+			limit 0;
+		
+		- kiểm tra bảng tạm thời có tồn tại?
+		
+			delimiter //
+			create procedure check_table_exists(table_name varchar(100)) 
+			begin
+				declare continue handler for sqlstate '42s02' set @err = 1;
+				set @err = 0;
+				set @table_name = table_name;
+				set @sql_query = concat('select 1 from ',@table_name);
+				prepare stmt1 from @sql_query;
+				if (@err = 1) then
+					set @table_exists = 0;
+				else
+					set @table_exists = 1;
+					deallocate prepare stmt1;
+				end if;
+			end //
+			delimiter ;
+
+			call check_table_exists('ten_bang_tam');
+			select @table_exists;	-- 1 có, 0 không
+		
+	- truncate table
+
+			truncate [table] table_name;
+		
+		- truncate table = delete không có where nhưng hiệu quả hơn vì nó xóa và tạo lại bảng thay vì xóa từng dòng.
+		
+		- lệnh sẽ reset thuộc tính auto_increment 
+			
+			alter table table_name auto_increment = value;
+		
+	- generated columns	(mysql 5.7+)
+	
+			column_name data_type [generated always] as (expression)
+				[virtual | stored] [unique [key]]
+				
+		- mặc định là virtual (tạo ra cột ảo)
+				
+		- ví dụ
+		
+			create table contacts (
+				first_name varchar(50) not null,
+				last_name varchar(50) not null,
+				fullname varchar(101) generated always as (concat(first_name, ' ', last_name))
+			);
+			
+			- thì khi thêm mới dữ liệu vào bảng thì cột fullname sẽ `tự động` thêm dữ liệu bằng cách ghép first_name và last_name
+			
+				insert into contacts(first_name,last_name)
+				values('john','doe');
+				
+					=>	 fullname = john doe
+		
+- kiểu dữ liệu trong mysql
+
+	- integer
+	
+		- zerofill
+		
+			v1 int(2) zerofill		=>	khi chèn 1 	=> 01
+	
+	- decimal
+	
+		column_name decimal(p,d); -- dec = fixed = numeric
+		
+			- p là độ dài chữ số (1 -> 65).
+			
+			- d là số chữ số sau dấu thập phân (0 -> 30). mysql yêu cầu d <= p.
+			
+		- ví dụ
+		
+			decimal(6,2);	=> 9999,99 đến -9999,99
+			
+			decimal(p) 		= decimal(p,0);
+			
+			decimal			=> p = 10
+	
+	- boolean
+	
+		- mysql dùng tinyint(1) để định nghĩa kiểu boolean.
+		
+		- trong mysql số 0 được coi là false và giá trị khác không được coi là true
+		
+		- dùng `where column_name is true` để lấy các cột có giá trị `true`
+		
+			   `where column_name = true` chỉ lấy ra các giá trị `1`
+	
+	- char
+	
+		- vấn đề khoảng trắng
+	
+	- date
+		
+		- yyyy-mm-dd
+	
+		- năm với 2 chữ số
+		
+			- 00 - 69 => 2000 - 2069.
+			
+			- 70 - 99 => 1970 - 1999.
+	
+		- select now();			=>	2020-02-07 10:15:24
+		
+		- select date(now());	=>	2020-02-07
+		
+		- select curdate();		=> 	ngày của hệ thống
+		
+		- select date_format(curdate(), '%m/%d/%y') today;	=>	02/07/2020
+		
+		- tính số ngày giữa 2 ngày: select datediff('2015-11-04','2014-11-04') days;
+
+		- thêm số ngày, tuần, tháng, năm, ... vào giá trị ngày
+		
+			select 
+				'2015-01-01' start,											-- hôm nay
+				date_add('2015-01-01', interval 1 day) 'one day later', 	-- hôm sau
+				date_add('2015-01-01', interval 1 week) 'one week later', 	-- 1 tuần sau
+				date_add('2015-01-01', interval 1 month) 'one month later',	-- 1 tháng sau
+				date_add('2015-01-01', interval 1 year) 'one year later'; 	-- 1 năm sau
+	
+		- trừ số ngày, tuần, tháng, năm, ... vào giá trị ngày
+		
+			select 
+				'2015-01-01' start,
+				date_sub('2015-01-01', interval 1 day) 'one day before',	 -- hôm trước
+				date_sub('2015-01-01', interval 1 week) 'one week before',	 -- tuần trước
+				date_sub('2015-01-01', interval 1 month) 'one month before', -- tháng trước
+				date_sub('2015-01-01', interval 1 year) 'one year before';	 -- năm trước
+	
+	
+		- lấy ngày, tháng, quý, năm
+		
+			select day(now()) 	  "ngày", 
+				   month(now())   "tháng", 
+				   quarter(now()) "quý", 
+				   year(now())    "năm";
+		- week()
+		
+			select 
+				weekday('2000-12-31') weekday,
+				week('2000-12-31',1) week,
+				weekofyear('2000-12-31') weekofyear;
+	
+	- time
+		
+		- hh:mm:ss
+		
+		- một số định dạng mysql chấp nhận khi insert time
+		
+			'hhmmss'	=>	'hh:mm:ss'		tuy nhiên, '108000' sẽ không hợp lệ vì 80 vượt quá số phút
+	
+			hhmmss		=>  'hh:mm:ss'
+	
+			'h:m:s'		=>	'0h:0m:0s'
+		
+		- thời gian hiện tại
+		
+			select 
+				current_time() as 'hh:mm:ss',
+				current_time() + 0 as 'hhmmss';
+	
+		- thêm và trừ thời gian
+		
+			select 
+				current_time(),
+				addtime(current_time(), 023000), -- thêm 2 giờ 30 phút
+				subtime(current_time(), 023000); -- trừ 2 giờ 30 phút
+	
+		- khác biệt giữa 2 time
+		
+			select
+				start_at,
+				end_at,
+				timediff(end_at, start_at)
+			from
+				tests;
+	
+		- định dạng thời gian
+		
+			time_format(time, format)
+			
+				%f	microseconds (000000 to 999999)
+				%h	hour (00 to 23)
+				%h	hour (00 to 12)
+				%i	hour (00 to 12)
+				%i	minutes (00 to 59)
+				%p	am or pm
+				%r	time in 12 hour am or pm format (hh:mm:ss am/pm)
+				%s	seconds (00 to 59)
+				%s	seconds (00 to 59)
+				%t	time in 24 hour format (hh:mm:ss)
+		
+		- trích xuất giờ, phút giây từ time
+		
+			select
+				current_time() now,
+				hour(current_time()) h,
+				minute(current_time()) m,
+				second(current_time()) s;
+	
+		- utc
+		
+			select 
+			   current_time(), 
+			   utc_time();
+	
+	- datetime
+	
+		- yyyy-mm-dd hh:mm:ss
+		
+		- datetime và timestamp
+		
+			- timestamp:	1970-01-01 00:00:01 utc	 ->	 2038-01-19 03:14:07 utc
+		
+			- timestamp sẽ thay đổi giá trị theo múi giờ utc.
+			
+				set time_zone = '+00:00';
+				
+				create table timestamp_n_datetime (
+					id int auto_increment primary key,
+					ts timestamp,
+					dt datetime
+				);
+				
+				insert into timestamp_n_datetime(ts, dt) values(now(),now());
+				
+				select * from timestamp_n_datetime;	=> datetime và timestamp giống nhau
+				
+				set time_zone = '+03:00';
+		
+				select * from timestamp_n_datetime;	=> datetime và timestamp khác nhau
+		
+		- datetime functions
+		
+			- set @dt =  now();
+			
+				select @dt;		=>		"2020-02-07 07:34:10"
+				
+				select
+					@dt,			
+					hour(@dt),
+					minute(@dt),
+					second(@dt),
+					day(@dt),
+					week(@dt),
+					month(@dt),		-- tháng
+					quarter(@dt),	-- quý
+					year(@dt); 		-- năm
+		
+		
+			- date_add()
+			
+				select @dt start, 
+				   date_add(@dt, interval 1 second) '1 second later',
+				   date_add(@dt, interval 1 minute) '1 minute later',
+				   date_add(@dt, interval 1 hour) 	'1 hour later',
+				   date_add(@dt, interval 1 day) 	'1 day later',
+				   date_add(@dt, interval 1 week) 	'1 week later',
+				   date_add(@dt, interval 1 month) 	'1 month later',
+				   date_add(@dt, interval 1 year) 	'1 year later';
+		
+			- date_sub ()
+			
+				select @dt start, 
+				   date_sub(@dt, interval 1 second) '1 second before',
+				   date_sub(@dt, interval 1 minute) '1 minute before',
+				   date_sub(@dt, interval 1 hour)   '1 hour before',
+				   date_sub(@dt, interval 1 day) 	'1 day before',
+				   date_sub(@dt, interval 1 week) 	'1 week before',
+				   date_sub(@dt, interval 1 month) 	'1 month before',
+				   date_sub(@dt, interval 1 year) 	'1 year before';
+		
+			- datediff(): tính số ngày chênh lệch giữa 2 datetime, hàm này chỉ tính ngày
+			
+				select datediff('2020-12-21', '2020-12-21');
+		
+		- timestamp
+		
+			- khởi tạo, tự động cập nhật giá trị cho cột kiểu timestamp
+			
+				column_name timestamp default current_timestamp
+
+				create table categories (
+					id int auto_increment primary key,
+					name varchar(255) not null,
+					created_at timestamp default current_timestamp,
+					updated_at timestamp default current_timestamp on update current_timestamp
+				);			
+		
+		- json
+		
+				create table table_name (
+					...
+					json_column_name json,
+					... 
+				);
+		
+			- cột json không thể có giá trị mặc định.
+			
+			- ví dụ
+				
+					create table events ( 
+						browser json
+					);
+				
+				- chèn dữ liệu
+				
+					insert (
+					  ...
+				      '{ "name": "firefox", "os": "windows", "resolution": { "x": 2560, "y": 1600 } }'
+					)
+				
+				- để lấy các giá trị ra khỏi json, bạn sử dụng toán tử muỗi tên `->`
+				
+					select
+						browser -> '$.name' browser				
+					from events;
+					
+						+----------+
+						| browser  |
+						+----------+
+						| "safari" |
+						| "safari" |
+						| "firefox"|
+						| "firefox"|
+						| "firefox"|
+						| "chrome" |
+						+----------+
+						
+				- để loại bỏ các dấu ngoặc kép ta dùng `->>`
+
+		- enum
+		
+				create table table_name (
+					...
+					col enum ('value1','value2','value3'), -- <= 20 giá trị là tốt nhất
+					...
+				);
+
+			- ví dụ
+			
+				create table tickets (
+					id int primary key auto_increment,
+					title varchar(255) not null,
+					priority enum('low', 'medium', 'high') not null -- lúc này low = 1, medium = 2, high = 3
+				);
+
+				- khi đó 2 câu lệnh sau là tương đương
+				
+					insert into tickets(title, priority)
+					values('scan virus for computer a', 'high');
+					
+					insert into tickets(title, priority)
+					values('scan virus for computer a', 3);
+
+				- tương tự cho where, order by, ... 
+
+			- lấy ra danh sách enum
+			
+				select 
+					column_type
+				from
+					information_schema.columns
+				where
+					table_name = table_name
+					and column_name = enum_colum_name;
+
+- mysql constraints (ràng buộc trong mysql)
+
+	- not null
+	
+		- dùng isnull(), ifnull(), nullif() để xử lý giá trị null.
+	
+	- khóa chính
+	
+			create table table_name(
+				primary_key_column datatype primary key,
+				...
+			);
+			
+			create table table_name(
+				primary_key_column1 datatype,
+				primary_key_column2 datatype,
+				...,
+				primary key(column_list)
+			);
+		
+		-  mysql sẽ ngầm thêm một not null vào cột khóa chính nếu chưa được khai báo.
+		
+		- thêm khóa chính
+		
+			alter table table_name
+			add primary key(column_list);
+		
+		- primary key & unique key & key
+		
+			- key từ đồng nghĩa với index
+			
+			- unique cho phép null.
+			
+
+	- khóa ngoại
+	
+		[constraint constraint_name]
+		foreign key [foreign_key_name] (column_name, ...)
+		references parent_table(colunm_name,...)
+		[on delete reference_option]
+		[on update reference_option]
+		
+	
+		- tùy chọn: cascade, set null, no action, restrict, và set default.
+
+			- cascade: nếu xóa/cập nhập một hàng từ bảng cha, các giá trị của các hàng khớp trong bảng con sẽ tự động bị xóa/cập nhật.
+			
+			- set null: nếu một hàng từ bảng cha bị xóa hoặc cập nhật, các giá trị của cột khóa ngoài (hoặc cột) trong bảng con được đặt thành null.
+			
+			- restrict: nếu một hàng từ bảng cha có một hàng khớp trong bảng con, mysql sẽ từ chối xóa hoặc cập nhật các hàng trong bảng cha.
+			
+			- no action: giống như restrict.
+			
+			- set default: được công nhận bởi trình phân tích cú pháp mysql. tuy nhiên, hành động này bị từ chối bởi cả hai bảng innodb và ndb.
+
+			- nếu không chỉ định mệnh đề on delete/on update, thì mặc định là restrict.
+
+		- xóa khóa ngoại
+		
+			- để xóa khóa ngoại, ta cần phải biết tên của nó là gì, mà tên chỉ tồn tại trong trường hợp ta có sử dụng từ khóa constraint lúc tạo khóa, vì vậy nên sử dụng constraint để tạo khóa ngoại.
+			
+				alter table `table_name` drop foreign key `constraint_name`;
+				
+			- để xem constraint trong bảng 
+			
+				show create table `table_name`;
+			
+			- vô hiệu hóa/kích hoạt khóa ngoại
+			
+				set foreign_key_checks = 0;
+				
+				set foreign_key_checks = 1;

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            // addClass
+            $("#btn1").click(function () {
+                $(".p1, .p2").addClass("blue");
+                $(".div1").addClass("important blue");
+            });
+            // toggleClass
+            $("#btn2").click(function () {
+                $(".p1, .p2").toggleClass("blue");
+                $(".div1").toggleClass("important blue");
+            });
+        });
+    </script>
+    <style>
+        .important {
+            font-weight: bold;
+            font-size: xx-large;
+        }
+        .blue {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h3>1) addClass()</h3>
+        <button id="btn1">Add classes to elements</button>
+        <p class="p1">This is a paragraph.</p>
+        <p class="p2">This is another paragraph.</p>
+        <div class="div1">This is some important text!</div>
+        <br>
+        <h3>2) removeClass()</h3>
+        <pre>
+            $("p").removeClass("blue");
+            $("h1, h2, p").removeClass("blue");
+        </pre>
+        <h3>3) toggleClass = addClass + removeClass</h3>
+        <button id="btn2">toggleClass</button>
+    </div>
+</body>
+
+</html>

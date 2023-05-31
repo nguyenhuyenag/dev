@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <title>Collapse & Accordion</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/script/jquery.min.js" ></script>
+    <script src="assets/script/popper.min.js" ></script>
+    <script src="assets/script/bootstrap.min.js" ></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Collapse & Accordion</h1>
+        <h4>1) Collapse</h4>
+        <!-- Link collapse -->
+        <a class="btn btn-link" href="#" data-toggle="collapse" data-target="#target1">
+            Click to me
+        </a>
+        <div id="target1" class="collapse">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
+        </div>
+
+        <br/>
+
+        <!-- Button collapse -->
+        <button class="btn" data-toggle="collapse" data-target="#target2">
+            Click to me
+        </button>
+        <div id="target2" class="collapse">
+            It is a long established fact that a reader will be distracted by the
+            readable content of a page when looking at its layout...
+        </div>
+
+        <hr>
+        <ol>
+            <li>Ban đầu lớp <strong>.collapse</strong> được áp dụng cho mục tiêu (target), lúc này mục tiêu đang ẩn.
+            </li>
+            <li>Người dùng nhấn vào <strong>button</strong>, lớp <strong>.collapsing</strong> được áp dụng cho mục tiêu.
+                Bạn sẽ thấy mục tiêu đang được mở rộng (expand).</li>
+            <li>Cuối cùng khi nội dung đã được hiển thị hoàn toàn, mục tiêu sẽ được thiết lập lớp
+                <strong>.collapse.show</strong>
+            </li>
+        </ol>
+        <img src="assets/images/collapse.png">
+
+        <br />
+
+        <br />
+        <h4>2) Nhiều mục tiêu (Multi Targets)
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#target11" role="button">
+                    Show/Hide Target 1
+                </a>
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#target22">
+                    Show/Hide Target 2
+                </button>
+                <button class="btn btn-success" type="button" data-toggle="collapse" data-target=".myTarget">
+                    Toggle both Targets
+                </button>
+            </p>
+
+            <div class="row">
+                <div class="col">
+                    <div class="collapse myTarget" id="target11">
+                        <div class="card card-body">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry...
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="collapse myTarget" id="target22">
+                        <div class="card card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid....
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <h4>3) Accordion</h4>
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                   <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                         <button class="btn btn-link" type="button" data-toggle="collapse"
+                            data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                         Javascript
+                         </button>
+                      </h5>
+                   </div>
+                   <div id="collapseOne" class="collapse show"
+                      aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body">
+                         JavaScript is a scripting or programming language that
+                         allows you to implement complex things on web pages ..
+                      </div>
+                   </div>
+                </div>
+     
+                <div class="card">
+                   <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                         Css
+                         </button>
+                      </h5>
+                   </div>
+                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                      data-parent="#accordionExample">
+                      <div class="card-body">
+                         CSS stands for Cascading Style Sheets.
+                         CSS describes how HTML elements are to be displayed on screen,
+                         paper, or in other media ..
+                      </div>
+                   </div>
+                </div>
+     
+                <div class="card">
+                   <div class="card-header" id="headingThree">
+                      <h5 class="mb-0">
+                         <button class="btn btn-link collapsed" type="button"
+                            data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree">
+                         Bootstrap
+                         </button>
+                      </h5>
+                   </div>
+                   <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                      data-parent="#accordionExample">
+                      <div class="card-body">
+                         Bootstrap is a free front-end framework for faster and easier web development.
+                         Bootstrap includes HTML and CSS based design templates for typography ...
+                      </div>
+                   </div>
+                </div>
+    </div>
+</body>
+
+</html>

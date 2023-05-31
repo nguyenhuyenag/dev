@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <title>Popover</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/script/jquery.min.js" ></script>
+    <script src="assets/script/popper.min.js" ></script>
+    <script src="assets/script/bootstrap.min.js" ></script>
+    <style>
+        h4,
+        h5,
+        h6 {
+            color: rgb(207, 8, 8);
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Popover</h1>
+        <h5>1) Popover</h5>
+        <p>Click nhiều popover cùng lúc</p>
+        <button type="button" class="btn btn-warning myPopover" data-toggle="popover" data-placement="right"
+            title="Right Popover" data-content="Popover show on Right">Tooltip on right</button>
+
+        <button type="button" class="btn btn-danger myPopover" data-toggle="popover" data-placement="top"
+            title="Top Popover" data-content="Popover show on top.">Tooltip on top</button>
+
+        <button type="button" class="btn btn-info myPopover" data-toggle="popover" data-placement="bottom"
+            title="Bottom Popover" data-content="Popover show on Bottom.">Tooltip on bottom</button>
+
+        <button type="button" class="btn btn-success myPopover" data-toggle="popover" data-placement="left"
+            title="Left Popover" data-content="Popover show on Left">Tooltip on left</button>
+
+        <hr>
+
+        <!-- focus-->
+        <h5>2) PopOver (Focus)</h5>
+        <p>Popover sẽ ẩn khi click vào phần tử khác</p>
+        <button type="button" class="btn btn-warning myPopover" data-toggle="popover" data-placement="right"
+            title="Dismissiabe Popover" data-trigger="hower" data-content="I display when the button is focused!">Focus
+            Me</button>
+
+        <hr>
+
+        <!-- hover-->
+        <h5>3) Popover (Hover)</h5>
+        <button type="button" class="btn btn-warning myPopover" data-toggle="popover" data-placement="right"
+            title="Hover Popover" data-trigger="hover" data-content="I display when pointer over the element">Hower over
+            Me</button>
+
+        <hr>
+        
+        <h5>4) Popover với nội dung HTML</h5>
+        <button type="button" class="btn btn-warning myPopover" data-toggle="popover" data-placement="right"
+            title="Popover with HTML content" data-trigger="hover" data-html="true"
+            data-content="This is <b style='color:red;'>Simple</b> HTML Content.">Popover HTML Content</button>
+
+        <br>
+        <a href="#" class="myPopover-HTML" data-toggle="popover" data-placement="right" title="Quick guide"
+            data-trigger="hover" data-html="true" data-popover-content="#myPopoverContent">Download Software</a>
+
+        <!-- Content for Popover: -->
+        <div id="myPopoverContent" style="display:none">
+            <strong>Steps to do..</strong>
+            <ol style="padding:10px">
+                <li>Download this file</li>
+                <li>Install the software</li>
+                <li>Restart your computer</li>
+            </ol>
+        </div>
+
+        <script>
+            $(function () {
+                $(".myPopover").popover();
+            });
+
+            $('.myPopover-HTML').popover({
+                html: true,
+                content: function () {
+                    var elementId = $(this).attr("data-popover-content");
+                    return $(elementId).html();
+                }
+            });
+        </script>
+
+    </div>
+</body>
+
+</html>

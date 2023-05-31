@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bootstrap Table Examples</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.21.4/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script>
+        function loadData() {
+            var selectedRows = $('#myTable').bootstrapTable('getSelections');
+            console.log(selectedRows);
+        }
+
+        function getRowData(id) {
+            let rowData = $('#myTable').bootstrapTable('getData')[id];
+            console.log(rowData);
+        }
+
+        $(function () {
+            let data = [  { id: 1, name: 'Item 1', price: 10.99 },  { id: 2, name: 'Item 2', price: 19.99 },  { id: 3, name: 'Item 3', price: 5.99 }];
+            let table = createTable(data);
+
+            setTimeout(() => { 
+                // Refresh the table with new data
+                let newData = [  { id: 4, name: 'Item 4', price: 15.99 },  { id: 5, name: 'Item 5', price: 9.99 }];
+                table.bootstrapTable('load', newData);
+            }, 3000);
+
+            function createTable(data) {
+                return $('#myTable').bootstrapTable({
+                    data: data,
+                    columns: [
+                        {
+                            
+                        }, {
+                            field: 'id',
+                            title: '____ID____',
+                            align: 'center',
+                            sortable: true
+                        }, {
+                            field: 'name',
+                            align: 'center',
+                            sortable: true
+                        }, {
+                            field: 'price',
+                            align: 'center',
+                            sortable: true,
+                            formatter: function (value, row, index) {
+                                return '€' + value.toFixed(2);
+                            }
+                        }, {
+                            title: 'Action',
+                            align: 'center',
+                            formatter: function (value, row, index) {
+                                let id = row['id'];
+                                return '<button class="btn btn-primary" onclick="getRowData(' + id + ')">Get Row Data</button>';
+                            }
+                        }
+                    ],
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Datatable Flat JSON</h1>
+        <h1 class="text-center">Waiting 3s</h1>
+        <table id="myTable" class="table table-striped">
+            <thead>
+                <tr class="text-center">
+                    <th data-checkbox='true'></th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <title>Progress Bar</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/script/jquery.min.js" ></script>
+    <script src="assets/script/popper.min.js" ></script>
+    <script src="assets/script/bootstrap.min.js" ></script>
+    <style>
+        h4, h5, h6, h5 {
+            color: rgb(207, 8, 8);
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Progress Bar</h1>
+        <ul>
+            <li>bg-primary</li>
+            <li>bg-secondary</li>
+            <li>bg-success</li>
+            <li>bg-danger</li>
+            <li>bg-warning</li>
+            <li>bg-info</li>
+            <li>bg-light</li>
+            <li>bg-dark</li>
+            <li>bg-muted</li>
+            <li>bg-white</li>
+        </ul>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                style="width:80%">
+                80%
+            </div>
+        </div>
+
+        <br/>
+        <div class="progress">
+            <div class="progress-bar bg-success text-left" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                aria-valuemax="100" style="width:40%">
+                40% Complete (.bg-success)
+            </div>
+        </div>
+
+        <br/>
+        <div class="progress">
+            <div class="progress-bar bg-info text-left" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                aria-valuemax="100" style="width:50%">
+                50% Complete (.bg-info)
+            </div>
+        </div>
+
+        <br/>
+        <div class="progress">
+            <div class="progress-bar bg-warning text-left" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                aria-valuemax="100" style="width:60%">
+                60% Complete (.bg-warning)
+            </div>
+        </div>
+
+        <br/>
+        <h5>2) Height</h5>
+        <div class="progress" style="height:55px;">
+            <div class="progress-bar" role="progressbar"
+               aria-valuenow="30"
+               aria-valuemin="0" aria-valuemax="100"
+               style="width:30%">
+            </div>
+         </div>
+
+         <br/>
+         <h5>3) Striped Progress Bar </h5>
+         <div class="progress">
+            <div class="progress-bar progress-bar-striped" role="progressbar"
+               aria-valuenow="80"
+               aria-valuemin="0" aria-valuemax="100"
+               style="width:80%">
+               80%
+            </div>
+         </div>
+
+         <br/>
+         <h5>3.1) Animated Progress Bar</h5>
+         <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated"
+               role="progressbar"
+               aria-valuenow="80"
+               aria-valuemin="0" aria-valuemax="100"
+               style="width:80%">
+               80%
+            </div>
+         </div>
+
+         <br/>
+         <h5>3- Stacked Progress Bar </h5>
+         <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 15%"
+               aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+               Music 3GB
+            </div>
+            <div class="progress-bar bg-success" role="progressbar" style="width: 30%"
+               aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+               Video 6GB
+            </div>
+            <div class="progress-bar bg-info" role="progressbar" style="width: 20%"
+               aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+               Picture 4GB
+            </div>
+         </div>
+
+
+
+
+    </div>
+</body>
+
+</html>

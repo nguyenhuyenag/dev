@@ -1,0 +1,133 @@
+
+- Cấu hình local repository
+
+	- Mặc định là: {user.home}/.m2/repository
+
+	- Mở file: `apache-maven-3.6.0/conf/settings.xml` và thêm dòng
+		
+		<localRepository>
+			C:\Server\apache\apache-maven-3.6.0\repository
+		</localRepository>
+		
+- Đường dẫn của thư mục trong POM.xml
+
+	- ${project.basedir} is the root directory of your project
+
+	- ${project.build.directory} is equivalent to ${project.basedir}/target
+
+- Build, compile bằng JDK 1.8
+
+		<properties>
+			<maven.compiler.target>1.8</maven.compiler.target> <!-- syntax -->
+			<maven.compiler.source>1.7</maven.compiler.source> <!-- compile -->
+		</properties>
+	
+	hoặc
+		
+		<build>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</build>
+	
+	Từ Java 9, chỉ cần khai báo chính xác Java version mà các bạn muốn sử dụng
+	
+		<properties>
+			<maven.compiler.source>9</maven.compiler.source>
+			<maven.compiler.target>9</maven.compiler.target>
+		</properties>
+	
+- Maven Lifecycle (Maven goals): Gồm 8 giai đoạn sau
+	
+	- clean: Xóa tất cả các file được build trong thư mục target.
+	
+	- compile: Compile source code thành các file .class vào thư mục target/classes
+	
+	- package: Đóng gói artifact thành file .jar hoặc .war
+	
+	- install: Đầu tiên nó sẽ chạy `mvn package`, sau đó copy artifact vào local repository theo dạng 
+	
+			groupId/artifactId/version
+	
+	- validate: Xác nhận và kiểm tra project có đầy đủ các thông tin cần thiết
+	
+	- test: Compile source code sử dụng các framework testing thích hợp như JUnit,...(không bắt buộc phải có phần source code cho test). File test trong src/test/java được thực thi
+	
+	- integration-test: xử lý và triển khai các package cần thiết vào môi trường để có thể chạy thử nghiệm.
+	
+	- verify: chạy và kiểm tra các package có hợp lệ và đảm bảo chất lượng không.
+	
+	- deploy: hoàn thành việc tích hợp, triển khai môi trường, copy tất cả package tới remote repository.
+
+- Dependency scope (POM.xml): <scope>xyz</scope>
+	
+	- compile: Đây là scope mặc định, có nghĩa là file jar cần phải có trong quá trình compile.
+	
+	- provided: File jar này khi build sẽ không được thêm vào lib, tức các file jar này sẽ được cung cấp bởi JDK hoặc web container (tomcat, jboss,...) trong quá trình chạy chương trình (runtime)
+	
+		+ Ví dụ:
+	
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-tomcat</artifactId>
+				<scope>provided</scope>
+			</dependency>
+	
+	- runtime: Các file jar được sử dụng trong quá trình runtime, còn quá trình compile thì không cần.
+
+		+ Ví dụ: mysql-connector-java
+		
+	- system: Scope này giống với provided, tuy nhiên các file jar được sử dụng trên máy tính
+	
+		+ Ví dụ, chúng ta có thư viện `helloworld-1.0.jar`, ta thêm vào pom.xml như sau
+		
+			<dependency>
+				<groupId>com.test</groupId>
+				<artifactId>helloworld</artifactId>
+				<version>1.0</version>
+				<scope>system</scope>
+				<systemPath>${project.basedir}/libs/helloworld-1.0.jar</systemPath>
+			</dependency>
+				
+		- Các thông số groupId, artifactId, version xem trong file pom.xml của helloworld
+	
+	- import: Scope này sẽ import tất cả các thư viện trong pom.xml của helloworld vào project hiện tại
+	
+		<dependency>
+			<groupId>com.test</groupId>
+			<artifactId>helloworld</artifactId>
+			<version>1.0</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+	
+	- test: Chỉ dùng cho việc viết test, thư viện này sẽ không được đóng khi khi build
+
+		+ Ví dụ: junit
+	
+- Maven offline mode: Maven không download bất kỳ từ maven central về local
+	
+	<offline>true</offline>
+
+- Dependency command
+
+	mvn dependency:tree 				In dependency trong project
+	mvn dependency:tree -Dverbose		Kiểm tra xung đột của các dependency
+
+- Setname cho file war
+
+		<build>
+			<finalName>nameeee</finalName>
+			<finalName>${project.name}</finalName>
+			<finalName>${project.artifactId}</finalName>
+		</build>
+
+- mvn clean install -Dmaven.test.skip=true
+

@@ -1,0 +1,67 @@
+
+- Bốn đặc trưng của transaction (thường được gọi là ACID):
+
+	- Atomicity: Quy định tất cả các hoạt động của transaction hoặc là thực thi thành công hết hoặc là không nếu có hoạt động thực thi không thành công.
+	
+	- Consistency: Tất cả các ràng buộc (constraints, key, data types, Trigger, Check) phải được thực thi thành công cho mọi transaction phát sinh xuống database, nhầm đảm bảo tính đúng đắn của dữ liệu.
+	
+	- Isolation: Đảm bảo các transaction xảy ra xen kẽ sẽ không làm ảnh hưởng đến tính nhất quán của dữ liệu. Các thay đổi dữ liệu bên trong mỗi transaction sẽ được cô lập, các transaction khác sẽ không thể nhìn thấy cho đến khi nó được đồng bộ xuống database (xem transaction-isolation.png) 
+	
+	- Durability: Đảm bảo một transaction thực thi thành công thì tất cả những thay đổi trong transaction phải được đồng bộ xuống database kể cả khi hệ thống xảy ra lỗi hoặc bị mất điện. 
+
+- Quản lý transaction trong JDBC
+
+		try (Connection con = dataSource.getConnection()) {
+			con.setAutoCommit(false);
+		 
+			// do something ...
+
+			con.commit();
+		} catch (SQLException e) {
+			con.rollback();
+		}
+
+- Quản lý transaction trong Spring
+
+	+ Trong spring boot có spring data thì transaction được kích hoạt mặc định, nếu không sử dụng spring boot ta cần phải cấu hình với @EnableTransactionManagement để kích hoạt tính transaction trong Spring.
+
+- Các hành vi của transaction trong spring
+
+		@Transactional(propagation = Propagation.SUPPORTS)
+
+	- Propagation
+	
+		+ REQUIRED: Nếu có transaction đang hoạt động thì nó sẽ sử dụng chung, nếu không có thì method được gọi sẽ tạo một transaction mới. Đây là giá trị mặc định của Propagation.
+
+		+ SUPPORTS: Sử dụng lại transaction đang hoạt động. Nếu không method được gọi sẽ thực thi mà không được đặt trong một transactional context nào.
+		
+		+ MANDATORY: Yêu cầu phải có một transaction đang hoạt động trước khi gọi, nếu không method được gọi sẽ ném ra một exception
+		
+			“org.springframework.transaction.IllegalTransactionStateException: No existing transaction found for transaction marked with propagation 'mandatory'”
+		
+		+ NEVER: Ném một exception nếu method được gọi trong một transaction hoạt động.
+
+		+ NOT_SUPPORTED: Dừng transaction hiện tại và thực thi method mà không thuộc một transaction nào.
+
+		+ REQUIRES_NEW: Method được gọi luôn bắt đầu một transaction mới. Nếu method được gọi đang trong một transaction (TA) đang hoạt động, thì TA đó sẽ bị tạm ngưng, một transaction mới (TB) sẽ được tạo ra cho method này. TB sẽ thực thi độc lập với TA bên ngoài, khi TB kết thúc, dữ liệu sẽ được đồng bộ xuống database. Sau đó TA bên ngoài sẽ được kích hoạt và hoạt động trở lại.
+		
+		+ NESTED: Method được gọi sẽ tạo một transaction mới nếu không có transaction nào đang hoạt động. Nếu method được gọi với một transaction đang hoạt động Spring sẽ tạo một savepoint và rollback tại đây nếu có Exception xảy ra. 
+
+- Handling Exceptions
+
+	- Spring proxy sẽ tự động rollback transaction nếu có một RuntimeException xảy ra.
+	
+	- rollbackFor: Cho phép cung cấp một mảng các Exception class mà transaction sẽ bị rollback nếu chúng xảy ra.
+	
+	- noRollbackFor: Chỉ định một mảng các Exception class mà transaction sẽ không rollback khi chúng xảy ra.
+	
+		@Transactional(rollbackFor = Exception.class, noRollbackFor = EntityNotFoundException.class)
+
+	=> rollback transaction cho tất cả các sub-class của Exception ngoại trừ EntityNotFoundException.
+	
+		@Transactional (rollbackFor = Throwable.class)
+	
+	=> rollback cho tất cả các lỗi xảy ra.
+
+
+

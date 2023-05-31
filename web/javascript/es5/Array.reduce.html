@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>JavaScript Array.reduce()</h2>
+
+    <p>This example finds the sum of all numbers in an array:</p>
+
+    <p id="reduce"></p>
+    <p id="reduceRight"></p>
+
+    <script>
+        var arr = ["1", "2", "3", "4", "5"];
+        reduce = arr.reduce(function (prev, cur) {
+            return prev + cur;
+        });
+        document.getElementById("reduce").innerHTML = "Array.reduce(): [" + arr + "] => " + reduce;
+        reduceRight = arr.reduceRight(function (prev, cur) {
+            return prev + cur;
+        });
+        document.getElementById("reduceRight").innerHTML = "Array.reduceRight(): [" + arr + "] => " + reduceRight;
+        console.log(reduce);        // => 12345
+        console.log(reduceRight);   // => 54321
+
+        var reducerLambda = numbers.reduce((reducer, value) => reducer + value);
+    </script>
+
+</body>
+
+</html>

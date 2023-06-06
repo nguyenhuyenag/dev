@@ -72,6 +72,9 @@
 	
 	find <keyword> [destination]
 	
+	start .								- Open the current directory
+
+	
 	
 	
 	

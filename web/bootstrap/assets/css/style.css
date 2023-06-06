@@ -1,0 +1,12 @@
+body {
+    counter-reset: section;
+}
+
+h2 {
+    color:red;
+}
+
+h2::before {
+    counter-increment: section;
+    content: counter(section) ") ";
+}

@@ -103,8 +103,8 @@
 	
 		SELECT t.column_name, t.COLUMN_TYPE
 		FROM INFORMATION_SCHEMA.COLUMNS t
-		WHERE table_schema = '[schemaname]'
-		AND table_name = '[tablename]'		// <- 'table_name' not table_name
+		WHERE table_schema = 'schemaname'
+		AND table_name = 'tablename'		// <- 'table_name' not table_name
 		ORDER BY column_name
 		
 	hoặc

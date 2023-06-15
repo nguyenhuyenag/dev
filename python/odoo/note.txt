@@ -1,0 +1,14 @@
+
+- Find one
+
+	entity = request.env['table.name'].browse(int(order_id))
+	
+	if sale_order.exists():
+		# The sale order exists
+	else:
+		# The sale order does not exist
+
+- Find all
+
+	domain = [('id', 'in', list_email)]
+	lists = request.env['account.move'].search_read(domain, offset=offset, limit=limit, order=order)

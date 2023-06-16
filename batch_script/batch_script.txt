@@ -11,6 +11,7 @@
 	del /s *.txt 					- Xóa tất cả các file '.txt' trong thư mục hiện tại & thư mục con (không xóa thư mục con)
 	del /s *.txt					- Tương tự như trên nhưng hiện thông báo '...Delete (Y/N)?' trước mỗi lần xóa
 	
+	%CD%							- Thư mục hiện tại
 	dir /a <Đường dẫn> 				- Dùng lệnh dir cho thư mục chỉ định
 	dir								- Hiển thị file, thư mục (không hiện file ẩn, file trong thư mục con)
 	dir /a							- Hiển thị tất cả + file ẩn, file hệ thống

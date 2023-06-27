@@ -3,23 +3,21 @@
 
 	- Phím tắt
 
-		- Sửa tên nhiều biến		- Alt + Shift + R
-		
+		- Rename					- Alt + Shift + R
 									- Hoặc từ biến cần sửa -> right click -> Refactor -> Rename...
 		
 		- Create a Javadoc			- Từ dòng trên tên hàm gõ `/**` + Enter
-		
 									  Hoặc `Shift-Alt-J`
 		
 		- Word Wrap					- Window -> Editor -> Toggle word wrap
-		
 									  Hoặc `Alt + Shift + Y`
 									  
 		- Expand/Collapse package	- Right Arrow	--> Expand
-		
 									- Left Arrow 	--> Collapse
 		
-		- new String(); 			<- "Ctrl + 1" hoặc "Ctrl + 2, L" hoặc "Ctrl + 2, F"
+		- Tạo biến cho biểu thức
+		
+				new String(); 		- 'Ctrl + 1' hoặc 'Ctrl + 2, L' hoặc 'Ctrl + 2, F'
 
 	- Uninstall plugin
 

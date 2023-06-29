@@ -46,3 +46,20 @@
 	- An internal error occurred during: "Repository registry initialization". java.lang.ArrayIndexOutOfBoundsException
 	
 		Remove `\.metadata\.plugins\org.eclipse.m2e.core\nexus`
+		
+	- SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"
+	
+		<slf4j.version>2.0.6</slf4j.version>
+	
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+	
+		

@@ -2,3 +2,9 @@
 - Hide file or folder in Visual Studio Code
 
 	- File > References > Settings => search: files:Exclude
+	
+- Restore "Don't show this prompt again" warning when delete
+
+	- Ctrl + Shift + P -> Search: settings.json <Open User Settings (JSON)>
+
+		"explorer.confirmDelete": false -> "explorer.confirmDelete": true

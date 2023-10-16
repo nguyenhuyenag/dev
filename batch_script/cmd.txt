@@ -6,7 +6,6 @@
 		
 		pip list | findstr "mysql"
 	
-
 - Find the process ID (PID) for the port 
 
 	netstat -ao | find "8080"
@@ -29,4 +28,8 @@
 - Xóa file (trong cả thư mục con)
 
 	> del /S *.class
+
+- Tạo file
+
+	> fsutil file createnew <file_name> <file_size_in_bytes>
 

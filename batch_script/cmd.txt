@@ -12,10 +12,10 @@
 	
 	netstat -ano | findstr :8080
 		
-		Proto  Local Address          Foreign Address        State           PID
+		Proto    Local Address        Foreign Address        State           PID
 		---------------------------------------------------------------------------
-		TCP    0.0.0.0:8080           ts24-nvhuyen:0         LISTENING       10192
-		TCP    [::]:8080              ts24-nvhuyen:0         LISTENING       10192
+		TCP      0.0.0.0:8080         ts24-nvhuyen:0         LISTENING       10192
+		TCP      [::]:8080            ts24-nvhuyen:0         LISTENING       10192
 	
 	Kill process
 		

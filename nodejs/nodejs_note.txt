@@ -1,0 +1,17 @@
+
+- Node version: 	https://nodejs.org/en/download/releases
+- Download: 		https://github.com/coreybutler/nvm-windows/releases
+
+	C:\Users\huyennv\AppData\Roaming\nvm
+
+- Một số câu lệnh (Run CMD as Admin)
+
+	nvm list							Liệt kê các phiên bản đã cài đặt
+
+	nvm install 10.24.1 				Cài một phiên bản cụ thể
+	nvm install node					Cài phiên bản mới nhất
+	nvm install --lts					Cài phiên bản LTS mới nhất
+	
+	nvm uninstall 8.11.1				Xóa
+	
+	nvm use 12.13.1 					Chuyển qua phiên bản 12.13.1

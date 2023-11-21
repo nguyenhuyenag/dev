@@ -24,23 +24,28 @@
 		
 	+ Chạy lệnh
 
-		mvn deploy:deploy-file -Dfile=<path_to_file> -DgroupId=<group_id> -DartifactId=<artifact_id> -Dversion=<version> -Dpackaging=jar -Durl=file:./maven-repository/ -DrepositoryId=maven-repository -DupdateReleaseInfo=true
+		mvn deploy:deploy-file 
+			-Dfile=<path_to_file> 
+			-DgroupId=<group_id> 
+			-DartifactId=<artifact_id> 
+			-Dversion=<version> 
+			-Dpackaging=jar 
+			-Durl=file:./maven-repository/ 
+			-DrepositoryId=maven-repository 
+			-DupdateReleaseInfo=true
 	
-	hoặc
-	
-		mvn install:install-file -Dfile=D:\ts24corp\workspace\ts24projects\excel2xml_thue\lib\gtgt.jar -DgroupId=mapforce -DartifactId=gtgt -Dversion=1.0 -Dpackaging=jar -Durl=file:./lib/ -DrepositoryId=lib -DupdateReleaseInfo=true
-	
-	Ví dụ
+	+ Ví dụ
 	
 		mvn deploy:deploy-file -Dfile=D:\ts24corp\workspace\ts24projects\sign-service\maven-repository\ts24.digitalsign-1.0.3.jar -DgroupId=digital -DartifactId=sign -Dversion=1.0.3 -Dpackaging=jar -Durl=file:./maven-repository/ -DrepositoryId=maven-repository -DupdateReleaseInfo=true
 	
-		
-	- Khác nhau giữa 2 lệnh "deploy-file" & "install-file"?
-	
-	Thêm vào file POM
+	+ Thêm vào file POM
 	
 		<dependency>
 			<groupId>digital</groupId>
 			<artifactId>sign</artifactId>
 			<version>1.0.3</version>
 		</dependency>
+
+
+
+

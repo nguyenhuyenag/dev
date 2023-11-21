@@ -1,21 +1,26 @@
 
-- Cấu hình local repository
+======================================================================
+* Cấu hình local repository
 
-	- Mặc định là: {user.home}/.m2/repository
+	+ Mặc định là: {user.home}/.m2/repository
 
-	- Mở file: `apache-maven-3.6.0/conf/settings.xml` và thêm dòng
+	+ Mở file: `apache-maven-3.6.0/conf/settings.xml` và thêm dòng
 		
 		<localRepository>
 			C:\Server\apache\apache-maven-3.6.0\repository
 		</localRepository>
-		
-- Đường dẫn của thư mục trong POM.xml
 
-	- ${project.basedir} is the root directory of your project
 
-	- ${project.build.directory} is equivalent to ${project.basedir}/target
+======================================================================
+* Đường dẫn của thư mục trong POM.xml
 
-- Build, compile bằng JDK 1.8
+	+ ${project.basedir} is the root directory of your project
+
+	+ ${project.build.directory} is equivalent to ${project.basedir}/target
+
+	
+======================================================================
+* Build, compile bằng JDK 1.8
 
 		<properties>
 			<maven.compiler.target>1.8</maven.compiler.target> <!-- syntax -->
@@ -37,14 +42,40 @@
 			</plugins>
 		</build>
 	
-	Từ Java 9, chỉ cần khai báo chính xác Java version mà các bạn muốn sử dụng
+	+ Từ Java 9, chỉ cần khai báo chính xác Java version muốn sử dụng
 	
 		<properties>
 			<maven.compiler.source>9</maven.compiler.source>
 			<maven.compiler.target>9</maven.compiler.target>
 		</properties>
+
+		
+======================================================================
+* Maven offline mode: Maven không download bất kỳ từ maven central về local
 	
-- Maven Lifecycle (Maven goals): Gồm 8 giai đoạn sau
+	<offline>true</offline>
+
+	
+======================================================================
+* Dependency command
+
+	mvn dependency:tree 						In dependency trong project
+	mvn dependency:tree > dependencies.txt		In vào file
+	mvn dependency:tree -Dverbose				Kiểm tra xung đột của các dependency
+
+	
+======================================================================
+* Setname cho file war
+
+		<build>
+			<finalName>MyName</finalName>
+			<finalName>${project.name}</finalName>
+			<finalName>${project.artifactId}</finalName>
+		</build>
+
+
+======================================================================
+* Maven Lifecycle (Maven goals): Gồm 8 giai đoạn sau
 	
 	- clean: Xóa tất cả các file được build trong thư mục target.
 	
@@ -111,23 +142,5 @@
 	- test: Chỉ dùng cho việc viết test, thư viện này sẽ không được đóng khi khi build
 
 		+ Ví dụ: junit
-	
-- Maven offline mode: Maven không download bất kỳ từ maven central về local
-	
-	<offline>true</offline>
 
-- Dependency command
-
-	mvn dependency:tree 				In dependency trong project
-	mvn dependency:tree -Dverbose		Kiểm tra xung đột của các dependency
-
-- Setname cho file war
-
-		<build>
-			<finalName>nameeee</finalName>
-			<finalName>${project.name}</finalName>
-			<finalName>${project.artifactId}</finalName>
-		</build>
-
-- mvn clean install -Dmaven.test.skip=true
 

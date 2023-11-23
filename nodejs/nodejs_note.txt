@@ -1,5 +1,6 @@
 
 - Node version: 	https://nodejs.org/en/download/releases
+
 - Download: 		https://github.com/coreybutler/nvm-windows/releases
 
 	C:\Users\huyennv\AppData\Roaming\nvm

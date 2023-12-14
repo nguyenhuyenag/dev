@@ -1,0 +1,5 @@
+
+- Highlight number
+
+	Số nguyên		\b\d+\b
+	Decimal			\b\d+(\.\d+)?\b

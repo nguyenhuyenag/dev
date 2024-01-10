@@ -1,5 +1,5 @@
 
-- AND (&)
+- AND (&) -> Trả về True khi và chỉ khi cả hai toán hạng là True
 
 		0 & 0 = 0
 		1 & 1 = 1
@@ -12,7 +12,7 @@
 		  5		1 0 1
 		3 & 5	0 0 1	=	1
 
-- OR (|)
+- OR (|) ->  Trả về True khi và chỉ khi ít nhất một toán hạng là True
 
 		0 | 0 = 0
 		1 | 1 = 1
@@ -21,11 +21,11 @@
 
 	+ Như vậy chỉ cần 1 trong 2 bit là 1 thì kết quả trả về sẽ là 1.
 	
-		  3		=	0 	1 	1
-		  5		=	1 	0 	1
-		3 | 5	=	1 	1 	1	=	7
+		  3	  	=	0 1 1
+		  5	  	=	1 0 1
+		3 | 5	=	1 1 1 	=	7
 
-- XOR (^)
+- XOR (^) -> Trả về True khi và chỉ khi hai toán hạng có giá trị khác nhau
 
 		0 ^ 0 = 0
 		1 ^ 1 = 0
@@ -34,16 +34,32 @@
 
 	+ Như vậy nếu 2 bit `giống nhau` thì cho kết quả 0 và `khác nhau` cho ra 1.
 	
-	+ Từ đó ta thấy nếu A xor B = 0 thì A = B
+	+ Từ đó ta thấy nếu A ^ B = 0 thì A = B
 	
 		  3		=	0	1	1
 		  5		=	1 	0 	1
 		3 ^ 5	=	1 	1 	0	=	6
 
+- Bảng chân trị (truh table)
+	
+	|---|---|-----|----|-----|
+	| A | B | AND | OR | XOR |
+	| 1 | 1 |  1  | 1  |  0  |
+	| 1 | 0 |  0  | 1  |  1  |
+	| 0 | 1 |  0  | 1  |  1  |
+	| 0 | 0 |  0  | 0  |  0  |
+	|---|---|-----|----|-----|
+
 - NOT (~)
 
 		~ 0 = 1
 		~ 1 = 0
+		
+		~85 = -86
+		
+		 85 = 0000 0000 0000 0000 0000 0000 0101 0101
+		~85 = 1111 1111 1111 1111 1111 1111 1010 1010 => -86
+
 
 	+ Phép toán này còn được gọi là phép đảo bit
 

@@ -2,7 +2,9 @@
 	conda init powershell
 	where python
 
-- Open Anaconda Prompt
+- Setup
+
+	- Open Anaconda Prompt
 
 	> where conda
 	
@@ -17,3 +19,7 @@
 	- Add path
 	
 		%MINICONDA_HOME%\Library\bin
+
+- How to use?
+
+	> conda list python -f

@@ -1,0 +1,17 @@
+
+
+- Open Anaconda Prompt
+
+	> where conda
+	
+		C:\Server\miniconda3\Library\bin\conda.bat
+		C:\Server\miniconda3\Scripts\conda.exe
+		C:\Server\miniconda3\condabin\conda.bat
+	
+	- Create PATH
+	
+		MINICONDA_HOME = C:\Server\miniconda3
+		
+	- Add path
+	
+		%MINICONDA_HOME%\Library\bin

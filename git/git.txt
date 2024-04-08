@@ -8,6 +8,19 @@
 - Show curent URL
 
 		> git config --get remote.origin.url
+
+- Sửa lại commit
+
+	- Git cho phép sửa đổi nội dung của commit CUỐI CÙNG bằng lệnh: git commit --amend --no-edit
+
+	+ Ví dụ add thêm file README.md vào commit cuối cùng:
+
+		> git log
+		> git add README.md
+		> git commit --amend --no-edit
+		> git log
+	
+	- Sửa message của commit cuối cùng: git commit --amend -m <new_message>
 		
 - Git ignore not working
 	

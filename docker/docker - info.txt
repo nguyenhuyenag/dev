@@ -1,0 +1,102 @@
+
+- Image
+
+	Image là một template không thay đổi, định nghĩa các thành phần, các ứng dụng sẽ được cài đặt trong một container của Docker.
+
+	Image được sử dụng để tạo ra các Container.
+
+	Image được lưu trữ trong Registry của Docker.
+
+	Để kiểm tra tất cả các Image đang có trong Docker trong máy, ta dùng lệnh: docker images
+	
+- Container
+
+	Có thể hình dung Image trong Docker giống như class trong Java và Container là instance của những class Java đó.
+
+	Container được tạo ra từ các Images. Bên trong những Container này, chúng ta sẽ có đủ các ứng dụng cần thiết mà chúng ta đã định nghĩa trong Image.
+
+	Để kiểm tra tất cả các Container đang có trong Docker, ta dùng lệnh: docker ps -a
+
+- Registry
+
+	Registry là nơi Docker sẽ lưu trữ những Image. Có 2 dạng là Local Docker Registry hoặc Public Registry như Docker Hub.
+
+	Bên trong một Registry, các Image được lưu trữ trong Repository.
+	
+- Repository
+
+	Repository là một tập hợp các Images khác nhau có cùng tên. Mỗi Image trong một Repository sẽ khác nhau ở tên của phiên bản.
+
+- Docker Hub
+
+	Docker Hub là một Public Docker Registry, chứa rất nhiều Image mà các bạn có thể sử dụng chúng.
+	
+- Command line
+
+	docker --version
+	
+	Image
+	
+		docker images									Hiển thị các images
+		
+		docker image rm <image_id>						Xóa image
+		
+		docker pull <image>								Download image
+		
+		docker run -it <image>							Run image (hoặc docker run -it tomcat:latest)
+		
+		docker run --privileged -d -p 80:80 centos:7 /sbin/init
+		
+	Container
+	
+		docker start <container_id>						Chạy container đã tồn tại
+	
+		docker rename <old_name> <new_name>				Đổi tên container
+			
+		docker kill $(docker ps -q)						Stop all container
+		
+		docker stop <container_id>						Dừng container đang chạy
+		
+		docker rm <container_id>						Xóa container
+		
+		docker rm $(docker ps -a -q)					Xóa tất cả container
+		
+		docker rm <container_id> -f						Xóa container đang chạy
+		
+		docker ps / docker ps -a						Hiển thị các container đang chạy
+		
+		docker attach <container_id>					Vào termial của container đang chạy
+		
+		docker exec -it [Container ID] /bin/bash		Vào termial của container đang chạy
+		
+		cat /etc/hostname								Show current container id
+		
+		docker commit 72e3fc11ea25 ubuntu:16.06_git		Đóng gói container thành images
+		
+		docker diff <container-name-or-id>				Kiểm tra thay đổi của container từ lúc được tạo
+		
+		docker run ... --restart=always					Tự khởi động Container nếu Container bị dừng
+		
+- Commit
+		
+		docker login
+		
+		You need to first tag your image before pushing
+
+		"docker tag firstimage YOUR_DOCKERHUB_NAME/firstimage" and then you can push it.
+
+		"docker push YOUR_DOCKERHUB_NAME/firstimage"
+	
+	Show IP của container
+	
+		ip route list | awk ' /^default/ {print $3}'
+		docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
+		docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name_or_id>
+
+- Filter logs
+	
+	docker logs container_id | grep "thong_tin_grep"
+	docker logs container_id 2>&1 | grep "thong_tin_grep"
+
+
+

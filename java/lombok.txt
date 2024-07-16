@@ -14,6 +14,34 @@
 	@EqualsAndHashCode: sẽ generate phương thức hashCode() và equals().
 
 	@NoArgsConstructor: sẽ generate một hàm construct không có đối số.
+	
+	@RequiredArgsConstructor: 
+	
+		+ Sinh ra một constructor với các tham số bắt buộc phải có giá trị. Các thuộc tính final và các thuộc tính được đánh dấu @NonNull sẽ bị bắt buộc phải chứa giá trị trong constructor.
+		
+		+ @RequiredArgsConstructor sẽ không sinh các tham số trong constructor đối với các thuộc tính:
+
+			- Non-final.
+			- Thuộc tính final đã được khởi tạo.
+			- Thuộc tính static.
+			- Các thuộc tính @NonNull đã được khởi tạo.
+		
+		+ Dùng để thay thế @Autowired
+		
+			@Service
+			@RequiredArgsConstructor
+			public class DocumentService {
+			
+				// Tự động thêm vào DocumentService()
+				private final MongoTemplate mongoTemplate;
+				
+				// Tự động thêm vào DocumentService()
+				private final TemplateService templateService;
+				
+				// Không thêm vào DocumentService() do khi báo `new ....` nên nó chắc chắn khác null
+				private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			}
 
 	@AllArgsConstructor: sẽ generate một hàm construct có đối số của tất cả field có trong class.
 

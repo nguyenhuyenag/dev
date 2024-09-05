@@ -1,0 +1,22 @@
+
+- File > Open > Mở đến thư mục chứa project
+
+- File > Project Structure
+
+	+ Project: Chọn phiên bản JDK,...
+	
+	+ Modules: Click vào icon (+) > Import module > Create module.... > Next...
+		
+		* Lưu ý tab Dependencies
+	
+	+ Artifacts: Click vào icon (+) > Web Application: Exploded > From Module > ... > Apply
+	
+- Run > Edit Config.... > Click vào icon (+) > Tomcat Server > Local
+
+	+ Server: Chọn phiên bản tomcat
+	
+	+ Deployment: Click vào icon (+) > Artifact... > Chọn vào Artifacts ở trên
+	
+		* Lưu ý chỉnh sửa `Application context`
+	
+	+ Before launch: Có thể xóa hết các mục con

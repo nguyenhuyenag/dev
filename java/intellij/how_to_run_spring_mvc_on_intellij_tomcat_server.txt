@@ -1,5 +1,5 @@
 
-- File > Open > Mở đến thư mục chứa project
+- File > Open > Mở thư mục chứa project
 
 - File > Project Structure
 

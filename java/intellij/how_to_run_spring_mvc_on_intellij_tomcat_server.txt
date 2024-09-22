@@ -19,4 +19,4 @@
 	
 		* Lưu ý chỉnh sửa `Application context`
 	
-	+ Before launch: Có thể xóa hết các mục con
+	+ Before launch: Build Artifact để tạo ra thư mục classes

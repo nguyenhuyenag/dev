@@ -1,0 +1,4 @@
+
+- Cách thoát drive team đã join
+
+	Vào `https://groups.google.com/my-groups` để thoát.

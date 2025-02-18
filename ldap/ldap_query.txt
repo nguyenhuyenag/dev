@@ -1,0 +1,108 @@
+
+- AND
+	
+	"(&(iduser=AOA7UT6R3Q6U2CTW0S)(deviceid=12345))"
+	
+- OR
+
+	"(|(uid=x)(iduser=x))"
+	
+- AND + OR
+
+	"(&(deviceId=12345)(|(uid=john)(iduser=john)))"
+	
+- Search
+
+	final ConnectionEntryReader reader = connection.search(baseDN, SearchScope.WHOLE_SUBTREE, filter, "*");
+	while (reader.hasNext()) {
+		if (reader.isEntry()) {
+			Entry entry = reader.readEntry();
+		}
+	}
+
+- Update
+
+	public boolean hasAttribute(final Entry entry, final String attrName) {
+        if (StringUtils.isEmpty(attrName)) {
+            return false;
+        }
+        return (entry.getAttribute(attrName) != null);
+    }
+	
+	public boolean notAttribute(final SearchResultEntry entry, final String attrName) {
+        return !hasAttribute(entry, attrName);
+    }
+	
+	private ModifyRequest modifyField(ModifyRequest request, ModificationType type, final String fieldName, String value) {
+		return StringUtils.isNotEmpty(value)
+				? request.addControl(PostReadRequestControl.newControl(true, fieldName))
+						 .addModification(type, fieldName, value)
+				: request;
+	}
+
+	public ModifyRequest addAttribute(ModifyRequest request, final String fieldName, final String value) {
+		return modifyField(request, ModificationType.ADD, fieldName, value);
+	}
+
+	public ModifyRequest updateAttributeValue(ModifyRequest request, final String fieldName, String value) {
+		return modifyField(request, ModificationType.REPLACE, fieldName, value);
+	}
+
+	public ModifyRequest buildRequest(String iduser, String deviceId) {
+		String baseDN = "dc\=ts24id,dc\=com,dc\=vn";
+        String dn = String.format("iduser=%s,deviceid=%s, baseDN, iduser, deviceId);
+        return Requests.newModifyRequest(dn);
+    }
+	
+	ModifyRequest request = buildRequest();
+	updateAttributeValue(request, ObjectField.SKIP_2FA, "1");
+	connection.modify(request);
+	
+	public static Entry buildTokenZNS(String uid, CreateTokenZNSRequest request) {
+        String dn = String.format("uid=%s,ou=tokenzns,dc=ts24id,dc=com,dc=vn", uid);
+        Entry entry = new LinkedHashMapEntry(dn);
+        try {
+            entry.addAttribute(ObjectField.OBJECT_CLASS_FIELD, LDAPTables.TOKEN_ZNS);
+            entry.addAttribute(ObjectField.ZALO_ZNS_ACCESS_TOKEN, request.getAccessToken());
+        } catch (Exception e) {
+            log.error("Failed to build TokenZNS entry for UID: {}. Error: {}", uid, e.getMessage(), e);
+        }
+        return entry;
+    }
+	
+	entry = LDAPUtils.buildTokenZNS(uid, request);
+	connection.add(entry);
+
+- Delete
+
+	public void delete(String userAccount, String deviceId) {
+        try (Connection connection = LDAPConnection.openConnection()) {
+			String baseDN = "dc\=ts24id,dc\=com,dc\=vn";
+            String filter = String.format("(&(deviceId=%s)(|(uid=%s)(iduser=%s)))", deviceId, userAccount, userAccount);
+            final ConnectionEntryReader reader = connection.search(baseDN, SearchScope.WHOLE_SUBTREE, filter, "*");
+            while (reader.hasNext()) {
+                if (reader.isEntry()) {
+					String dn = String.valueOf(reader.readEntry().getName());
+					DeleteRequest deleteRequest = Requests.newDeleteRequest(dn);
+					Result result = connection.delete(deleteRequest);
+					if (result.getResultCode() == ResultCode.SUCCESS) {
+						log.info("Deletion successful. deviceId={}", deviceId);
+					} else {
+						log.info("Deletion failed. deviceId={}", deviceId);
+					}
+                }
+            }
+        } catch (ErrorResultIOException e) {
+            log.error("Exception method [{}]: ", method);
+        }
+    }
+
+
+
+
+
+
+
+
+
+

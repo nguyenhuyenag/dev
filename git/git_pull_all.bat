@@ -9,5 +9,5 @@ for /f %%f in ('dir /ad /b %GIT_FOLDER%') do (
 	cd /d %GIT_FOLDER%\%%f & call git pull & cd ..
 	echo;
 )
-timeout /t 5 /nobreak
+timeout /t 10 /nobreak
 exit

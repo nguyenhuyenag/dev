@@ -8,9 +8,9 @@
 
 	> where conda
 	
-		C:\Server\miniconda3\Library\bin\conda.bat
-		C:\Server\miniconda3\Scripts\conda.exe
-		C:\Server\miniconda3\condabin\conda.bat
+		\miniconda3\Library\bin\conda.bat
+		\miniconda3\Scripts\conda.exe
+		\miniconda3\condabin\conda.bat
 	
 	- Create PATH
 	
@@ -24,10 +24,14 @@
 
 	> conda list python -f
 
-conda create --name python-3.12 python=3.12
+conda create --name python-3.10 python=3.10
 
 conda env list							Liệt kê tất cả các môi trường
 conda activate <env-name>				Kích hoạt môi trường
 conda deactivate						Thoát khỏi môi trường
 conda remove -n python-3.12 --all		Xóa môi trường python-3.12
+
+conda config --show envs_dirs
+
+
 

@@ -23,3 +23,11 @@
 - How to use?
 
 	> conda list python -f
+
+conda create --name python-3.12 python=3.12
+
+conda env list							Liệt kê tất cả các môi trường
+conda activate <env-name>				Kích hoạt môi trường
+conda deactivate						Thoát khỏi môi trường
+conda remove -n python-3.12 --all		Xóa môi trường python-3.12
+

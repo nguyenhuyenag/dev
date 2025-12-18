@@ -1,5 +1,5 @@
 @echo off
-set GIT_FOLDER=D:\WORK\Dev\Github
+set GIT_FOLDER=E:\Dev\Projects\Github
 if not exist %GIT_FOLDER% (
 	set GIT_FOLDER=D:\Dev\Projects\Github
 )

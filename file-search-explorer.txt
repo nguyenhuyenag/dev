@@ -1,0 +1,4 @@
+
+- Tìm kiếm file theo đuôi
+
+	> Mở Explorer, nhập vào ô tìm kiếm: ext:xwm

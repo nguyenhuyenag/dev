@@ -1,7 +1,7 @@
 @echo off
 set GIT_FOLDER=E:\Dev\Projects\Github
 if not exist %GIT_FOLDER% (
-	set GIT_FOLDER=D:\Dev\Projects\Github
+	set GIT_FOLDER=D:\WORK\Dev\Github
 )
 for /f %%f in ('dir /ad /b %GIT_FOLDER%') do (
 	echo Pulling from: %GIT_FOLDER%\%%f

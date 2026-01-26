@@ -26,14 +26,19 @@
         if (StringUtils.isEmpty(attrName)) {
             return false;
         }
-        return (entry.getAttribute(attrName) != null);
+        return entry.getAttribute(attrName) != null;
     }
 	
 	public boolean notAttribute(final SearchResultEntry entry, final String attrName) {
         return !hasAttribute(entry, attrName);
     }
 	
-	private ModifyRequest modifyField(ModifyRequest request, ModificationType type, final String fieldName, String value) {
+	private ModifyRequest modifyField(
+		ModifyRequest request,
+		ModificationType type,
+		final String fieldName, 
+		String value
+	) {
 		return StringUtils.isNotEmpty(value)
 				? request.addControl(PostReadRequestControl.newControl(true, fieldName))
 						 .addModification(type, fieldName, value)
@@ -43,10 +48,18 @@
 	public ModifyRequest addAttribute(ModifyRequest request, final String fieldName, final String value) {
 		return modifyField(request, ModificationType.ADD, fieldName, value);
 	}
-
+	
 	public ModifyRequest updateAttributeValue(ModifyRequest request, final String fieldName, String value) {
 		return modifyField(request, ModificationType.REPLACE, fieldName, value);
 	}
+	
+	- Nếu không thể add
+	
+		request.addModification(
+			ModificationType.ADD,
+			"objectClass",
+			"extensibleObject"
+		);
 
 	public ModifyRequest buildRequest(String iduser, String deviceId) {
 		String baseDN = "dc\=ts24id,dc\=com,dc\=vn";

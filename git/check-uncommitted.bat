@@ -8,30 +8,34 @@ if not exist %GIT_FOLDER% (
 
 set DIRTY=0
 
-for /f %%f in ('dir /ad /b %GIT_FOLDER%') do (
-    cd /d %GIT_FOLDER%\%%f
-    git status --porcelain >nul 2>nul
-    for /f %%a in ('git status --porcelain') do (
+for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
+    cd /d "%GIT_FOLDER%\%%f"
+
+    git status --porcelain | findstr . >nul
+    if not errorlevel 1 (
+        if !DIRTY! == 0 (
+            color 0C
+            echo =====================================
+            echo REPOS WITH UNCOMMITTED CHANGES
+            echo =====================================
+        )
         set DIRTY=1
-        goto :DIRTY_FOUND
+        echo /%%f
     )
 )
 
-:CHECK_DONE
-if "!DIRTY!"=="0" (
+if %DIRTY%==0 (
     color 0A
     echo =====================================
     echo ALL REPOSITORIES ARE CLEAN
     echo =====================================
     timeout /t 5 /nobreak
-    exit
+) else (
+    echo.
+    echo =====================================
+    echo PLEASE COMMIT YOUR CHANGES
+    echo =====================================
+    pause
 )
 
-:DIRTY_FOUND
-color 0C
-echo =====================================
-echo ERROR: SOME REPOSITORY HAS UNCOMMITTED CODE
-echo Repo: %GIT_FOLDER%\%%f
-echo =====================================
-pause
 exit

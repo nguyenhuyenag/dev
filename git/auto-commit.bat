@@ -9,12 +9,17 @@ for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
     if exist ".git" (
         echo Repo: /%%f
 
-        :: Commit tất cả nếu có thay đổi
+        :: Xóa git lock nếu tồn tại
+        if exist ".git\index.lock" (
+            echo Removing stale git lock...
+            del ".git\index.lock"
+        )
+
+        :: Commit nếu có thay đổi
         git add .
         git diff --cached --quiet
         if errorlevel 1 (
-            echo Committing changes...
-            git commit -m "Auto commit before pull"
+            git commit -m "Auto commit"
         )
 
         echo Pulling...

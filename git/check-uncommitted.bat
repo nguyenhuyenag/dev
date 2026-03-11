@@ -3,7 +3,6 @@ setlocal enabledelayedexpansion
 
 :: Current folder
 set "GIT_FOLDER=%cd%"
-
 set DIRTY=0
 
 for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (

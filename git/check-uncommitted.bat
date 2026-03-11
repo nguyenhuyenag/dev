@@ -1,10 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set GIT_FOLDER=E:\Dev\Projects\Github
-if not exist %GIT_FOLDER% (
-    set GIT_FOLDER=D:\WORK\Dev\Github
-)
+:: Current folder
+set "GIT_FOLDER=%cd%"
 
 set DIRTY=0
 

@@ -1,0 +1,7 @@
+ D git/auto-commit.bat
+ M git/auto-pull-commit.bat
+ D git/check-uncommitted.bat
+ D git/pull-all.bat
+?? git/old-check-uncommitted.bat
+?? git/old-pull-all.bat
+?? temp_status.txt

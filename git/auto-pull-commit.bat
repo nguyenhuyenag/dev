@@ -1,6 +1,5 @@
 @echo off
 
-:: Current folder
 set "GIT_FOLDER=%cd%"
 
 for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
@@ -9,20 +8,12 @@ for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
     if exist ".git" (
         echo Repository: /%%f
 
-        :: Kiểm tra thay đổi
-        git status --porcelain > temp_status.txt
-
-        for %%A in (temp_status.txt) do set size=%%~zA
-
-        if %size% GTR 0 (
-            echo [INFO] Changes detected. Auto commit & push...
-
+        git status --porcelain | findstr . >nul
+        if not errorlevel 1 (
             git add .
             git commit -m "Auto commit"
             git push
         ) else (
-            echo [INFO] No local changes. Pulling...
-
             git pull > temp_pull.txt
 
             findstr /C:"Already up to date." temp_pull.txt >nul
@@ -35,7 +26,6 @@ for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
             del temp_pull.txt
         )
 
-        del temp_status.txt
         echo.
     )
 

@@ -14,7 +14,7 @@ for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
         git status --porcelain | findstr . >nul
         if not errorlevel 1 (
             git add .
-            git commit -m "Auto commit"
+            git commit -m "Auto commit %date% %time%"
             git push
         ) else (
             :: Pull và kiểm tra kết quả

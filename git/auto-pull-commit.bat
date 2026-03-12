@@ -1,5 +1,7 @@
 @echo off
+chcp 65001 >nul
 
+:: Current folder
 set "GIT_FOLDER=%cd%"
 
 for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
@@ -8,12 +10,14 @@ for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
     if exist ".git" (
         echo Repository: /%%f
 
+        :: Kiểm tra thay đổi local
         git status --porcelain | findstr . >nul
         if not errorlevel 1 (
             git add .
             git commit -m "Auto commit"
             git push
         ) else (
+            :: Pull và kiểm tra kết quả
             git pull > temp_pull.txt
 
             findstr /C:"Already up to date." temp_pull.txt >nul

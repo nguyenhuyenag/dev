@@ -1,8 +1,13 @@
 @echo off
 chcp 65001 >nul
 
-:: Fix credential helper sai path
-git config --global credential.helper manager >nul 2>&1
+:: Xóa credential helper sai
+git config --global --unset credential.helper >nul 2>&1
+git config --system --unset credential.helper >nul 2>&1
+git config --local --unset credential.helper >nul 2>&1
+
+:: Đặt helper chuẩn của Windows
+git config --global credential.helper manager-core >nul 2>&1
 
 :: Current folder
 set "GIT_FOLDER=%cd%"

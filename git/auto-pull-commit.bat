@@ -22,7 +22,7 @@ for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
             git push
             set changed=
         ) else (
-            echo [SYNC] Pulling...
+            :: echo [SYNC] Pulling...
             git pull
         )
 

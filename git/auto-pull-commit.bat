@@ -1,6 +1,8 @@
 @echo off
 chcp 65001 >nul
-setlocal enabledelayedexpansion
+
+:: Fix credential helper sai path
+git config --global credential.helper manager >nul 2>&1
 
 :: Current folder
 set "GIT_FOLDER=%cd%"
@@ -12,18 +14,23 @@ for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
         echo Repository: /%%f
 
         :: Kiểm tra thay đổi local
-        git status --porcelain >nul 2>&1
-        for /f %%a in ('git status --porcelain') do set changed=1
-
-        if defined changed (
-            echo [COMMIT] Local changes detected
+        git status --porcelain | findstr . >nul
+        if not errorlevel 1 (
             git add .
             git commit -m "Auto commit %date% %time%"
             git push
-            set changed=
         ) else (
-            echo [SYNC] Pulling...
-            git pull
+            :: Pull và kiểm tra kết quả
+            git pull > temp_pull.txt
+
+            findstr /C:"Already up to date." temp_pull.txt >nul
+            if not errorlevel 1 (
+                echo [OK] Already up to date.
+            ) else (
+                type temp_pull.txt
+            )
+
+            del temp_pull.txt
         )
 
         echo.
@@ -32,5 +39,5 @@ for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
     cd /d "%GIT_FOLDER%"
 )
 
-timeout /t 5 /nobreak >nul
+timeout /t 5 /nobreak
 exit

@@ -1,0 +1,9 @@
+
+- Đặt 2 file vào thư mục của GIT
+
+	/github
+		repo 1
+		repo 2
+		...
+		check-uncommitted.bat
+		pull-all.bat

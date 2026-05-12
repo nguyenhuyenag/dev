@@ -11,7 +11,7 @@
 	
 	+ Cách này khi build gói WAR thư viện sẽ không tự động import vào gói lib
 
-- Với spring boot & tomcat (deploy): Chạy CMD ở thư chứa project
+- Với spring boot & tomcat (deploy): Chạy CMD ở thư chứa project:
 
 	+ Thêm
 

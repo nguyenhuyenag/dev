@@ -1,0 +1,4 @@
+# file-name.jar,groupId,artifactId,version
+additionalbouncycastle.jar,additionalbouncycastle,additionalbouncycastle,1.0
+eid-applet-service-signer-1.2.7.jar,be.fedict.eid-applet,eid-applet-service-signer,1.2.7
+eid-applet-service-spi-1.2.7.jar,be.fedict.eid-applet,eid-applet-service-spi,1.2.7

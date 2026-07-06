@@ -5,6 +5,12 @@
 	
 	> git push --force (hoặc mở cmd ở thư mục của repository)
 
+- Restore 
+
+	- Ví dụ muốn lấy src/main.py từ commit abc1234:
+
+	> git restore --source=abc1234 src/main.py (đường dẫn không có '/' ở đầu)
+
 - Show curent URL
 
 		> git config --get remote.origin.url

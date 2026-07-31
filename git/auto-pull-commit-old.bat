@@ -1,5 +1,4 @@
 @echo off
-chcp 65001 >nul
 
 :: Current folder
 set "GIT_FOLDER=%cd%"

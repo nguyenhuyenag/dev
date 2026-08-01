@@ -1,5 +1,7 @@
 @echo off
 
+:: Copy file nay, de vao thu muc /Github
+
 :: Current folder
 set "GIT_FOLDER=%cd%"
 

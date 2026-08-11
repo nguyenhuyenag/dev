@@ -5,6 +5,8 @@ chcp 65001 >nul
 set "GIT_FOLDER=%cd%"
 set /a COUNT=0
 
+echo.
+
 for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
     call :process_repo "%%f"
 )
@@ -14,8 +16,6 @@ cd /d "%GIT_FOLDER%"
 echo.
 timeout /t 3 /nobreak
 exit /b
-
-echo.
 
 :process_repo
 set "REPO=%~1"

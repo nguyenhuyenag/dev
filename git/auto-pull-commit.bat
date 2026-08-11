@@ -3,6 +3,7 @@ chcp 65001 >nul
 
 :: Current folder
 set "GIT_FOLDER=%cd%"
+set /a COUNT=0
 
 for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
     call :process_repo "%%f"
@@ -10,9 +11,11 @@ for /f %%f in ('dir /ad /b "%GIT_FOLDER%"') do (
 
 cd /d "%GIT_FOLDER%"
 
+echo.
 timeout /t 3 /nobreak
 exit /b
 
+echo.
 
 :process_repo
 set "REPO=%~1"
@@ -23,7 +26,9 @@ if not exist ".git" (
     exit /b
 )
 
-echo Repository: /%REPO%
+set /a COUNT+=1
+
+echo (%COUNT%) Repository: /%REPO%
 
 :: Pull
 :: Disable automatic garbage collection

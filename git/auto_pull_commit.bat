@@ -35,9 +35,23 @@ echo (%COUNT%) Repository: /%REPO%
 git -c gc.auto=0 pull
 
 if errorlevel 1 (
-    echo [ERROR] Pull failed: /%REPO%
+    echo [WARNING] Pull failed, running Git GC: /%REPO%
+    git gc --prune=now
+
+    if errorlevel 1 (
+        echo [WARNING] Git GC failed: /%REPO%
+    )
+
     echo.
-    exit /b
+
+    :: Retry Pull
+    git -c gc.auto=0 pull
+
+    if errorlevel 1 (
+        echo [ERROR] Pull failed after GC: /%REPO%
+        echo.
+        exit /b
+    )
 )
 
 :: Check local changes

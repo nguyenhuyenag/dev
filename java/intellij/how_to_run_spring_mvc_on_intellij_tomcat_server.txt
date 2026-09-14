@@ -10,6 +10,11 @@
 		* Lưu ý tab Dependencies
 	
 	+ Artifacts: Click vào icon (+) > Web Application: Exploded > From Module > ... > Apply
+		
+		> JAR: 							Đóng gói thành file .jar
+		> Web Application: Exploded: 	Run web với Tomcat nhưng không nén thành file .war mà để nguyên cấu trúc thư mục (.class, .jsp, .xml, ...)
+		> Web Application: Archive: 	Đóng gói web thành một file .war duy nhất
+		...
 	
 - Run > Edit Config.... > Click vào icon (+) > Tomcat Server > Local
 

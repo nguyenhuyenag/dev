@@ -55,3 +55,24 @@
 			<scope>system</scope>
 			<systemPath>${basedir}/lib/ViettelFileSigner-v2.3.jar</systemPath>
         </dependency>
+	
+	+ Auto install jar
+	
+		- Giả sử cấu trúc dự án:
+		
+			/cloud24p_api
+				/lib
+					additionalbouncycastle.jar
+					eid-applet-service-signer-1.2.7.jar
+					eid-applet-service-spi-1.2.7.jar
+					input.txt
+					install-jar.bat
+					output.txt
+					ts24sign-pdf-1.0.1.jar
+					ts24sign-pdf-1.0.1-old.jar
+					ViettelFileSigner-v2.3.jar
+				/src
+				/pom.xml
+				/README.md
+		
+		-> Run file 'install-jar.bat'

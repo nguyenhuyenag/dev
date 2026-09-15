@@ -1,0 +1,35 @@
+-- SELECT * from customers;
+-- SELECT * FROM orders;
+
+-- (1) INNER JOIN: -> Lấy những dòng khớp dữ liệu ở cả 2 bảng
+SELECT c.id, c.name, o.amount 
+FROM customers c
+JOIN orders o
+  ON c.id = o.customer_id;
+
+-- (2) LEFT JOIN: -> Lấy tất cả dòng bảng bên trái, kể dòng không có dữ liệu tương ứng ở bảng bên phải. 
+-- Ví dụ: Charlie (trái) = NULL (do không có dòng tương ứng bên phải).
+SELECT c.id, c.name, o.amount
+FROM customers c
+LEFT JOIN orders o
+    ON c.id = o.customer_id;
+    
+-- (3) RIGHT JOIN: Lấy tất cả dòng bảng bên phải, kể cả dòng không có dữ liệu tương ứng ở bảng bên trái.
+-- Ví dụ: | NULL (trái) | NULL (trái) | 300.00 (phải) | (do không có dòng tương ứng bên trái)
+SELECT c.id, c.name, o.amount
+FROM customers c 
+RIGHT JOIN orders o 
+  ON c.id = o.customer_id;
+
+-- (4) FULL JOIN
+SELECT c.name, o.amount
+FROM customers c 
+FULL OUTER JOIN orders o 
+  ON c.id = o.customer_id;
+
+
+
+
+
+
+

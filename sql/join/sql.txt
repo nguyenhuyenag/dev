@@ -1,0 +1,85 @@
+
+### GROUP BY:
+
+	> Những dòng có cùng giá trị ở các cột được chỉ định trong GROUP BY sẽ được gom thành một nhóm.
+
+	Sau đó, bạn có thể dùng SUM(), COUNT(), AVG(), MAX(), MIN()... trên từng nhóm.
+	
+	GROUP BY
+		↓
+	Gom các dòng có cùng giá trị
+		↓
+	Tạo thành các nhóm
+		↓
+	Dùng: SUM / COUNT / AVG / MAX / MIN
+		↓
+	Tính trên từng nhóm
+
+	Ví dụ:
+
+		+-------------+--------+
+		| customer_id | amount |
+		+-------------+--------+
+		| 1           | 100    |
+		| 1           | 200    |
+		| 2           | 150    |
+		| 2           | 50     |
+		+-------------+--------+
+
+		Nếu:
+
+		GROUP BY customer_id
+
+		thì SQL tạo 2 nhóm:
+
+			Nhóm customer_id = 1
+				100
+				200
+
+			Nhóm customer_id = 2
+				150
+				50
+
+		Sau đó:
+
+			SUM(amount)
+
+		sẽ tính trong từng nhóm:
+
+			+-------------+--------------+
+			| customer_id | SUM(amount)  |
+			+-------------+--------------+
+			| 1           | 300          |
+			| 2           | 200          |
+			+-------------+--------------+
+
+#### HAVING
+
+	HAVING dùng để lọc các nhóm sau khi GROUP BY.
+
+	Đây là điểm khác biệt quan trọng:
+
+		WHERE   	→ lọc từng dòng trước khi GROUP BY
+		HAVING  	→ lọc từng nhóm sau khi GROUP BY
+		
+		WHERE  		→ lọc ROW
+		GROUP BY 	→ gom ROW thành GROUP
+		HAVING 		→ lọc GROUP
+		
+	Ví dụ sau khi GROUP BY mà chỉ muốn customer có tổng tiền > 200
+	
+		SELECT customer_id, SUM(amount) AS total_amount
+		FROM orders
+		GROUP BY customer_id
+		HAVING SUM(amount) > 200; // Không dùng được total_amount > 200
+	
+	sẽ được:
+
+		+-------------+--------------+
+		| customer_id | SUM(amount)  |
+		+-------------+--------------+
+		| 1           | 300          |
+		| 2           | 200          |
+		+-------------+--------------+
+
+	- HAVING rất thường đi cùng SUM(), COUNT(), AVG(), MAX(), MIN().

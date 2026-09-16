@@ -1,0 +1,60 @@
+
+- Trả về giá trị đầu tiên KHÔNG PHẢI NULL. Nếu tất cả đều NULL → trả về NULL
+
+	SELECT COALESCE(NULL, 'Hello', 'World');
+	-- Kết quả: 'Hello'
+	
+	SELECT COALESCE(NULL, NULL, NULL, 'Fallback');
+	-- Kết quả: 'Fallback'
+	
+	=> Thường dùng để làm default value.
+	
+	+ Tính toán an toàn:
+	
+		SELECT price, discount,
+			   price - COALESCE(discount, 0) AS final_price
+		FROM products;
+	
+	+ Kết hợp với NOT IN (tránh bẫy NULL)
+	
+		ELECT * FROM customers
+		WHERE COALESCE(city, '') NOT IN ('Hanoi');
+	
+	+ Các ví dụ tương đượng:
+	
+		-- Chuẩn SQL (dùng được mọi nơi)
+		COALESCE(phone, 'N/A')
+
+		-- MySQL
+		IFNULL(phone, 'N/A')
+
+		-- SQL Server
+		ISNULL(phone, 'N/A')
+
+		-- Oracle
+		NVL(phone, 'N/A')
+
+- Lưu ý quan trọng
+
+	⚠️ Kiểu dữ liệu phải tương thích
+	
+		COALESCE(phone, 'Chưa có')  -- OK: cả 2 là chuỗi
+		COALESCE(price, 'Miễn phí') -- ⚠️ Có thể lỗi: số vs chuỗi
+	
+	⚠️ Không thay thế được IS NULL
+	
+		-- Đúng
+		WHERE city IS NULL
+
+		-- Sai (không dùng COALESCE để kiểm tra NULL)
+		WHERE COALESCE(city, 'x') = 'x'
+	
+	⚠️ Hiệu năng: COALESCE không dùng được index trong nhiều trường hợp.
+
+		Nếu query thường xuyên lọc theo cột, tránh bọc COALESCE quanh cột đó trong WHERE.
+
+		-- ❌ Chậm: không dùng index
+		WHERE COALESCE(city, '') = 'Hanoi'
+
+		-- ✅ Nhanh: dùng index
+		WHERE city = 'Hanoi'

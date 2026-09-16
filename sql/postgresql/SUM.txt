@@ -1,0 +1,2 @@
+
+- SUM() bỏ qua NULL, nếu tất cả là NULL thì trả về NULL chứ không phải 0.

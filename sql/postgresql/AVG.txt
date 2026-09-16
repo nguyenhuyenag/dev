@@ -1,0 +1,34 @@
+
+- AVG tính trung bình giá trị các cột (bỏ qua cột NULL).
+
+		AVG(col) = SUM(col) / COUNT(col)
+
+	Trong đó:
+
+		+ SUM(col) = tổng các giá trị khác NULL
+		+ COUNT(col) = số dòng có giá trị khác NULL
+	
+	- Ví dụ:
+	
+		id | name     | price
+		---|----------|------
+		1  | Laptop   | 1000
+		2  | Mouse    | 20
+		3  | Monitor  | 300
+		4  | Keyboard | 50
+		5  | Webcam   | NULL
+	
+	Thì
+		SELECT AVG(price) FROM products;
+		
+		=> Kết quả: (1000 + 20 + 300 + 50) / 4 = 1370 / 4 = 342.5
+		
+		Chứ không phải 1370 / 5 = 274 — vì NULL bị bỏ qua cả tử số lẫn mẫu số.
+	
+	*** Nếu muốn coi NULL = 0
+	
+		SELECT AVG(COALESCE(rating, 0)) FROM ratings WHERE product_id = 1;
+		-- Kết quả: (5 + 4 + 0 + 3) / 4 = 3.0
+	
+		
+		

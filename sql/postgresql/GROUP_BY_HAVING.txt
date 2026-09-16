@@ -58,14 +58,14 @@
 	HAVING dùng để lọc các nhóm sau khi GROUP BY.
 
 	Đây là điểm khác biệt quan trọng:
-
-		WHERE   	→ lọc từng dòng trước khi GROUP BY
-		HAVING  	→ lọc từng nhóm sau khi GROUP BY
-		
-		WHERE  		→ lọc ROW
-		GROUP BY 	→ gom ROW thành GROUP
+	
+		WHERE  		→ Lọc ROW
+		GROUP BY 	→ Gom ROW thành GROUP
 		HAVING 		→ lọc GROUP
 		
+		WHERE   	→ Lọc trước khi GROUP BY
+		HAVING  	→ Lọc sau khi GROUP BY
+	
 	Ví dụ sau khi GROUP BY mà chỉ muốn customer có tổng tiền > 200
 	
 		SELECT customer_id, SUM(amount) AS total_amount

@@ -1,0 +1,69 @@
+
+1. Ba biến thể chính
+
+	Cú pháp                   | Ý nghĩa
+	--------------------------|------------------------------------------------------------
+	COUNT(*)                  | Đếm tất cả các dòng, kể cả dòng có NULL
+	COUNT(column)             | Đếm số dòng có giá trị khác NULL ở cột đó
+	COUNT(DISTINCT column)    | Đếm số giá trị khác nhau (loại trùng), bỏ qua NULL
+	--------------------------|------------------------------------------------------------
+	
+	
+- COUNT với CASE (đếm có điều kiện):
+
+	SELECT
+		COUNT(CASE WHEN city = 'Hanoi'  THEN 1 END) AS hanoi_count,
+		COUNT(CASE WHEN city = 'Saigon' THEN 1 END) AS saigon_count,
+		COUNT(CASE WHEN city IS NULL    THEN 1 END) AS null_count
+	FROM customers;
+	
+	Kết quả:
+	
+		hanoi_count		saigon_count	null_count
+		2				1				2
+	
+	=> Mẹo: COUNT(CASE WHEN ... THEN 1 END) — không có ELSE → giá trị NULL bị bỏ qua
+
+- Cách 1:
+
+	SELECT COUNT(DISTINCT c.city)
+	FROM customers c;
+
+- Cách 2:
+		
+	select count(*)
+	from (
+		select distinct c.city 
+		from customers c
+	) as temp_table;
+
+	-- 1. Đếm tất cả
+	SELECT COUNT(*) FROM customers;
+
+	-- 2. Đếm giá trị khác NULL
+	SELECT COUNT(city) FROM customers;
+
+	-- 3. Đếm giá trị khác nhau
+	SELECT COUNT(DISTINCT city) FROM customers;
+
+	-- 4. Đếm theo nhóm
+	SELECT city, COUNT(*) FROM customers GROUP BY city;
+
+	-- 5. Đếm có điều kiện
+	SELECT COUNT(*) FROM customers WHERE city = 'Hanoi';
+
+	-- 6. Đếm với HAVING
+	SELECT city, COUNT(*) FROM customers
+	GROUP BY city HAVING COUNT(*) > 1;
+
+	-- 7. Đếm với JOIN
+	SELECT c.name, COUNT(o.order_id)
+	FROM customers c
+	LEFT JOIN orders o ON o.customer_id = c.customer_id
+	GROUP BY c.customer_id, c.name;
+
+	-- 8. Đếm nhiều loại trong 1 query
+	SELECT
+		COUNT(CASE WHEN city = 'Hanoi' THEN 1 END) AS hanoi,
+		COUNT(CASE WHEN city = 'Saigon' THEN 1 END) AS saigon
+	FROM customers;

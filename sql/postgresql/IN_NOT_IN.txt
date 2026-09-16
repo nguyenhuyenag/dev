@@ -1,0 +1,121 @@
+
+- IN (LIST)
+
+	SELECT * FROM customers
+	WHERE country NOT IN ('Germany', 'France', 'UK');
+
+- IN (SELECT)
+
+	SELECT * FROM customers
+	WHERE customer_id IN (SELECT customer_id FROM orders);
+	
+- Tương tự cho NOT IN.
+
+>>> Cẩn thận với NULL trong NOT IN
+
+	=> Có thể khiến query trả về rỗng mà không hề hay biết.
+	
+	Vấn đề: Trong SQL, WHERE chỉ giữ lại các dòng mà điều kiện cho kết quả TRUE.
+	Tuy nhiên, mọi so sánh với NULL đều cho kết quả UNKNOWN (không phải TRUE, cũng không phải FALSE).
+
+	- Ví dụ:
+	
+		+ Giả sử bảng customers:
+			
+			id | name    | city
+			---|---------|------
+			1  | Alice   | Hanoi
+			2  | Bob     | Saigon
+			3  | Charlie | NULL
+			4  | David   | Hue
+		
+		Câu lệnh
+		
+			SELECT * FROM customers
+			WHERE city NOT IN ('Hanoi');
+			
+		sẽ kỳ vọng trả về 3 kết quả: 
+		
+			id | name    | city
+			---|---------|------
+			2  | Bob     | Saigon
+			3  | Charlie | NULL
+			4  | David   | Hue
+
+		nhưng thực tế sẽ chỉ có 2 kết quả:
+		
+			id | name    | city
+			---|---------|------
+			2  | Bob     | Saigon
+			4  | David   | Hue
+		
+		=> Charlie bị mất! Dù NULL rõ ràng không phải 'Hanoi'.
+		
+		Lý do: Vì câu lệnh
+			
+			NOT IN ('Hanoi') được hiểu là: NOT (city = 'Hanoi')
+			
+			trong city = NULL -> UNKNOWN // không phải TRUE
+		
+		* Trường hợp tệ hơn, câu lệnh
+		
+			SELECT * 
+			FROM customer2 c
+			WHERE city NOT IN ('Hanoi', NULL);
+		
+		thậm chí chỉ trả về rỗng, không có dòng dữ liệu nào.
+		Vì:
+			NOT (city = 'Hanoi' OR city = NULL)
+				= NOT (TRUE/FALSE OR UNKNOWN)
+				= NOT UNKNOWN
+				= UNKNOWN
+		
+		- Bảng chân trị của NULL
+		
+			Biểu thức               | Kết quả
+			------------------------|--------
+			NULL = 'Hanoi'          | UNKNOWN
+			NULL != 'Hanoi'         | UNKNOWN
+			NULL IN ('Hanoi')       | UNKNOWN
+			NULL NOT IN ('Hanoi')   | UNKNOWN
+			NULL = NULL             | UNKNOWN
+			NULL IS NULL            | TRUE
+		
+		=> Chỉ có 'IS NULL / IS NOT NULL' mới xử lý được NULL đúng cách.
+
+	=> Cách đúng:
+	
+		SELECT * FROM customers
+		WHERE city NOT IN ('Hanoi')
+		  AND city IS NOT NULL;
+
+	Ví dụ thực tế: Tìm khách hàng CHƯA/ĐÃ có đơn hàng.
+	
+		SELECT * FROM customers
+		WHERE id NOT IN (SELECT customer_id FROM orders);
+		
+		=> Mất dữ liệu.
+		
+		Cách đúng:
+		
+			+ EXISTS — khách hàng CÓ đơn hàng
+		
+				SELECT * FROM customers c
+				WHERE EXISTS (
+					SELECT 1 FROM orders o
+					WHERE o.customer_id = c.customer_id
+				);
+				
+				→ Với mỗi khách, subquery kiểm tra xem có đơn hàng nào không. Nếu có → giữ lại.
+			
+			+ NOT EXISTS — khách hàng CHƯA có đơn hàng.
+			
+				SELECT * FROM customers c
+				WHERE NOT EXISTS (
+					SELECT 1 FROM orders o
+					WHERE o.customer_id = c.customer_id
+				);
+				
+				→ Nếu subquery không trả về dòng nào → giữ lại.
+			
+			

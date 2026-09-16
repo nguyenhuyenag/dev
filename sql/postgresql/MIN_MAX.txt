@@ -1,0 +1,45 @@
+
++ NULL -> Bỏ qua khi tính.
+
+- MIN / MAX với ngày tháng
+	Cực kỳ hữu ích để tìm ngày sớm nhất / muộn nhất.
+
+	SELECT MIN(order_date) AS first_order,
+		   MAX(order_date) AS last_order
+	FROM orders;
+		
+		first_order		last_order
+		2024-01-01		2024-12-31
+	
+	=> Ứng dụng: đơn hàng mới nhất
+	
+		SELECT * FROM orders
+		WHERE order_date = (SELECT MAX(order_date) FROM orders);
+
+	-- 1. Min/Max toàn bảng
+	SELECT MIN(price), MAX(price) FROM products;
+
+	-- 2. Min/Max theo nhóm
+	SELECT department, MIN(salary), MAX(salary)
+	FROM employees GROUP BY department;
+
+	-- 3. Có điều kiện
+	SELECT MAX(salary) FROM employees WHERE department = 'IT';
+
+	-- 4. Với ngày tháng
+	SELECT MIN(order_date), MAX(order_date) FROM orders;
+
+	-- 5. Lấy dòng đầy đủ của max
+	SELECT * FROM employees
+	WHERE salary = (SELECT MAX(salary) FROM employees);
+
+	-- 6. Với HAVING
+	SELECT department, MAX(salary)
+	FROM employees GROUP BY department
+	HAVING MAX(salary) > 1900;
+
+	-- 7. Top N mỗi nhóm (window function)
+	SELECT * FROM (
+	SELECT *, ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS rn
+	FROM employees
+	) t WHERE rn = 1;

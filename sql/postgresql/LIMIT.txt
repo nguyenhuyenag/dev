@@ -1,0 +1,51 @@
+
+- LIMIT với OFFSET — Phân trang
+
+	Cú pháp:
+	
+		SELECT column_name(s)
+		FROM table_name
+		ORDER BY column_name
+		LIMIT number OFFSET skip;
+	
+	+ number = số dòng lấy
+	+ skip = số dòng bỏ qua
+	
+	Ví dụ:
+	
+		Trang   | Câu lệnh              | Ý nghĩa
+		--------|-----------------------|----------------------------
+		Trang 1 | LIMIT 10 OFFSET 0     | Lấy 10 dòng đầu (bỏ qua 0)
+		Trang 2 | LIMIT 10 OFFSET 10    | Bỏ qua 10, lấy 10 tiếp theo
+		Trang 3 | LIMIT 10 OFFSET 20    | Bỏ qua 20, lấy 10 tiếp theo
+		--------|-----------------------|----------------------------
+		
+	=> Lấy trang 2 (mỗi trang 10 dòng)
+	
+		SELECT * FROM customers
+		ORDER BY customer_id
+		LIMIT 10 OFFSET 10;
+		
+	💡 Công thức: OFFSET = (page - 1) * page_size
+	
+	** Nhược điểm: 
+	
+			LIMIT 10 OFFSET 1000000;
+			
+		→ DB vẫn phải quét qua 1.000.000 dòng rồi mới bỏ, dù chỉ lấy 10 dòng → rất chậm.
+	
+	=> Giải pháp: Dùng keyset pagination (dựa trên giá trị cột thay vì OFFSET):
+	
+		SELECT * FROM customers
+		WHERE customer_id > 1000000
+		ORDER BY customer_id
+		LIMIT 10;
+		
+	LIMIT 0:
+	
+		SELECT * FROM customers LIMIT 0;
+		→ Trả về 0 dòng (nhưng vẫn có metadata cột). Hữu ích để kiểm tra cấu trúc bảng.
+		
+		Chuẩn SQL: 
+			
+			SELECT * FROM customers FETCH FIRST 0 ROWS ONLY;

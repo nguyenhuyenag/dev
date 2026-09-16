@@ -1,0 +1,39 @@
+
+- ❌ Alias KHÔNG dùng được trong WHERE:
+
+	-- SAI
+	SELECT name, price * 1.1 AS price_with_tax
+	FROM products
+	WHERE price_with_tax > 100;  -- ❌ Lỗi
+
+	-- ĐÚNG: lặp lại biểu thức
+	SELECT name, price * 1.1 AS price_with_tax
+	FROM products
+	WHERE price * 1.1 > 100;  -- ✅
+	
+	💡 Lý do: WHERE được xử lý trước SELECT, nên alias chưa tồn tại. 
+			→ Alias chỉ tồn tại từ bước SELECT trở đi
+
+	Thứ tự xử lý SQL:
+
+		FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
+
+- AS với CASE:
+
+	SELECT name,
+		CASE
+		   WHEN age < 18 THEN 'Vị thành niên'
+		   WHEN age < 60 THEN 'Người lớn'
+		   ELSE 'Người già'
+		END AS age_group
+	FROM customers;
+	
+	Kết quả:
+	
+		name  | age_group
+		------|----------------
+		Alice | Người lớn
+		Bob   | Vị thành niên
+
+-- 8. Subquery alias
+		SELECT * FROM (SELECT * FROM orders LIMIT 10) AS recent;

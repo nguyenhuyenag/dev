@@ -1,0 +1,20 @@
+
+- Kết hợp kết quả của hai hay nhiều câu SELECT thành một tập kết quả duy nhất:
+
+		SELECT column1, column2 FROM table1
+		UNION
+		SELECT column1, column2 FROM table2;
+	
+	Quy tắc bắt buộc:
+	
+		+ Số cột phải bằng nhau ở tất cả các SELECT.
+		+ Kiểu dữ liệu phải tương thích (cùng nhóm: số với số, chuỗi với chuỗi...).
+		+ Thứ tự cột phải khớp — cột 1 của query 1 ghép với cột 1 của query 2.
+
+	Toán tử    | Đặc điểm
+	-----------|-------------------------------------------
+	UNION      | Loại bỏ dòng trùng (DISTINCT)
+	UNION ALL  | Giữ lại tất cả dòng, kể cả dòng trùng
+	-----------|-------------------------------------------
+	
+	Vis d

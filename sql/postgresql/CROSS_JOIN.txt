@@ -1,0 +1,13 @@
+
+- Tích Descartes 2 bảng.
+
+	SELECT column_name(s)
+	FROM table_A
+	CROSS JOIN table_B;
+	
+	SELECT column_name(s)
+	FROM table_A, table_B;
+	
+	Cách viết FROM table_A, table_B không có WHERE chính là CROSS JOIN
+
+	=> Dễ gây tràn bộ nhớ.

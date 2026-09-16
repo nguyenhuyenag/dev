@@ -1,0 +1,73 @@
+
+### GROUP BY:
+
+	> Những dòng có cùng giá trị ở các cột được chỉ định trong GROUP BY sẽ được gom thành một nhóm.
+
+	Sau đó, bạn có thể dùng SUM(), COUNT(), AVG(), MAX(), MIN()... trên từng nhóm.
+	
+		GROUP BY
+			↓
+		Gom các dòng có cùng giá trị
+			↓
+		Tạo thành các nhóm
+			↓
+		Dùng: SUM / COUNT / AVG / MAX / MIN
+			↓
+		Tính trên từng nhóm
+
+	- Ví dụ có bảng orders
+	
+		order_id | customer_id | city   | total
+		---------|-------------|--------|------
+		101      | 1           | Hanoi  | 500
+		102      | 1           | Hanoi  | 300
+		103      | 2           | Saigon | 200
+		104      | 3           | Hanoi  | 400
+		105      | 2           | Saigon | 600
+	
+	+ Đếm số đơn hàng theo thành phố
+	
+		
+			select o.city, count(*) as total_order
+			from orders o
+			group by o .city; 
+			
+		Bước 1: GROUP BY city: Dữ liệu được chia thành các nhóm:
+
+			Hanoi:
+				101 | 1 | Hanoi | 500
+				102 | 1 | Hanoi | 300
+				104 | 3 | Hanoi | 400
+				
+			Saigon:
+				103 | 2 | Saigon | 200
+				105 | 2 | Saigon | 600
+		
+		Bước 2: COUNT(*): Đếm mọi row tồn tại trong group này.
+
+			Do đó:
+
+				Hanoi  → COUNT(*) = 3
+				Saigon → COUNT(*) = 2
+		
+		=> Kết quả
+		
+			city	order_count
+			Hanoi	3
+			Saigon	2
+
+	3. Quy tắc vàng ⚠️
+	
+	- Mọi cột trong SELECT phải:
+		+ hoặc nằm trong GROUP BY
+		+ hoặc được bọc trong hàm tổng hợp
+		
+	❌ Sai
+	SELECT city, customer_id, COUNT(*) 
+	FROM orders 
+	GROUP BY city;
+	
+	-- Thêm vào GROUP BY
+	SELECT city, customer_id, COUNT(*) 
+	FROM orders
+	GROUP BY city, customer_id;

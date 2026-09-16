@@ -1,12 +1,7 @@
+
 # SQL JOIN
 
 JOIN dùng để kết hợp dữ liệu từ hai hoặc nhiều bảng dựa trên một điều kiện liên kết.
-
-**Điều kiện khớp:**
-
-```sql
-customers.id = orders.customer_id
-```
 
 ### Bảng `customers`
 
@@ -31,6 +26,12 @@ customers.id = orders.customer_id
 | 3  | 2           | 150    |
 | 4  | 4           | 300    |
 +----+-------------+--------+
+```
+
+**Điều kiện khớp:**
+
+```sql
+customers.id = orders.customer_id
 ```
 
 ## INNER JOIN

@@ -1,0 +1,12 @@
+
+- Google Translate
+
+	> https://chromewebstore.google.com/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb?hl=en
+
+	- Cấu hình ngôn ngữ:
+
+		> (1) Vào -> chrome-extension://aapbdbdomjkkjkaonfhkkikfgjllcleb/options.html
+		
+		> (2) Vào EXTENSION OPTIONS ở góc dưới bên trái popup.
+		
+		My primary language: Vietnamese -> Dịch thành tiếng Việt khi click vào popup

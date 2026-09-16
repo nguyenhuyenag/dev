@@ -1,0 +1,48 @@
+
+- LIKE (phân biệt hoa thường), còn ILIKE (không phân biệt hoa thường).
+
+	SELECT * FROM users WHERE name LIKE 'Alice';
+		
+		→ Chỉ trả về: Alice (id = 1)
+
+	SELECT * FROM users WHERE name ILIKE 'Alice';
+		
+		→ Trả về cả 3: Alice, alice, ALICE.
+		
+	=> ILIKE là đặc trưng của PostgreSQL
+
+- Có 2 loại thường dùng:
+	
+	+ '%' -> Khớp với 0, 1, hoặc nhiều ký tự.
+	+ '_' -> Khớp với đúng 1 ký tự
+	
+	Ví dụ 1:
+	
+			SELECT * FROM users WHERE name LIKE 'A_';
+		
+		=> Khớp với name có 2 ký tự, bắt đầu bằng A, theo sau là một ký tự bất kỳ.
+		Ví dụ: An, Ai, Ab, A1, A@...
+		
+			SELECT * FROM users WHERE code LIKE 'AB_DE';
+		
+		=> Khớp với ABxDE, AB1DE, AB#DE... (trong đó x, 1, # là một ký tự bất kỳ).
+		
+	Ví dụ 2: Giả sử có danh sách:
+
+			text
+			cat
+			cut
+			cot
+			ct
+			coat
+			
+		Mẫu c_t sẽ khớp với:
+
+			cat
+			cut
+			cot
+
+		Nhưng không khớp với:
+
+			ct (vì thiếu 1 ký tự ở giữa)
+			coat (vì có 2 ký tự ở giữa)

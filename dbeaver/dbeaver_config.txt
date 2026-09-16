@@ -1,0 +1,5 @@
+
+- Chỉnh font size sql editor:
+
+	> Preferences > User Interface > Appearance > Colors and Fonts
+		> find DBeaver Fonts folder and change Monospace font

@@ -1,0 +1,89 @@
+
+🔢 Kiểu số (Numeric Types):
+
+	Được dùng để lưu trữ số nguyên, số thực và các giá trị chính xác cao.
+
+	Số nguyên (Integers):
+
+	smallint (2 byte): Từ -32,768 đến 32,767.
+
+	integer (4 byte): Từ -2,147,483,648 đến 2,147,483,647. Đây là lựa chọn phổ biến nhất.
+
+	bigint (8 byte): Từ -9,223,372,036,854,775,808 đến 9,223,372,036,854,775,807.
+
+	Số tự tăng (Serial Types): Đây không phải là kiểu thực sự mà là cú pháp tắt để tạo cột tự động tăng (giống AUTO_INCREMENT).
+
+	smallserial, serial, bigserial.
+
+	Số chính xác (Arbitrary Precision): numeric hoặc decimal. Lưu trữ số với độ chính xác tùy chọn, rất phù hợp cho tiền tệ. Phép tính trên kiểu này chính xác nhưng chậm hơn so với số nguyên hoặc số thực.
+
+	Số thực (Floating-Point): real (4 byte, độ chính xác 6 chữ số) và double precision (8 byte, độ chính xác 15 chữ số). Phép tính nhanh nhưng có thể gặp sai số làm tròn.
+
+🔤 Kiểu ký tự (Character Types):
+
+	Dùng để lưu trữ văn bản.
+
+	character varying(n) hoặc varchar(n): Chuỗi có độ dài thay đổi, tối đa n ký tự.
+
+	character(n) hoặc char(n): Chuỗi có độ dài cố định, sẽ tự động thêm khoảng trắng nếu chuỗi ngắn hơn n.
+
+	text: Chuỗi có độ dài thay đổi, không giới hạn (trên lý thuyết).
+
+📅 Kiểu ngày và giờ (Date/Time Types):
+
+	date: Chỉ lưu ngày (năm, tháng, ngày).
+
+	time: Chỉ lưu giờ trong ngày. Có thể có hoặc không có múi giờ (with time zone).
+
+	timestamp: Lưu cả ngày và giờ. Có thể có hoặc không có múi giờ. timestamptz (timestamp with time zone) là kiểu được khuyến nghị cho hầu hết các ứng dụng.
+
+	interval: Lưu khoảng thời gian (ví dụ: '1 day', '2 hours')
+
+📦 Kiểu JSON và JSONB:
+
+	PostgreSQL cung cấp hai kiểu để lưu trữ dữ liệu JSON:
+
+	json: Lưu văn bản JSON nguyên bản, cần phân tích lại mỗi lần xử lý. Chậm hơn nhưng giữ nguyên định dạng ban đầu.
+
+	jsonb: Lưu JSON ở dạng nhị phân đã phân tách. Xử lý nhanh hơn, hỗ trợ lập chỉ mục (GIN) hiệu quả. Đây là kiểu được khuyến nghị cho hầu hết các trường hợp sử dụng.
+
+🧩 Kiểu dữ liệu đặc biệt:
+
+	PostgreSQL nổi tiếng với các kiểu dữ liệu chuyên biệt:
+
+	Mạng (Network): inet (địa chỉ IP), cidr (địa chỉ mạng), macaddr (địa chỉ MAC).
+
+	Hình học (Geometric): point, line, lseg, box, path, polygon, circle.
+
+	Định danh: uuid (định danh duy nhất toàn cầu).
+
+	Tìm kiếm văn bản (Text Search): tsvector (tài liệu văn bản), tsquery (truy vấn tìm kiếm).
+
+	Khác: bytea (dữ liệu nhị phân), boolean (đúng/sai), xml, money, bit/bit varying (chuỗi bit).
+	
+==================================================================================================================
+
+- Boolean:
+	
+	When you insert data into a Boolean column, PostgreSQL converts it to a Boolean value
+
+		+ 1, yes, y, t, true values are converted to true
+		+ 0, no, false, f values are converted to false
+		+ space to null
+
+- Array of strings: Ví dụ lưu trữ các ngày trong tuần, các tháng trong năm,...
+
+	CREATE TABLE articles (
+		id SERIAL PRIMARY KEY,
+		title VARCHAR(255) NOT NULL,
+		tags TEXT[] -- Stores an array of strings
+	);
+	
+	-- Method 1: Using the ARRAY constructor
+	INSERT INTO articles (title, tags) 
+	VALUES ('Getting Started with Postgres', ARRAY['database', 'sql', 'postgres']);
+
+	-- Method 2: Using curly brace string syntax
+	INSERT INTO articles (title, tags) 
+	VALUES ('Advanced SQL Queries', '{"queries", "performance", "optimization"}');
+

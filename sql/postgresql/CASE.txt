@@ -1,0 +1,60 @@
+
+- Tương tự như if/else:
+
+1. Simple CASE — So sánh bằng
+
+	CASE column_name
+		WHEN value1 THEN result1
+		WHEN value2 THEN result2
+		...
+		ELSE default_result // Không bắt buộc
+	END
+	
+	- Giả sử có bảng:
+		
+		order_id | status
+		---------|-------
+		101      | 1
+		102      | 2
+		103      | 3
+		104      | NULL
+		
+	Câu lệnh:
+	
+		SELECT order_id,
+			   CASE status
+				   WHEN 1 THEN 'Mới'
+				   WHEN 2 THEN 'Đang xử lý'
+				   WHEN 3 THEN 'Hoàn thành'
+				   ELSE 'Không xác định'
+			   END AS status_name
+		FROM orders;
+	
+	Sẽ cho ra kết quả:
+	
+		order_id | status_name
+		---------|----------------
+		101      | Mới
+		102      | Đang xử lý
+		103      | Hoàn thành
+		104      | Không xác định
+
+2. Searched CASE — Điều kiện linh hoạt
+	
+		SELECT name, salary,
+			   CASE
+				   WHEN salary >= 5000 THEN 'Cao'
+				   WHEN salary >= 2000 THEN 'Trung bình'
+				   WHEN salary >= 1000 THEN 'Thấp'
+				   ELSE 'Rất thấp'
+			   END AS salary_level
+		FROM employees;
+		
+	Sẽ cho ra kết quả:
+		
+		name    | salary | salary_level
+		--------|--------|------------
+		Alice   | 6000   | Cao
+		Bob     | 3000   | Trung bình
+		Charlie | 1500   | Thấp
+		David   | 800    | Rất thấp

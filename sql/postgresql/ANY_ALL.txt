@@ -1,0 +1,55 @@
+
+- ANY: Dùng để so sánh 1 giá trị, với 1 giá trị trong subquery.
+
+		SELECT column_name(s)
+		FROM table_name
+		WHERE column_name operator ANY/ALL (subquery);
+		
+		Với operator: =, !=, <>, >, <, >=, <=
+	
+	=> Điều kiện ĐÚNG nếu có ít nhất một giá trị trong subquery thỏa mãn phép so sánh.
+
+- ALL: Dùng để so sánh 1 giá trị, với tất cả giá trị trong subquery.
+
+	=> Điều kiện đúng nếu tất cả giá trị trong subquery đều thỏa mãn phép so sánh
+	
+- Bảng so sánh
+	
+		Biểu thức       | Tương đương
+		----------------|------------
+		> ANY (...)     | > MIN(...)
+		> ALL (...)     | > MAX(...)
+		< ANY (...)     | < MAX(...)
+		< ALL (...)     | < MIN(...)
+		= ANY (...)     | IN (...)
+		!= ALL (...)    | NOT IN (...)
+		----------------|------------
+
+	💡 Lưu ý: ANY = chỉ cần MỘT, ALL = phải TẤT CẢ.
+	
+	⚠️ Lưu ý: != ANY (...) không tương đương với NOT IN (...)
+	
+	- Ví dụ minh họa
+
+		-- Hai câu này TƯƠNG ĐƯƠNG
+		WHERE price > ANY (SELECT price FROM products WHERE price < 500)
+		WHERE price > (SELECT MIN(price) FROM products WHERE price < 500)
+
+		-- Hai câu này TƯƠNG ĐƯƠNG
+		WHERE price < ANY (SELECT price FROM products WHERE price < 500)
+		WHERE price < (SELECT MAX(price) FROM products WHERE price < 500)
+
+		-- Hai câu này TƯƠNG ĐƯƠNG
+		WHERE price = ANY (SELECT price FROM products)
+		WHERE price IN (SELECT price FROM products)
+		
+		💡 = ANY chính là IN. Đây là điểm cực kỳ quan trọng cần nhớ.
+	
+- ANY & ALL
+
+	Toán tử | Ý nghĩa
+	--------|---------------------------------------------
+	ANY     | Đúng nếu ít nhất một giá trị thỏa mãn
+	--------|---------------------------------------------
+	ALL     | Đúng nếu tất cả giá trị thỏa mãn
+	--------|---------------------------------------------

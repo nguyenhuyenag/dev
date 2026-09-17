@@ -1,19 +1,28 @@
 
 ### GROUP BY:
 
-	> Những dòng có cùng giá trị ở các cột được chỉ định trong GROUP BY sẽ được gom thành một nhóm.
-
-	Sau đó, bạn có thể dùng SUM(), COUNT(), AVG(), MAX(), MIN()... trên từng nhóm.
+	=> Lọc các nhóm sau khi đã GROUP BY.
 	
-	GROUP BY
-		↓
-	Gom các dòng có cùng giá trị
-		↓
-	Tạo thành các nhóm
-		↓
-	Dùng: SUM / COUNT / AVG / MAX / MIN
-		↓
-	Tính trên từng nhóm
+		GROUP BY
+			↓
+		Gom các dòng có cùng giá trị:			=>	Tạo thành các nhóm
+			↓
+		Dùng: SUM / COUNT / AVG / MAX / MIN		=>	Tính trên từng nhóm
+	
+	- Cú pháp:
+
+		SELECT column1, aggregate_function(column2)
+		FROM table_name
+		WHERE condition              -- lọc dòng (tùy chọn)
+		GROUP BY column1
+		HAVING aggregate_condition   -- lọc nhóm
+		ORDER BY column1;
+	
+	Thứ tự xử lý:
+	
+		FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
+		
+	=> Vì HAVING chạy sau GROUP BY nên nó mới dùng được hàm tổng hợp — điều mà WHERE không làm được (chưa có nhóm nào để tính toán).
 
 	Ví dụ:
 
@@ -83,3 +92,15 @@
 		+-------------+--------------+
 
 	- HAVING rất thường đi cùng SUM(), COUNT(), AVG(), MAX(), MIN().
+	
+	=> Càng lọc sớm càng tốt → giảm dữ liệu phải xử lý ở các bước sau.
+	
+		-- ❌ Kém hiệu quả: lọc sau khi gom nhóm
+		SELECT city, SUM(total) FROM orders
+		GROUP BY city
+		HAVING city = 'Hanoi';
+
+		-- ✅ Hiệu quả hơn: lọc trước khi gom nhóm
+		SELECT city, SUM(total) FROM orders
+		WHERE city = 'Hanoi'
+		GROUP BY city;

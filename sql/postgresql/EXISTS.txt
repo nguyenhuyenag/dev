@@ -1,0 +1,24 @@
+
+- EXISTS -> Kiểm tra xem 1 subquery có trả về ít nhất 1 dòng nào không.
+
+		SELECT column_name(s)
+		FROM table_name
+		WHERE EXISTS (subquery);
+	
+		+ EXISTS trả về TRUE nếu subquery có ít nhất 1 dòng.
+		+ Trả về FALSE nếu subquery rỗng.
+		+ Dừng ngay khi tìm thấy dòng đầu tiên → nhanh
+
+	- Ví dụ: 
+	
+		-- Tìm khách hàng có đơn hàng
+		select * from customers c
+		where exists (
+			select 1 from orders o where c.customer_id = o.customer_id
+		);
+				
+		-- Tìm khách chưa có đơn hàng
+		select * from customers c 
+		where not exists (
+			select 1 from orders o where c.customer_id = o.customer_id 
+		);

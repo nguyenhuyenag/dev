@@ -1,0 +1,62 @@
+
+- Merge vs Rebase
+
+	+ Merge 	→ giữ nguyên lịch sử, tạo thêm "merge commit"
+	+ Rebase	→ viết lại lịch sử, tạo commit mới "y hệt" nhưng khác hash
+
+- Ví dụ:
+
+		main:     A --- B --- C
+						   \
+		feature:            D --- E
+	
+	=> Tính huống: Ta đang ở feature và muốn lấy C từ.
+	
+	🔀 MERGE
+	
+		> git checkout feature
+		> git merge main
+	
+		# Kết quả:
+		
+			main:     A --- B --- C
+							   \     \
+			feature:            D --- E --- M
+										  (merge commit)
+		
+		+ Tạo merge commit M (2 parent: E và C)
+		+ Giữ nguyên hash của D, E
+		+ Lịch sử phân nhánh rõ ràng — thấy được branch nào tách ra khi nào
+	
+	🔁 REBASE
+	
+		> git checkout feature
+		> git rebase main
+		
+		# Kết quả:
+		
+			main:     A --- B --- C
+								   \
+			feature:                D' --- E'
+		
+		+ KHÔNG có merge commit
+		+ D, E bị viết lại thành D', E' (hash mới)
+		+ Lịch sử thẳng hàng, như thể bạn tạo feature SAU khi C đã có.
+
+### Quy tắc cho team:
+
+	Tình huống                          | Dùng
+	------------------------------------|----------------------------
+	Update feature branch với main      | Rebase
+	Merge feature vào main              | Merge hoặc Squash merge
+	Branch cá nhân, chưa push           | Rebase thoải mái
+	Branch đã push, có người dùng       | Merge, KHÔNG rebase
+	Muốn lịch sử sạch                   | Rebase + Squash
+	Muốn an toàn tuyệt đối              | Merge
+	Dọn commit trước PR                 | Interactive rebase
+	------------------------------------|----------------------------
+	
+	=> Rebase để update, Merge để tích hợp.
+	=> Rebase branch của mình, Merge branch của người khác.
+	=> Branch public thì không rebase.
+		

@@ -1,4 +1,8 @@
 
+- Xem thông tin của repo:
+
+	> git remote - v
+	
 - Git push force
 
 	> git push <https://git...> --force (hoặc mở cmd ở thư mục của repository)

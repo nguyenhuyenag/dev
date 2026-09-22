@@ -1,0 +1,7 @@
+
+- Viết thường toàn bộ 1 cột: Ví dụ cần lower dữ liệu toàn bộ cột B.
+	
+	=> Giả sử B1 là header, B2-> là dữ liệu. Từ cột B, tạo 1 cột mới bên cạnh, nhập vào công thức:
+		=ARRAYFORMULA(LOWER(B2:B))
+	Khi đó cột mới sẽ là giá trị tương ứng của B nhưng lower.
+	=> Copy nội dung vừa tạo, dán vào cột B tương ứng => Dùng Right click -> paste special

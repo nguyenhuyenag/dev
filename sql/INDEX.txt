@@ -1,0 +1,25 @@
+
+- Xem query có dùng index không:
+       EXPLAIN SELECT ...;
+
+     Cột quan trọng trong EXPLAIN:
+       + type     : ALL (full scan - tệ) | ref | range | const (tốt)
+       + key      : index nào được dùng (NULL = không dùng)
+       + rows     : số dòng ước tính phải quét (càng nhỏ càng tốt)
+       + Extra    : 
+           "Using index"       => index-only scan (tốt)
+           "Using where"       => lọc sau khi đọc
+           "Using filesort"    => phải sort lại (nên tránh)
+           "Using temporary"   => tạo bảng tạm (nên tránh)
+
+------------------------------------------------------------
+7. NGUYÊN TẮC ĐÁNH INDEX
+------------------------------------------------------------
+
+   - Đánh index trên cột hay xuất hiện trong WHERE / JOIN.
+   - Ưu tiên cột có CARDINALITY CAO (nhiều giá trị khác nhau).
+   - Với composite index: cột chọn lọc cao đặt trước.
+   - Cân nhắc COVERING INDEX cho query nóng.
+   - KHÔNG đánh index tràn lan (tốn dung lượng, chậm ghi).
+   - Index không dùng đến thì nên xóa.
+   - Tránh đánh index trên cột ít thay đổi giá trị (giới tính, status 2-3 giá trị...).

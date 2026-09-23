@@ -26,7 +26,7 @@
 			) AS tmp USING (id)
 			ORDER BY user_id;
 
-- Phân trang bằng con trỏ:
+- Phân trang bằng con trỏ (cách này phụ thuộc hoàn toàn vào Index)
 
 	=> Dùng con trỏ để xác định vị trí trang tiếp theo.
 	

@@ -38,4 +38,4 @@ Bảng Khoa:
 	| K01 		  | Công nghệ thông tin 
 	| K02 		  | Kinh tế 
 
-=> Lúc này cả hai bảng đều đạt 3NF: mọi cột không phải khóa đều phụ thuộc trực tiếp vào khóa chính.
+=> Lúc này cả hai bảng đều đạt 3NF: Mọi cột không phải khóa đều phụ thuộc trực tiếp vào khóa chính.

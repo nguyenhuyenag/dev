@@ -1,0 +1,41 @@
+
+=> Mọi cột không phải khóa phải phụ thuộc trực tiếp vào khóa chính, không qua trung gian.
+
+
+- Giả sử bảng SinhVien chưa đạt 3NF:
+
+	MaSV (PK) | TenSV | MaKhoa | TenKhoa
+	----------|-------|--------|------------------------
+	SV01      | An    | K01    | Công nghệ thông tin
+	SV02      | Bình  | K01    | Công nghệ thông tin
+	SV03      | Cường | K02    | Kinh tế
+
+=> Vấn đề: TenKhoa phụ thuộc vào MaKhoa, mà MaKhoa lại phụ thuộc vào MaSV. Đây là phụ thuộc bắc cầu: 
+	MaSV → MaKhoa → TenKhoa. Bảng này chưa đạt 3NF.
+
+	Hậu quả:
+
+		Dư thừa dữ liệu: "Công nghệ thông tin" bị lặp lại nhiều lần.
+
+		Dị thường cập nhật: Nếu đổi tên khoa, phải sửa tất cả các dòng có MaKhoa = K01.
+
+		Dị thường thêm/xóa: Không thể thêm khoa mới nếu chưa có sinh viên nào thuộc khoa đó.
+
+=> Cách chuẩn hóa về 3NF: Tách thành 2 bảng
+
+- Bảng SinhVien:
+
+	| MaSV (PK) | TenSV | MaKhoa (FK) 
+	|-----------|-------|-------------
+	| SV01 		| An 	| K01 
+	| SV02 		| Bình 	| K01 
+	| SV03 		| Cường | K02 
+
+Bảng Khoa:
+
+	| MaKhoa (PK) | TenKhoa 
+	|-------------|------------------------
+	| K01 		  | Công nghệ thông tin 
+	| K02 		  | Kinh tế 
+
+=> Lúc này cả hai bảng đều đạt 3NF: mọi cột không phải khóa đều phụ thuộc trực tiếp vào khóa chính.

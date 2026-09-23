@@ -1,0 +1,64 @@
+
+- Một số cách phân trang thường dùng.
+
+- Dùng offset/limit:
+
+	+ limit -> trả về bao nhiêu dòng.
+	+ offset -> bỏ qua bao nhiêu dòng trước đó
+	=> Ví dụ muốn 20 hàng mỗi trang -> offset = (page - 1) * limit. Với page là trang dữ liệu muốn lấy.
+	
+		=> Trang đầu tiên: PAGE = 1, LIMIT = 20 ⇒ OFFSET = 0
+		
+			SELECT * FROM event_data 
+			ORDER BY user_id 
+			LIMIT 20 OFFSET 0
+		
+		=> Nhược điểm: Nhanh ở trang đầu và càng chậm nếu về các trang phía sau.
+		
+- Defered join
+
+	=> Thay vì truy vấn trên bảng gốc, ta tạo một subquery chỉ SELECT cột được index cover (thường là id/PK) để xử lý,
+		sau đó nối với bảng gốc.
+
+			SELECT * FROM event_data 
+			INNER JOIN (
+				SELECT id FROM event_data ORDER BY user_id LIMIT 20 OFFSET 500000 
+			) AS tmp USING (id)
+			ORDER BY user_id;
+
+- Phân trang bằng con trỏ:
+
+	=> Dùng con trỏ để xác định vị trí trang tiếp theo.
+	
+	- Ví dụ có trang đầu tiên:
+	
+		> SELECT * FROM event_data ORDER BY user_id LIMIT 20 OFFSET 0;
+	
+	Với bảng là:
+	
+		+----+---------+-------------+------+
+		|    | user_id | event_name  | time |
+		+----+---------+-------------+------+
+		|  1 |       1 | add_data    | null |
+		|  2 |       1 | remove_data | null |
+		|  3 |       2 | add_data    | null |
+		|  4 |       3 | add_data    | null |
+		|  5 |       4 | add_data    | null |
+		| .. |      .. | ..          | ..   |
+		| 19 |      22 | add_data    | null |
+		| 20 |      29 | add_data    | null |
+		+----+---------+-------------+------+
+	
+	- Vì truy vấn chúng ta sort theo user_id do đó ta sẽ dùng nó làm con trỏ.
+	
+	=> Ta sẽ sử dụng con trỏ user_id trên cho trang thứ 2 trong mệnh đề WHERE:
+
+		SELECT * FROM event_data 
+		WHERE user_id > 29 
+		ORDER BY user_id LIMIT 20;
+		
+		hoặc
+		
+		SELECT * FROM event_data 
+		WHERE user_id > 500000 
+		ORDER BY user_id LIMIT 20;

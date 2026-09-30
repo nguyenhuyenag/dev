@@ -2,7 +2,7 @@
 - toán tử
 	
 	=				so sánh bằng
-	<> hoặc !=		khác
+	<> hoặc !=		khác nhau
 	<				less than. you typically use it with numeric and date/time data types.
 	>				greater than
 	<=				less than or equal to

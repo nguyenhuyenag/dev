@@ -1,7 +1,7 @@
 ﻿
 - MySQL không phân biệt chữ hoa-thường, trừ khi so sánh nhị phân
 
-	- SELECT binary 'a' = 'A' as compare;
+	- SELECT binary 'a' = 'A' as compare; // 1 
 
 - UPPER() & UCASE(): Viết hoa chuỗi
 
@@ -81,7 +81,6 @@
 
 - CONCAT_WS(separator, str1, str2, str3,...): Nối chuỗi bằng dấu phân cách
 
-	
 	- SELECT concat_ws("_", "a", "b", "c", "d");  =>	a_b_c_d
 	
 	- SELECT CONCAT_WS(NULL, 'a', 'b', 'c');	  => 	NULL

@@ -1,0 +1,23 @@
+
+
+	1. Virtualization -> enabled
+	2. Bật WSL
+
+	3. Nếu lỗi thì gỡ WSL và cài thủ công:
+
+		> Get-AppxPackage -AllUsers -Name "*WindowsSubsystemforLinux*" | Remove-AppxPackage -AllUsers
+		
+		- https://github.com/microsoft/wsl/releases
+			-> wsl.3.0.1.0.x64.msi
+
+	# MySQL
+
+		docker run -d \
+		  --name mysql-80.036 \
+		  -e MYSQL_USER=huyennv \
+		  -e MYSQL_PASSWORD=root \
+		  -e MYSQL_ROOT_PASSWORD=root \
+		  -p 3307:3306 \
+		  mysql:8.0.36-debian
+
+		docker run -d --name mysql-8.0.36 -e MYSQL_USER=huyennv -e MYSQL_PASSWORD=root -e MYSQL_ROOT_PASSWORD=root -p 3307:3306 mysql:8.0.36-debian

@@ -978,10 +978,6 @@
 					and column_name = enum_colum_name;
 
 - mysql constraints (ràng buộc trong mysql)
-
-	- not null
-	
-		- dùng isnull(), ifnull(), nullif() để xử lý giá trị null.
 	
 	- khóa chính
 	

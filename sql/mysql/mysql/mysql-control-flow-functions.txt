@@ -1,0 +1,61 @@
+
+- IF
+	IF(<điều_kiện>, <giá_trị_nếu_đúng>, <giá_trị_nếu_sai>)
+	
+	1. Ví dụ
+		SELECT 
+			customerNumber,
+			customerName,
+			IF(state IS NULL, 'N/A', state) state,
+			country
+		FROM
+			customers;
+	2. Dùng để xử lý NULL
+		SELECT 
+		  u.name,
+		  IF(SUM(r.distance) IS NULL, 0, SUM(r.distance)) AS travelled_distance
+		FROM Users u
+		LEFT JOIN Rides r ON u.id = r.user_id
+		GROUP BY u.id, u.name;
+
+	3. Các hàm họ IF trong MySQL
+		+------------------------+-----------------------------------------+-----------------------------+
+		| Hàm                    | Công dụng                               | Ví dụ                       |
+		+------------------------+-----------------------------------------+-----------------------------+
+		| IF(đk, a, b)           | Rẽ nhánh 2 giá trị                      | IF(x > 0, 'dương', 'âm')    |
+		| IFNULL(a, b)           | Nếu a là NULL → trả b                   | IFNULL(SUM(d), 0)           |
+		| NULLIF(a, b)           | Nếu a = b → trả NULL, ngược lại trả a   | NULLIF(x, 0)                |
+		| COALESCE(a, b, c, ...) | Trả giá trị không NULL đầu tiên         | COALESCE(x, y, 0)           |
+		+------------------------+-----------------------------------------+-----------------------------+
+- NULL
+
+	Dùng isnull(), ifnull(), nullif() để xử lý giá trị null.
+	
+- CASE
+	1.Simple CASE
+			SELECT
+				col1,
+				...
+				CASE col2
+					WHEN <giá_trị_1> THEN <kết_quả_1>
+					WHEN <giá_trị_2> THEN <kết_quả_2>
+					[ELSE <kết_quả_mặc_định>]
+				END
+			FROM <bảng>;
+		Ví dụ:
+			SELECT
+			  CASE t.gender
+				WHEN 1 THEN 'Nam'
+				WHEN 2 THEN 'Nữ'
+				ELSE 'Không xác định'
+			  END AS 'gender'
+			FROM Users t;
+	2. Searched CASE
+		SELECT
+		  CASE
+			WHEN t.distance >= 300 THEN 'Cao'
+			WHEN t.distance >= 150 THEN 'Trung bình'
+			WHEN t.distance > 0    THEN 'Thấp'
+			ELSE 'Không đi'
+		  END AS muc_do
+		FROM Rides t;

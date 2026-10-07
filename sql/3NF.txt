@@ -16,9 +16,7 @@
 	Hậu quả:
 
 		Dư thừa dữ liệu: "Công nghệ thông tin" bị lặp lại nhiều lần.
-
 		Dị thường cập nhật: Nếu đổi tên khoa, phải sửa tất cả các dòng có MaKhoa = K01.
-
 		Dị thường thêm/xóa: Không thể thêm khoa mới nếu chưa có sinh viên nào thuộc khoa đó.
 
 => Cách chuẩn hóa về 3NF: Tách thành 2 bảng

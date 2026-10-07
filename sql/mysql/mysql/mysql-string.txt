@@ -1,0 +1,141 @@
+﻿
+- Tùy vào collation của cột/chuỗi. Với utf8mb4_general_ci thì không phân biệt hoa/thường; với utf8mb4_bin thì phân biệt.
+- MySQL không phân biệt chữ hoa-thường, trừ khi so sánh nhị phân.
+
+	- SELECT binary 'a' = 'A' as compare; // 1 
+
+1. In hoa, thường chuỗi:
+	UPPER() = UCASE()
+	LOWER() = LCASE()
+	
+2. Tính độ dài chuỗi:
+	- LENGTH(): Độ dài byte, phụ thuộc charset
+	- CHAR_LENGTH() = CHARACTER_LENGTH(): Đội dài ký tự, đếm số ký tự thật.
+	
+3. Loại bỏ khoảng trắng 2 đầu, bên trái hoặc bên phải:
+	TRIM(), LTRIM(), RTRIM(): 
+
+4. Cắt chuỗi
+	4.1. Cắt chuỗi theo vị trí và số lượng: SUBSTR() = SUBSTRING():  
+
+		SUBSTRING(str, pos)            	-- từ vị trí pos → hết
+		SUBSTRING(str, pos, n)         	-- từ vị trí pos, lấy n ký tự
+		SUBSTRING(str FROM pos)          -- chuẩn SQL
+		SUBSTRING(str FROM pos FOR len)  -- chuẩn SQL
+
+	4.2: Cắt theo dấu phân cách: SUBSTRING_INDEX(str, delim, count)
+
+		count > 0 → lấy phần BÊN TRÁI dấu phân cách thứ count (đếm số delim trong str).
+		count < 0 → lấy phần BÊN PHẢI dấu phân cách thứ |count| (tính từ cuối).
+	
+		SELECT SUBSTRING_INDEX('a.b.c.d', '.', 1);    -- 'a' 	-> Lấy phần từ đầu tiên trong chuỗi, cách nhau bởi dấu '.'
+		SELECT SUBSTRING_INDEX('a.b.c.d', '.', 2);    -- 'a.b'
+		SELECT SUBSTRING_INDEX('a.b.c.d', '.', 3);    -- 'a.b.c'
+		SELECT SUBSTRING_INDEX('a.b.c.d', '.', -1);   -- 'd'
+		SELECT SUBSTRING_INDEX('a.b.c.d', '.', -2);   -- 'c.d'
+	
+	4.3: Cắt chuỗi ở 2 đầu: 
+		LEFT(str, n): Lấy n ký tự tính từ bên trái.			
+		RIGHT(str, n): Lấy n ký tự tính từ bên phải.
+		
+			SELECT LEFT('Hello world', 5); 	->	'Hello'
+			SELECT RIGHT('Hello world', 5);	->	'world'
+
+5. Xử lý khoảng trắng (space)
+	5.1: Tạo n khoảng trắng: SPACE(n)
+		CONCAT('a', SPACE(2), 'b')	->	'a  b'
+	
+	5.2. Thêm khoảng trắng vào chuỗi:
+		LPAD(str, n, add_string): Cắt thành chuỗi độ dài = n tính từ bên trái, nếu thiếu thì bổ sung thêm chuỗi con cho đủ.
+		RPAD(): Tương tự, nhưng tính từ bên phải.
+		
+			LPAD('abc', 5, '1');	-> '11abc'
+			RPAD('aaaa', 10, '0');	-> 'aaaa000000'
+
+6. Đảo chuỗi: 
+	REVERSE('abc')		->	'cba';
+	
+7. Lặp chuỗi n lần
+	REPEAT('abc', 2)	-> 'abcabc'
+
+8. So sánh chuỗi
+	- STRCMP(str1, str2): So sánh 2 chuỗi
+		str1 > str2	->	1
+		str1 = str2	->	0
+		str1 < str2	->	-1
+		
+		STRCMP('a', 'b'); -> 1
+
+9. Ghép chuỗi:
+	9.1: Nối chuỗi thông thường
+		CONCAT('a', 'b', 'c')	-> 'abc'
+
+	9.2. Nối chuỗi bằng dấu phân cách
+
+	- CONCAT_WS(separator, str1, str2, str3,...): Nối chuỗi bằng dấu phân cách
+			
+			SELECT CONCAT('a', NULL, 'c');           -- NULL  (CONCAT thường)
+			SELECT CONCAT_WS(NULL, 'a', 'b', 'c');   -- NULL  (separator NULL)
+			SELECT CONCAT_WS('-', 'a', 'b', 'c');    -- 'a-b-c'
+			SELECT CONCAT_WS('-', 'a', NULL, 'c');   -- 'a-c' (bỏ qua NULL)
+			
+10. Thay thế:
+	REPLACE(str, from_str, to_str): Thay thế tất cả các lần xuất hiện của một chuỗi được chỉ định.
+	SELECT REPLACE('Hello word', 'word', 'MySQL'); ->	'Hello MySQL'
+
+11. Tìm kiếm trong chuỗi
+	- Trong MySQL dùng 1-indexed 
+	11.1: LOCATE & POSITION -> Vị trí lần đầu
+		LOCATE(substr, str)              -- tìm substr trong str, bắt đầu từ vị trí 1
+		LOCATE(substr, str, pos)         -- tìm substr trong str, bắt đầu từ vị trí pos
+		
+		-- Ví dụ:
+			SELECT LOCATE('b', 'abc');          -- 2
+			SELECT LOCATE('c', 'abc');          -- 3
+			SELECT LOCATE('a', 'abc');          -- 1
+			SELECT LOCATE('z', 'abc');          -- 0   (không tìm thấy)
+			SELECT LOCATE('abc', 'abc');        -- 1
+			SELECT LOCATE('bc', 'abc');         -- 2   (tìm chuỗi con)
+	
+		- POSITION(substring IN string): Tương tự LOCATE()
+			SELECT POSITION('b' IN 'abc');       -- 2
+			SELECT POSITION('c' IN 'abc');       -- 3
+			SELECT POSITION('a' IN 'abc');       -- 1
+			SELECT POSITION('z' IN 'abc');       -- 0   (không tìm thấy)
+			SELECT POSITION('abc' IN 'abc');     -- 1
+			SELECT POSITION('bc' IN 'abc');      -- 2   (tìm chuỗi con)
+
+	11.2. INSTR(str, substr): Giống LOCATE() nhưng đảo vị trí tham số
+			select INSTR('abc123456', 'c');	-> 3
+	
+	11.3: Tìm trong chuỗi phân tách bởi dấu phẩy (hàm không tìm chuỗi con mà nó so khớp từng phần tử giữa các dấu phẩy).
+			FIND_IN_SET('c', 'a,b,c,d'); -> 3
+			FIND_IN_SET('b', 'ab,c,d');  -> 0   ❌ khớp toàn bộ phần tử, không khớp một phần, 'b' không phải phần tử riêng
+			FIND_IN_SET(NULL, 'a,b');    -> NULL
+			FIND_IN_SET('a', NULL);      -> NULL
+
+12. Hàm FIELD:
+	FIELD(v, v1, v2, v3, ...) 	-> Tìm vị trí của v trong [val1, val2, val3, ...]
+	
+		FIELD('a', '1', '2', 'a', 'x');	-> 3
+		
+13. Chèn chuỗi
+	INSERT(string, position, number, substring)
+
+	- position: Vị trí chèn, nếu position nằm ngoài độ dài của string hàm sẽ trả về string.
+	- number: Số lượng ký tự để thay thế trong chuỗi. Nếu number nằm ngoài độ dài của phần còn lại của chuỗi, hàm INSERT sẽ thay thế string bắt đầu từ postion cho đến hết string.
+	
+		SELECT INSERT('Quadratic', 3, 4, 'What');    -- 'QuWhattic'
+		SELECT INSERT('abcdef', 3, 2, 'XY');         -- 'abXYef'
+		SELECT INSERT('abcdef', 1, 3, 'XY');         -- 'XYdef'
+		SELECT INSERT('abcdef', 4, 0, 'XY');         -- 'abcXYdef'  (chèn, không xóa)
+		SELECT INSERT('abcdef', 3, 10, 'XY');        -- 'abXY'      (xóa vượt cuối chuỗi)
+		
+		a b c d e f
+			↑ ↑
+		   pos=3, len=2  →  xóa 'cd'
+		→ 'ab' + 'XY' + 'ef' = 'abXYef'
+	
+- FORMAT(number, decimal_places): Định dạng số dưới dạng '#,###.##', làm tròn nó đến một số vị trí thập phân nhất định.
+	
+- ASCII(character): Trả về mã ASCII của giá trị đầu tiên trong chuỗi.

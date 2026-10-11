@@ -1,0 +1,4 @@
+
+1. Làm tròn số
+
+	SELECT TRUNCATE(1.23456, 2);	-> 1,23

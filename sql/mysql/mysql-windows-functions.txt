@@ -67,8 +67,8 @@
 		DENSE_RANK()   | Cùng hạng, không nhảy       | 1, 2, 2, 3
 		---------------|-----------------------------|------------------
 
-	=> 	ROW_NUMBER 			= đánh stt không trùng.
-		RANK, DENSE_RANK 	= xếp hạng
+	=> 	ROW_NUMBER 			= Đánh stt không trùng.
+		RANK, DENSE_RANK 	= Xếp hạng
 
 3. Các hàm lấy giá trị theo thứ hạng
 		Hàm               | Lấy gì

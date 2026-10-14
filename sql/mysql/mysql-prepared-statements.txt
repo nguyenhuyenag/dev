@@ -1,0 +1,24 @@
+
+1. Tạo sẵn câu lệnh để chạy: MySQL không cần parse lại SQL mỗi lần → nhanh hơn.
+
+	-- Bước 1: PREPARE — chuẩn bị câu SQL có placeholder `?`
+	PREPARE stmt FROM 'SELECT id, name, email FROM user WHERE role = ?';
+
+	-- Bước 2: SET — gán giá trị cho biến
+	SET @role = 'admin';
+	
+	-- Bước 3: EXECUTE — thực thi với các biến
+	EXECUTE stmt USING @role;
+	-- → admin
+
+	SET @role = 'user';
+	EXECUTE stmt USING @role;
+	-- → user
+
+	SET @role = 'manager';
+	EXECUTE stmt USING @role;
+	-- → manager
+
+	-- Bước 4 (tùy chọn): DEALLOCATE — giải phóng
+	-- Nếu không DEALLOCATE, statement tồn tại tới khi session kết thúc.
+	DEALLOCATE PREPARE stmt;

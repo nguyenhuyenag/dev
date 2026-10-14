@@ -9,6 +9,8 @@
 	
 	- View cho phép tăng/giảm các Fields vì nó được tạo từ một câu truy vấn SELECT nên có thể JOIN nhiều Table lại với nhau và lưu vào View
 	
+	=> Tạo 1 bảng, gán cho user chỉ được xem bảng này, tránh lộ thông tin trong bảng gốc.
+	
 - Nhược điểm
 
 	- Truy vấn trong View có thể sẽ chậm hơn trong table.

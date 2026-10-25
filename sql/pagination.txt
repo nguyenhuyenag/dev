@@ -32,7 +32,11 @@
 	
 	- Ví dụ có trang đầu tiên:
 	
-		> SELECT * FROM event_data ORDER BY user_id LIMIT 20 OFFSET 0;
+		SELECT 
+			* 
+		FROM event_data 
+		ORDER BY user_id 
+		LIMIT 20 OFFSET 0;
 	
 	Với bảng là:
 	

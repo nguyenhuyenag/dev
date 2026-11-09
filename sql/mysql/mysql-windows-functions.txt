@@ -150,7 +150,7 @@
 		Cần phải sửa lại:
 			ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING -> Nhìn toàn bộ partition
 
-3. LAG/LEAD: Lấy giá trị của dòng TRƯỚC đó, SAU đó.
+3. LAG/LEAD: Lấy giá trị của dòng TRƯỚC/SAU đó.
 		LAG(<cột>,				// Cột cần lấy giá trị
 			<offset>,			// Lùi bao nhiêu dòng, mặc định là 1
 			<giá_trị_mặc_định>	// Trả về gì nếu không có dòng trước, mặc định là NULL
